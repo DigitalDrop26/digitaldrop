@@ -1,0 +1,158 @@
+.section {
+  background: var(--color-white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.copy {
+  min-width: 0;
+}
+
+.copy h2.h2-visual {
+  margin-bottom: 0.5rem;
+}
+
+.copy .h1-visual {
+  margin-bottom: 1rem;
+  font-size: 35pt;
+  hyphens: none;
+  -webkit-hyphens: none;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.carouselCol {
+  min-width: 0;
+}
+
+.carousel {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.viewport {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    transition: none;
+  }
+}
+
+.slide {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  padding-right: 0.125rem;
+}
+
+.card {
+  border-radius: 0;
+  background: linear-gradient(145deg, #d9d9d9, #bfbfbf);
+  flex-shrink: 0;
+  transition:
+    width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    min-height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+/* Portfolio tile: quadrati; il featured è più grande */
+.cardFeatured {
+  width: clamp(11rem, 36vw, 17.5rem);
+  max-width: 58%;
+  aspect-ratio: 1;
+}
+
+.cardPeek {
+  width: clamp(6.5rem, 22vw, 10.5rem);
+  max-width: 40%;
+  aspect-ratio: 1;
+  opacity: 0.92;
+}
+
+.arrowBtn {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-drop-blue);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  align-self: flex-end;
+  margin-bottom: 0;
+}
+
+.arrowBtn:hover {
+  color: var(--color-drop-red);
+  opacity: 1;
+}
+
+.arrowBtn:focus-visible {
+  outline: 2px solid var(--color-drop-red);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .carousel {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .arrowBtn {
+    order: 2;
+    margin-top: 0.5rem;
+  }
+
+  .viewport {
+    order: 1;
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  .cardFeatured {
+    width: min(52vw, 14rem);
+    max-width: 56%;
+  }
+
+  .cardPeek {
+    width: min(32vw, 9rem);
+    max-width: 42%;
+  }
+}

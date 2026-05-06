@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo-color.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Digital Drop — Inspire Action" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Digital Drop</title>
+  </head>
+  <body>
+    <div id="root">
+      <div
+        id="static-fallback"
+        style="
+          font-family: system-ui, sans-serif;
+          padding: 2rem;
+          max-width: 40rem;
+          margin: 0 auto;
+          line-height: 1.5;
+          color: #005279;
+        "
+      >
+        <p style="font-weight: 700; margin-top: 0">Caricamento…</p>
+        <p>
+          Se resta solo questa schermata o una pagina bianca, molto probabilmente stai aprendo il file
+          <code>index.html</code> direttamente dal disco. Con React e Vite il browser non esegue il
+          codice in quel modo.
+        </p>
+        <p><strong>Fai così:</strong> nella cartella del progetto esegui nel terminale:</p>
+        <pre style="background: #f0f0f0; padding: 1rem; overflow: auto; border-radius: 8px">
+npm install
+npm run dev</pre>
+        <p>
+          Poi apri l’indirizzo che compare (di solito <code>http://localhost:5173</code>). Per
+          vedere la versione di produzione: <code>npm run build</code> e
+          <code>npm run preview</code>.
+        </p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

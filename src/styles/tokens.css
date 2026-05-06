@@ -1,0 +1,31 @@
+:root {
+  /* Stessa griglia della navigation: logo e contenuto pagina allineati */
+  --layout-max-width: 1200px;
+  --layout-gutter-start: max(50px, env(safe-area-inset-left, 0px));
+  --layout-gutter-end: max(50px, env(safe-area-inset-right, 0px));
+
+  --color-drop-blue: #005279;
+  --color-drop-red: #e7503f;
+  --color-white: #ffffff;
+  --gradient-section: linear-gradient(
+    135deg,
+    #f2f2f2 0%,
+    #fce8e8 55%,
+    #f5e6e8 100%
+  );
+
+  --font-sora: "Sora", system-ui, sans-serif;
+
+  --text-h1-size: 30pt;
+  /* Dimensione unica per corpo pagina e paragrafi (<p>, .text-body) */
+  --text-body-size: 18pt;
+  --text-small-size: 12pt;
+  --text-display-size: 50pt;
+
+  /* Altezza approssimativa header fisso: padding-top50px + logo + padding-bottom 20px */
+  --header-height: calc(50px + clamp(1.65rem, 4vw, 2.1rem) + 20px);
+  --radius-pill: 9999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --shadow-soft: 0 12px 40px rgba(0, 82, 121, 0.08);
+}

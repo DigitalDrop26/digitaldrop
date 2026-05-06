@@ -1,0 +1,92 @@
+.section {
+  position: relative;
+  overflow: visible;
+  background-color: var(--color-white);
+  text-align: center;
+  /* Contenuto centrato verticalmente nella sezione */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: clamp(22rem, 52svh, 40rem);
+  /* Padding simmetrico (sovrascrive .section globale per questa sezione) */
+  padding-block: clamp(2.75rem, 7vw, 5rem);
+}
+
+.bgClip {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Solo questa immagine riceve il parallasse via transform nello script */
+.parallaxImg {
+  position: absolute;
+  left: 0;
+  top: -18%;
+  width: 100%;
+  height: 136%;
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%);
+  opacity: 0.3;
+  pointer-events: none;
+  user-select: none;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallaxImg {
+    top: 0;
+    height: 100%;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .parallaxImg {
+    will-change: transform;
+  }
+}
+
+/* Unico figlio in flow: classe globale `container` da global.css */
+.section > :global(.container) {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 52rem;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.heading {
+  line-height: 1.06;
+}
+
+.cta {
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  .section {
+    min-height: clamp(21rem, 58svh, 38rem);
+    padding-block: clamp(2.5rem, 8vw, 4.5rem);
+  }
+
+  .heading {
+    line-height: 1.12;
+    padding-top: 0.15em;
+    margin-top: 0;
+  }
+}

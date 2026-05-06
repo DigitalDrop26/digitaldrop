@@ -1,0 +1,79 @@
+/* Solo opacity + transform (GPU-friendly), niente filter/blur */
+.wrap {
+  width: 100%;
+  overflow: visible;
+  opacity: 0;
+  transition:
+    opacity 1.05s cubic-bezier(0.45, 0.05, 0.25, 1),
+    transform 1.05s cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+
+.visible {
+  opacity: 1;
+}
+
+.dirUp {
+  transform: translate3d(0, 1.5rem, 0);
+}
+
+.dirUp.visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.dirDown {
+  transform: translate3d(0, -1.25rem, 0);
+}
+
+.dirDown.visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.dirLeft {
+  transform: translate3d(1.5rem, 0, 0);
+}
+
+.dirLeft.visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.dirRight {
+  transform: translate3d(-1.5rem, 0, 0);
+}
+
+.dirRight.visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.dirScale {
+  transform: scale(0.96);
+}
+
+.dirScale.visible {
+  transform: scale(1);
+}
+
+/* Leggero: solo movimento verticale ridotto */
+.dirSoft {
+  transform: translate3d(0, 1rem, 0);
+}
+
+.dirSoft.visible {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Rotazione molto leggera (evita scatti rispetto a skew/blur) */
+.dirRotate {
+  transform: translate3d(0, 0.75rem, 0) rotate(-1.25deg) scale(0.97);
+}
+
+.dirRotate.visible {
+  transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

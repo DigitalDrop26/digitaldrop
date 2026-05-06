@@ -1,0 +1,179 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  transition:
+    background-color 0.85s cubic-bezier(0.45, 0.05, 0.25, 1),
+    box-shadow 0.85s cubic-bezier(0.45, 0.05, 0.25, 1),
+    padding-top 0.85s cubic-bezier(0.45, 0.05, 0.25, 1),
+    padding-bottom 0.85s cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+
+.headerInner {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  padding-left: var(--layout-gutter-start);
+  padding-right: var(--layout-gutter-end);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.headerTransparent {
+  background: transparent;
+  box-shadow: none;
+}
+
+.headerScrolled {
+  /* Blu drop logo (stesso valore di --color-drop-blue in tokens.css) */
+  background: #005279;
+  box-shadow: 0 8px 28px rgba(0, 20, 40, 0.35);
+  /* Inset notch + stesso respiro sopra/sotto il contenuto; così logo e icona restano centrati nella striscia */
+  padding-top: calc(0.875rem + env(safe-area-inset-top, 0px));
+  padding-bottom: 0.875rem;
+}
+
+.headerScrolled .headerInner {
+  align-items: center;
+  min-height: 3.25rem;
+}
+
+.headerScrolled .menuToggle {
+  align-self: center;
+  color: var(--color-white);
+}
+
+.headerScrolled .menuToggle::before,
+.headerScrolled .menuToggle::after {
+  /* anello chiaro (leggibile su blu drop) */
+  border-color: rgba(255, 236, 232, 0.72);
+}
+
+.headerScrolled .menuToggle:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.headerScrolled .menuToggle:focus-visible {
+  outline-color: var(--color-white);
+}
+
+.headerTransparent .menuToggle {
+  color: var(--color-drop-red);
+}
+
+.headerTransparent .menuToggle::before,
+.headerTransparent .menuToggle::after {
+  border-color: rgba(231, 80, 63, 0.48);
+}
+
+.headerTransparent .menuToggle:hover {
+  background: rgba(231, 80, 63, 0.14);
+}
+
+.headerTransparent .menuToggle:focus-visible {
+  outline-color: var(--color-drop-red);
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 0;
+  transform-origin: left center;
+  transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+
+.headerScrolled .logoLink {
+  transform: scale(0.9);
+}
+
+.logo {
+  height: clamp(1.65rem, 4vw, 2.1rem);
+  width: auto;
+}
+
+.logoImg {
+  display: block;
+  width: auto;
+  max-width: min(55vw, 280px);
+  height: clamp(1.65rem, 4vw, 2.1rem);
+  object-fit: contain;
+  object-position: left center;
+}
+
+.menuToggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.25rem;
+  min-height: 3.25rem;
+  padding: 0.35rem;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  overflow: visible;
+  flex-shrink: 0;
+  line-height: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menuToggle::before,
+.menuToggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  opacity: 0;
+  transform: scale(0.75);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.menuToggle svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .menuToggle:hover::before,
+  .menuToggle:focus-visible::before {
+    animation: menuToggleRing 1.45s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  .menuToggle:hover::after,
+  .menuToggle:focus-visible::after {
+    animation: menuToggleRing 1.45s cubic-bezier(0.22, 1, 0.36, 1) 0.4s infinite;
+  }
+}
+
+@keyframes menuToggleRing {
+  0% {
+    transform: scale(0.78);
+    opacity: 0.52;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menuToggle::before,
+  .menuToggle::after {
+    display: none;
+  }
+}

@@ -1,0 +1,211 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: #001328;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-out);
+  overflow: hidden;
+}
+
+.overlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Cerchi concentrici animati (apertura / chiusura) */
+.rippleField {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition:
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s ease;
+}
+
+.ring[data-index="0"] {
+  width: min(22vmin, 180px);
+  transition-delay: 0ms, 0ms;
+}
+.ring[data-index="1"] {
+  width: min(38vmin, 320px);
+  transition-delay: 55ms, 40ms;
+}
+.ring[data-index="2"] {
+  width: min(58vmin, 480px);
+  transition-delay: 110ms, 70ms;
+}
+.ring[data-index="3"] {
+  width: min(82vmin, 680px);
+  transition-delay: 165ms, 100ms;
+}
+.ring[data-index="4"] {
+  width: min(115vmin, 920px);
+  transition-delay: 220ms, 130ms;
+}
+
+.rippleFieldOpen .ring {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.closeArea {
+  position: absolute;
+  top: max(1rem, env(safe-area-inset-top, 0px));
+  right: var(--layout-gutter-end);
+  z-index: 2;
+}
+
+.closeBtn {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+/* Menu principale centrato in altezza nel viewport */
+.menuCenter {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  padding: 5rem var(--layout-gutter-end) 8rem var(--layout-gutter-start);
+  box-sizing: border-box;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.navLink {
+  display: block;
+  font-family: var(--font-sora);
+  font-weight: 300;
+  font-size: clamp(1.75rem, 6vw, 2.75rem);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--color-drop-red);
+  padding: 0.5rem 0;
+  transition: opacity 0.2s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  opacity: 0.88;
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--color-drop-red);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 1.25rem var(--layout-gutter-end) calc(1.5rem + env(safe-area-inset-bottom, 0px))
+    var(--layout-gutter-start);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.12), transparent);
+}
+
+.social {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--color-white);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.socialLink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+.contact {
+  font-size: var(--text-small-size);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.contact a {
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .rippleFieldOpen .ring,
+  .ring {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
