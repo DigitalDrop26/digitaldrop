@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import styles from "./CTASection.module.css";
 
 const PARALLAX_SPEED = 0.22;
-const CTA_BG_SRC = "/cta-sea.jpg";
+const CTA_BG_SRC = `${import.meta.env.BASE_URL}cta-sea.jpg`;
 
 export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null);

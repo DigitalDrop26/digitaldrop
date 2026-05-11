@@ -3,7 +3,7 @@ import { BurgerIcon } from "./BurgerIcon";
 import styles from "./Header.module.css";
 
 /** Logo in evidenza con header trasparente: sostituisci il file in `public/logo-navbar-prescroll.svg` (o cambia estensione e aggiorna qui). */
-const NAV_LOGO_PRE_SCROLL_SRC = "/logo-navbar-prescroll.svg";
+const NAV_LOGO_PRE_SCROLL_SRC = `${import.meta.env.BASE_URL}logo-navbar-prescroll.svg`;
 
 type HeaderProps = {
   scrolled: boolean;
