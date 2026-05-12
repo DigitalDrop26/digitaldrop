@@ -86,7 +86,7 @@ export function FullscreenNav({ open, onClose }: FullscreenNavProps) {
         <div className={styles.social}>
           <a
             className={styles.socialLink}
-            href="https://www.facebook.com/"
+            href="https://www.facebook.com/digitaldrop.eu"
             target="_blank"
             rel="noreferrer noopener"
             aria-label="Facebook"
@@ -95,7 +95,7 @@ export function FullscreenNav({ open, onClose }: FullscreenNavProps) {
           </a>
           <a
             className={styles.socialLink}
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/drop_inspireaction/"
             target="_blank"
             rel="noreferrer noopener"
             aria-label="Instagram"
