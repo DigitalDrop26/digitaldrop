@@ -2,6 +2,23 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      window.addEventListener(
+        "error",
+        function (ev) {
+          var t = ev.target;
+          if (!t || t.tagName !== "SCRIPT") return;
+          var fb = document.getElementById("static-fallback");
+          if (!fb) return;
+          fb.innerHTML =
+            "<p style=\"font-weight:700;margin-top:0\">Impossibile caricare la parte interattiva del sito.</p>" +
+            "<p>Apri la console del browser (F12 → scheda Console). Controlla di usare l’URL pubblicato " +
+            "(<code>https://digitaldrop26.github.io/digitaldrop/</code>), di non aprire questo file dal disco " +
+            "e di non avere estensioni che bloccano JavaScript.</p>";
+        },
+        true,
+      );
+    </script>
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%logo-color.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Digital Drop — Inspire Action" />
@@ -40,6 +57,11 @@ npm run dev</pre>
           Poi apri l’indirizzo che compare (di solito <code>http://localhost:5173</code>). Per
           vedere la versione di produzione: <code>npm run build</code> e
           <code>npm run preview</code>.
+        </p>
+        <p>
+          Online l’indirizzo del sito è
+          <code>https://digitaldrop26.github.io/digitaldrop/</code> (serve il suffisso
+          <code>/digitaldrop/</code>).
         </p>
       </div>
     </div>
