@@ -1,0 +1,776 @@
+/* ============================================================
+   Drop Home — custom styles on top of design system tokens
+   ============================================================ */
+
+/* ============================================================
+   Drop · Agenzia di comunicazione e marketing
+   Colors + Type foundation
+   ============================================================ */
+
+/* ---------- Fonts ----------
+   Sora is Drop's single typeface — used across the marketing
+   deck, the logo wordmark, body and display.
+   ---------------------------------------------------------- */
+
+:root {
+  /* ---------- Brand colors ----------
+     Primary palette — the two colors of the Drop wordmark.
+     These are the only "brand" colors. Everything else is a
+     neutral, a tint, or one of the support accents below. */
+  --drop-teal:        #005077;  /* primary — wordmark + body copy */
+  --drop-orange:      #E94A31;  /* accent — the "o" in the logo, highlights */
+
+  /* ---------- Teal tints ----------
+     Coherent ramp built around --drop-teal (#005077 = step 700).
+     Lighter steps blend toward white, darker toward near-black. */
+  --teal-900:         #002841;
+  --teal-800:         #003A59;
+  --teal-700:         #005077;  /* = --drop-teal */
+  --teal-600:         #145E82;
+  --teal-500:         #2E708F;
+  --teal-400:         #598DA7;
+  --teal-300:         #94B6C6;
+  --teal-200:         #C7D9E1;
+  --teal-100:         #E6EEF1;
+  --teal-050:         #F2F6F8;
+
+  /* ---------- Orange tints ----------
+     Coherent ramp built around --drop-orange (#E94A31 = step 500). */
+  --orange-700:       #9E311F;
+  --orange-600:       #C43E28;
+  --orange-500:       #E94A31;  /* = --drop-orange */
+  --orange-400:       #EF7765;
+  --orange-300:       #F4A598;
+  --orange-200:       #F9CCC5;
+  --orange-100:       #FCE9E6;
+
+  /* ---------- Support surface ----------
+     A soft cool blue tint Drop uses as page-wash / off-white
+     surface. Appears in editorial layouts and slide backgrounds. */
+  --soft-wash:        #E8F1FB;
+  --soft-lavender:    #DCE3FA;
+
+  /* ---------- Neutrals ---------- */
+  --white:            #FFFFFF;
+  --paper:            #E8F1FB;   /* soft cool wash — Drop's off-white */
+  --line:             #E5E7EB;
+  --line-strong:      #C8D0D8;
+  --ink-soft:         #5C6873;
+  --ink:              #1F2A33;
+  --black:            #001328;   /* Drop's deep navy-black */
+
+  /* ---------- Semantic foreground / background ---------- */
+  --bg:               var(--white);
+  --bg-muted:         var(--teal-100);
+  --bg-invert:        var(--drop-teal);
+  --fg:               var(--ink);          /* body copy is INK (#1F2A33) */
+  --fg-heading:       var(--drop-teal);     /* headings are teal */
+  --fg-soft:          var(--teal-500);
+  --fg-on-dark:       var(--white);
+  --fg-accent:        var(--drop-orange);   /* accent / highlight words */
+  --border:           var(--line);
+  --border-strong:    var(--line-strong);
+
+  /* ---------- Type ---------- */
+  --font-sans:        "Sora", ui-sans-serif, system-ui, -apple-system,
+                      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display:     var(--font-sans);
+
+  /* size scale (clamped where useful) */
+  --fs-xs:            12px;
+  --fs-sm:            14px;
+  --fs-md:            16px;
+  --fs-lg:            18px;
+  --fs-xl:            22px;
+  --fs-2xl:           28px;
+  --fs-3xl:           36px;
+  --fs-4xl:           48px;
+  --fs-5xl:           64px;
+  --fs-6xl:           84px;
+
+  /* line heights */
+  --lh-tight:         1.1;
+  --lh-snug:          1.25;
+  --lh-normal:        1.45;
+  --lh-loose:         1.7;
+
+  /* tracking — Sora is geometric; reduce on display sizes */
+  --tracking-tight:   -0.01em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.06em;
+
+  /* ---------- Spacing scale (4-pt) ---------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ---------- Radii ----------
+     Drop's deck uses generous rounding on cards (~24-28px)
+     and a fully-rounded "pill" treatment on the circular
+     category badges. The logo letters are circular ends. */
+  --radius-xs:  4px;
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  20px;       /* image cards in deck */
+  --radius-xl:  28px;       /* large category cards */
+  --radius-2xl: 36px;
+  --radius-pill: 999px;
+
+  /* ---------- Shadows ----------
+     Cards float over photographic backgrounds — shadows are
+     soft, diffuse and teal-tinted, never neutral grey. */
+  --shadow-sm:  0 1px 2px rgba(0, 76, 109, 0.06),
+                0 1px 1px rgba(0, 76, 109, 0.04);
+  --shadow-md:  0 6px 18px -6px rgba(0, 76, 109, 0.18),
+                0 2px 6px rgba(0, 76, 109, 0.08);
+  --shadow-lg:  0 24px 48px -16px rgba(0, 76, 109, 0.22),
+                0 8px 20px -8px rgba(0, 76, 109, 0.12);
+  --shadow-card: 0 30px 60px -30px rgba(0, 44, 66, 0.35);
+
+  /* ---------- Motion ---------- */
+  --ease:           cubic-bezier(.2,.7,.2,1);
+  --ease-in:        cubic-bezier(.5,0,.75,0);
+  --ease-out:       cubic-bezier(.2,.8,.2,1);
+  --dur-fast:       120ms;
+  --dur-base:       220ms;
+  --dur-slow:       420ms;
+}
+
+/* ============================================================
+   Semantic type
+   ============================================================ */
+
+html, body {
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display — the hero "DROP è l'agenzia…" treatment.
+   Always bold (700+), tight tracking, teal. */
+.t-display,
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-heading);
+  text-wrap: balance;
+}
+
+/* H2 — slide titles "Valori", "I settori di riferimento". */
+h2, .t-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-heading);
+}
+
+/* H3 — card titles "Radici e Innovazione". */
+h3, .t-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: var(--lh-snug);
+  color: var(--fg-heading);
+}
+
+/* H4 — eyebrows + smaller cards. */
+h4, .t-h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+  color: var(--fg-heading);
+}
+
+/* Eyebrow — small accent label above a section title.
+   Drop uses a short orange underline above its eyebrow. */
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: none;
+  color: var(--fg-heading);
+  position: relative;
+  padding-top: 10px;
+  display: inline-block;
+}
+.t-eyebrow::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 40px; height: 2px;
+  background: var(--drop-orange);
+}
+
+/* Body — Drop's body copy is INK (dark grey-blue #1F2A33), weight 500.
+   Bold spans stay ink. Use .t-accent to highlight in orange. */
+p, .t-body {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-md);
+  line-height: var(--lh-loose);
+  color: var(--fg);
+}
+
+.t-body-lg {
+  font-size: var(--fs-lg);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.t-body-sm {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+}
+
+strong, b, .t-strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+/* Accent inline — Drop highlights key phrases in orange. */
+.t-accent {
+  color: var(--fg-accent);
+  font-weight: 700;
+}
+
+/* Caption / page number. */
+.t-caption {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-soft);
+}
+
+/* Mono / code — not part of brand but provided for utility. */
+code, kbd, samp, .t-mono {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+
+/* Link defaults. */
+a {
+  color: var(--fg-accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+a:hover { opacity: 0.7; }
+
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: auto; }
+html, body { margin: 0; padding: 0; background: #FAF7F2; overscroll-behavior: none; }
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Paper / off-white feel — slightly warmer than the deck wash */
+:root {
+  --paper-warm: #FAF7F2;
+  --paper-tint: #F2EEE6;
+  --ink-deep: #0B1820;
+}
+
+img { max-width: 100%; display: block; }
+a { border-bottom: none; color: inherit; }
+button { font-family: inherit; }
+
+/* ---------- Lenis ---------- */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ---------- Custom cursor follower (subtle) ---------- */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--drop-orange);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: normal;
+  transform: translate(-50%, -50%);
+  transition: transform .25s var(--ease), opacity .25s var(--ease);
+}
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(0, 80, 119, 0.4);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform .35s var(--ease), width .25s var(--ease), height .25s var(--ease), border-color .25s var(--ease);
+}
+.cursor-ring.is-hover { width: 64px; height: 64px; border-color: var(--drop-orange); }
+.cursor-ring.is-press { width: 28px; height: 28px; }
+@media (max-width: 900px) { .cursor-dot, .cursor-ring { display: none; } }
+
+/* ---------- Display type — editorial brutalist ---------- */
+.display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  color: var(--drop-teal);
+}
+.display-xxl {
+  font-size: clamp(72px, 16vw, 280px);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+}
+.display-xl {
+  font-size: clamp(56px, 11vw, 180px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+}
+.display-lg {
+  font-size: clamp(40px, 7vw, 112px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.display-md {
+  font-size: clamp(28px, 4.2vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+.display-sm {
+  font-size: clamp(22px, 2.8vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.italic-serif {
+  font-style: italic;
+  font-family: "Times New Roman", "Times", serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--drop-teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--drop-orange);
+  display: inline-block;
+}
+.eyebrow.on-dark { color: rgba(255,255,255,0.7); }
+.eyebrow.on-dark::before { background: var(--drop-orange); }
+
+/* ---------- Reveal primitives (controlled by JS) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+.reveal-fade { opacity: 0; transform: none; transition: opacity 1.2s var(--ease-out); }
+.reveal-fade.is-in { opacity: 1; }
+
+/* Line-mask reveal — clip up from below */
+.line-reveal {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.line-reveal > span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1.05s var(--ease-out);
+  will-change: transform;
+}
+.line-reveal.is-in > span { transform: translateY(0); }
+
+/* Char split */
+.char {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform .9s var(--ease-out), opacity .6s var(--ease-out);
+  will-change: transform, opacity;
+}
+.char.is-in { transform: translateY(0); opacity: 1; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  border: none;
+  overflow: hidden;
+  transition: color .35s var(--ease), border-color .35s var(--ease);
+  isolation: isolate;
+}
+.btn .btn-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+  transition: transform .55s var(--ease);
+  transform: translateY(0);
+}
+.btn .btn-fill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: translateY(100%);
+  transition: transform .55s var(--ease);
+}
+.btn:hover .btn-fill::before { transform: translateY(0); }
+
+.btn-primary { color: white; background: var(--drop-teal); }
+.btn-primary .btn-fill::before { background: var(--drop-orange); }
+.btn-primary:hover { color: white; }
+
+.btn-ghost {
+  color: var(--drop-teal);
+  background: transparent;
+  border: 1.5px solid var(--drop-teal);
+}
+.btn-ghost .btn-fill::before { background: var(--drop-teal); }
+.btn-ghost:hover { color: white; border-color: var(--drop-teal); }
+
+.btn-light {
+  color: var(--drop-teal);
+  background: white;
+}
+.btn-light .btn-fill::before { background: var(--drop-orange); }
+.btn-light:hover { color: white; }
+
+.btn .arrow {
+  display: inline-flex;
+  width: 18px; height: 18px;
+  align-items: center; justify-content: center;
+  transition: transform .35s var(--ease);
+}
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* ---------- Section wrapper ---------- */
+.section {
+  position: relative;
+  padding: clamp(80px, 12vw, 180px) 0;
+}
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+}
+.container-wide {
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 3vw, 40px);
+}
+
+/* ---------- Grain texture overlay ---------- */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* ---------- Marquee ---------- */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  user-select: none;
+}
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 60px;
+  animation: marquee-x 38s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee.reverse .marquee-track { animation-direction: reverse; }
+
+/* ---------- Card hover image reveal ---------- */
+.svc-row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 36px 0;
+  border-top: 1px solid rgba(0, 80, 119, 0.15);
+  cursor: pointer;
+  position: relative;
+}
+.svc-row:last-child { border-bottom: 1px solid rgba(0, 80, 119, 0.15); }
+.svc-row .num {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--teal-500);
+  letter-spacing: 0.04em;
+}
+.svc-row .title {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--drop-teal);
+  font-size: clamp(28px, 4.2vw, 64px);
+  line-height: 1;
+  transition: transform .5s var(--ease), color .35s var(--ease);
+  transform-origin: left center;
+}
+.svc-row .meta {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--teal-500);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+.svc-row:hover .title { color: var(--drop-orange); transform: translateX(16px); }
+.svc-row .preview {
+  position: absolute;
+  right: 18%;
+  top: 50%;
+  width: 260px; height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(-50%) scale(0.9) rotate(-3deg);
+  opacity: 0;
+  transition: opacity .45s var(--ease), transform .55s var(--ease);
+  z-index: 3;
+  box-shadow: 0 30px 60px -20px rgba(0,44,66,.35);
+}
+.svc-row:hover .preview {
+  opacity: 1;
+  transform: translateY(-50%) scale(1) rotate(-2deg);
+}
+.svc-row .preview img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Value cards ---------- */
+.value-card {
+  position: relative;
+  background: white;
+  border-radius: 28px;
+  padding: 40px 36px;
+  box-shadow: 0 30px 60px -30px rgba(0, 44, 66, 0.25);
+  overflow: hidden;
+  transition: transform .55s var(--ease), box-shadow .55s var(--ease);
+}
+.value-card.dark {
+  background: var(--drop-teal);
+  color: white;
+}
+.value-card.dark h3, .value-card.dark p { color: white; }
+.value-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px -28px rgba(0, 44, 66, 0.35);
+}
+
+/* ---------- Sector badge ---------- */
+.sector-tile {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  cursor: pointer;
+}
+.sector-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.sector-tile:hover img { transform: scale(1.06); }
+.sector-tile .label {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 28px;
+  color: white;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,20,40,0.75) 100%);
+}
+
+/* ---------- Process timeline ---------- */
+.step-card {
+  background: white;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 50px -25px rgba(0, 44, 66, 0.25);
+  transition: transform .45s var(--ease);
+}
+
+/* ---------- Big number ---------- */
+.big-number {
+  font-weight: 700;
+  font-size: clamp(64px, 12vw, 192px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--drop-teal);
+}
+
+/* ---------- Magnetic link ---------- */
+.magnetic { display: inline-block; will-change: transform; }
+
+/* ---------- Footer ---------- */
+.footer-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+  font-size: 16px;
+  transition: color .25s var(--ease), padding .35s var(--ease);
+  position: relative;
+}
+.footer-link:hover { color: white; padding-left: 14px; }
+.footer-link::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  transition: opacity .35s var(--ease);
+  color: var(--drop-orange);
+}
+.footer-link:hover::before { opacity: 1; }
+
+/* ---------- Underline link ---------- */
+.ulink {
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  color: var(--drop-teal);
+  padding-bottom: 2px;
+}
+.ulink::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: right center;
+  transform: scaleX(1);
+  transition: transform .45s var(--ease);
+}
+.ulink:hover::after { transform-origin: left center; transform: scaleX(0); }
+.ulink .ulink-bar2 {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--drop-orange);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .55s var(--ease) .05s;
+}
+.ulink:hover .ulink-bar2 { transform: scaleX(1); transform-origin: left center; }
+
+/* ---------- Field (newsletter input) ---------- */
+.field {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid rgba(255,255,255,0.3);
+  padding: 18px 0;
+  transition: border-color .35s var(--ease);
+}
+.field:focus-within { border-color: var(--drop-orange); }
+.field input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0;
+}
+.field input::placeholder { color: rgba(255,255,255,0.4); }
+
+/* ---------- Hero clip wipe ---------- */
+@keyframes wipe-down {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.wipe-in { animation: wipe-down 1.4s var(--ease-out) both; }
+
+/* Pulse dot */
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0.3; }
+}
+.pulse-dot {
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--drop-orange);
+  animation: pulse-soft 2s var(--ease) infinite;
+}
+
+/* Spin pattern */
+@keyframes spin-slow {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+.spin-slow { animation: spin-slow 32s linear infinite; }
+
+/* ---------- Responsive guards ---------- */
+@media (max-width: 760px) {
+  .svc-row { grid-template-columns: 40px 1fr; gap: 12px; padding: 24px 0; }
+  .svc-row .meta { display: none; }
+  .svc-row .preview { display: none; }
+}
+
+/* Selection */
+::selection { background: var(--drop-orange); color: white; }

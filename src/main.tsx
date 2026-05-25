@@ -1,8 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "./styles/tokens.css";
-import "./styles/global.css";
+import { initLenis } from "./drop/hooksAndUi";
+import "./styles/drop-homepage.css";
+
+initLenis();
 
 const container = document.getElementById("root");
 if (!container) {
