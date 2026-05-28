@@ -71,6 +71,9 @@
   --border:           var(--line);
   --border-strong:    var(--line-strong);
 
+  /* ---------- Layout ---------- */
+  --page-gutter:      50px;
+
   /* ---------- Type ---------- */
   --font-sans:        "Sora", ui-sans-serif, system-ui, -apple-system,
                       "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -335,6 +338,17 @@ html.lenis { height: auto; }
 }
 .cursor-ring.is-hover { width: 64px; height: 64px; border-color: var(--drop-orange); }
 .cursor-ring.is-press { width: 28px; height: 28px; }
+
+/* Splash: niente cursore (né sistema né follower) finché intro attiva */
+body.is-intro-loading,
+body.is-intro-loading * {
+  cursor: none !important;
+}
+body.is-intro-loading .cursor-dot,
+body.is-intro-loading .cursor-ring {
+  opacity: 0 !important;
+  visibility: hidden;
+}
 @media (max-width: 900px) { .cursor-dot, .cursor-ring { display: none; } }
 
 /* ---------- Display type — editorial brutalist ---------- */
@@ -349,6 +363,25 @@ html.lenis { height: auto; }
   font-size: clamp(72px, 16vw, 280px);
   line-height: 0.85;
   letter-spacing: -0.045em;
+}
+/** Solo hero fold: più piccolo così titolo+basso restano più spesso dentro 100vh. */
+.display-xxl.hero-title-fold {
+  font-size: clamp(40px, min(11vw, 14vh), 132px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+}
+@media (max-height: 820px) {
+  .display-xxl.hero-title-fold {
+    font-size: clamp(32px, min(10vw, 12vh), 104px);
+    line-height: 0.92;
+  }
+}
+/** Mobile strette (portrait): titolo hero un filo più generoso */
+@media (max-width: 900px) {
+  .display-xxl.hero-title-fold {
+    font-size: clamp(44px, min(13.2vw, 15vh), 132px);
+    line-height: 0.86;
+  }
 }
 .display-xl {
   font-size: clamp(56px, 11vw, 180px);
@@ -450,11 +483,16 @@ html.lenis { height: auto; }
   transition: color .35s var(--ease), border-color .35s var(--ease);
   isolation: isolate;
 }
+.btn > span:not(.btn-fill),
+.btn > svg {
+  position: relative;
+  z-index: 1;
+}
 .btn .btn-fill {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  z-index: -1;
+  z-index: 0;
   transition: transform .55s var(--ease);
   transform: translateY(0);
 }
@@ -504,13 +542,18 @@ html.lenis { height: auto; }
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 56px);
+  padding-inline: var(--page-gutter);
 }
 .container-wide {
   width: 100%;
   max-width: 1680px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 3vw, 40px);
+  padding-inline: var(--page-gutter);
+}
+
+/* Pannello menu mobile — stesso gutter laterale del resto del sito */
+.nav-drawer {
+  padding: 32px var(--page-gutter);
 }
 
 /* ---------- Grain texture overlay ---------- */
@@ -570,6 +613,7 @@ html.lenis { height: auto; }
   color: var(--drop-teal);
   font-size: clamp(28px, 4.2vw, 64px);
   line-height: 1;
+  white-space: pre-line;
   transition: transform .5s var(--ease), color .35s var(--ease);
   transform-origin: left center;
 }
@@ -659,7 +703,7 @@ html.lenis { height: auto; }
   font-size: clamp(64px, 12vw, 192px);
   line-height: 0.9;
   letter-spacing: -0.04em;
-  color: var(--drop-teal);
+  color: var(--drop-orange);
 }
 
 /* ---------- Magnetic link ---------- */
@@ -764,6 +808,13 @@ html.lenis { height: auto; }
   to { transform: rotate(360deg); }
 }
 .spin-slow { animation: spin-slow 32s linear infinite; }
+
+@keyframes scrollLine {
+  0% { transform: scaleY(0.2); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  50.01% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0.2); transform-origin: bottom; }
+}
 
 /* ---------- Responsive guards ---------- */
 @media (max-width: 760px) {

@@ -30,7 +30,8 @@ export function useReveal(rootRef: React.RefObject<HTMLElement | null>, opts: Re
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const selector = (opts.selector as string) || ".reveal, .reveal-fade, .line-reveal, .char-line";
+    const selector =
+      (opts.selector as string) || ".reveal, .reveal-fade, .line-reveal:not(.hero-line-reveal), .char-line";
     const els = root.querySelectorAll(selector);
     const stagger = (opts.stagger as number) ?? 70;
     const io = new IntersectionObserver(
@@ -50,12 +51,14 @@ export function useReveal(rootRef: React.RefObject<HTMLElement | null>, opts: Re
       },
     );
     els.forEach((el, i) => {
+      if (el.classList.contains("is-in")) return;
       if (!el.getAttribute("data-idx")) el.setAttribute("data-idx", String(i % 10));
       io.observe(el);
     });
     return () => io.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- original bundler passed opts object
-  }, [rootRef, opts.selector, opts.stagger, opts.threshold, opts.rootMargin]);
+    // refreshKey: riesegue l'observer quando il DOM `.reveal` cambia (es. filtri archivio progetti)
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- refreshKey è opzionale volutamente
+  }, [rootRef, opts.selector, opts.stagger, opts.threshold, opts.rootMargin, opts.refreshKey]);
 }
 
 export function useInView(ref: React.RefObject<Element | null>, opts: { threshold?: number; rootMargin?: string } = {}) {

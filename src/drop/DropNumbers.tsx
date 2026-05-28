@@ -7,7 +7,7 @@ export function DropNumbers() {
   useReveal(rootRef);
 
   const stats = [
-    { to: 25, suffix: "+", label: "Anni di lavoro nel settore primario italiano", sub: "dal 1999" },
+    { to: 25, suffix: "+", label: "Anni di lavoro nel settore primario italiano", sub: "dal 1998" },
     { to: 180, suffix: "", label: "Brand agroalimentari accompagnati alla crescita", sub: "in 8 regioni" },
     { to: 94, suffix: "%", label: "Clienti che ci scelgono di nuovo dopo il primo progetto", sub: "retention 2024" },
     { to: 12, suffix: "", label: "Persone, tra strateghi, designer, content e dev", sub: "sede Milano + Parma" },
@@ -18,7 +18,7 @@ export function DropNumbers() {
       ref={rootRef}
       className="section"
       style={{
-        background: "var(--paper-warm)",
+        background: "#ffffff",
         paddingTop: "clamp(80px, 10vw, 140px)",
         paddingBottom: "clamp(80px, 10vw, 140px)",
       }}

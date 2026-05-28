@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { bundleResources } from "./bundleResources";
-import { MarqueeRow, Reveal, useReveal } from "./hooksAndUi";
+import { Reveal, useReveal } from "./hooksAndUi";
 
-// Sectors — Agri / Food / Formazione three big tiles + circular badges
+// Sectors — Agri / Food / Formazione three big tiles
 export function DropSectors() {
   const rootRef = useRef(null);
   useReveal(rootRef);
@@ -45,7 +45,7 @@ export function DropSectors() {
         {/* Heading */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'end', marginBottom: 'clamp(48px, 8vw, 96px)' }} className="sec-head">
           <Reveal delay={0}>
-            <span className="eyebrow on-dark">03 — Settori</span>
+            <span className="eyebrow on-dark">02 — Settori</span>
             <h2 className="display display-lg" style={{ color: 'white', marginTop: 28, marginBottom: 0 }}>
               Tre mondi,<br/>una sola <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>lingua</em>.
             </h2>
@@ -63,19 +63,6 @@ export function DropSectors() {
           {sectors.map((s, i) => (
             <Reveal key={s.key} delay={i} className="sector-tile" data-cursor="hover">
               <img src={s.img} alt={s.title} />
-              {/* Badge */}
-              <div style={{
-                position: 'absolute',
-                top: 20, left: 20,
-                width: 80, height: 80,
-                borderRadius: 999,
-                background: 'var(--drop-orange)',
-                color: 'white',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontWeight: 700, fontSize: 18, letterSpacing: '-0.02em',
-                zIndex: 2,
-                transition: 'transform .55s var(--ease)',
-              }}>{s.title}</div>
               {/* Num */}
               <div style={{
                 position: 'absolute',
@@ -101,24 +88,6 @@ export function DropSectors() {
               </div>
             </Reveal>
           ))}
-        </div>
-
-        {/* Marquee row */}
-        <div style={{ marginTop: 'clamp(48px, 8vw, 96px)' }}>
-          <Reveal delay={0}>
-            <MarqueeRow>
-              {['Filiere corte', '·', 'Cooperative', '·', 'DOP', '·', 'IGP', '·', 'Biologico', '·', 'Agricoltura rigenerativa', '·', 'Zootecnia', '·', 'Foodtech', '·', 'Wine', '·', 'Olio EVO', '·', 'Latte e formaggi', '·'].map((t, i) => (
-                <span key={i} style={{
-                  fontSize: 'clamp(28px, 3.5vw, 48px)',
-                  letterSpacing: '-0.02em',
-                  color: t === '·' ? 'var(--drop-orange)' : 'rgba(255,255,255,0.55)',
-                  fontStyle: t.length > 4 && i % 3 === 0 ? 'italic' : 'normal',
-                  fontFamily: t.length > 4 && i % 3 === 0 ? '"Times New Roman", serif' : 'inherit',
-                  fontWeight: t === '·' ? 700 : (t.length > 4 && i % 3 === 0 ? 400 : 600),
-                }}>{t}</span>
-              ))}
-            </MarqueeRow>
-          </Reveal>
         </div>
       </div>
 

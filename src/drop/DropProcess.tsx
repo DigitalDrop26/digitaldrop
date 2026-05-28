@@ -30,7 +30,7 @@ export function DropProcess() {
             </Reveal>
             <Reveal delay={2}>
               <p style={{ marginTop: 24, color: 'var(--teal-500)', fontSize: 14, lineHeight: 1.6, maxWidth: 320 }}>
-                Un metodo collaudato in 25 anni di lavoro fianco a fianco con agricoltori,
+                Un metodo collaudato in quasi 30 anni di lavoro fianco a fianco con agricoltori,
                 allevatori e PMI del food.
               </p>
             </Reveal>

@@ -1,4 +1,6 @@
-import { useEffect, Fragment, useState } from "react";
+import { useEffect, Fragment, useState, useLayoutEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { bundleResources } from "./bundleResources";
 import { CursorFollower } from "./hooksAndUi";
 import { DropCaseStudies } from "./DropCaseStudies";
 import { DropFooter } from "./DropFooter";
@@ -14,6 +16,18 @@ import { DropValues } from "./DropValues";
 
 export function DropHomepageApp() {
   const [intro, setIntro] = useState(true);
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    if (intro) {
+      document.body.classList.add("is-intro-loading");
+    } else {
+      document.body.classList.remove("is-intro-loading");
+    }
+    return () => {
+      document.body.classList.remove("is-intro-loading");
+    };
+  }, [intro]);
 
   useEffect(() => {
     if (intro) {
@@ -33,6 +47,23 @@ export function DropHomepageApp() {
     return () => clearTimeout(t);
   }, []);
 
+  /** Scroll alla sezione quando si arriva da sottopagine con hash (es. menu header archivio). */
+  useEffect(() => {
+    if (intro) return;
+    const id = location.hash.replace(/^#/, "");
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    const t = window.setTimeout(() => {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(el, { offset: -80, duration: 1.4 });
+      } else {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 120);
+    return () => window.clearTimeout(t);
+  }, [intro, location.hash]);
+
   return (
     <Fragment>
       <CursorFollower />
@@ -41,7 +72,7 @@ export function DropHomepageApp() {
         style={{
           position: "fixed",
           inset: 0,
-          zIndex: 9999,
+          zIndex: 10300,
           background: "var(--drop-teal)",
           display: "flex",
           alignItems: "center",
@@ -61,17 +92,44 @@ export function DropHomepageApp() {
           }}
         >
           <div
+            className="intro-splash-logo"
             style={{
-              fontSize: "clamp(80px, 18vw, 200px)",
-              fontWeight: 700,
-              letterSpacing: "-0.05em",
-              lineHeight: 1,
               position: "relative",
+              width: "min(88vw, 440px)",
+              margin: "0 auto",
+              lineHeight: 0,
             }}
           >
-            <span style={{ display: "inline-block", animation: "introIn 1.1s cubic-bezier(.2,.7,.2,1) both" }}>
-              dr<span style={{ color: "var(--drop-orange)" }}>o</span>p
-            </span>
+            {/* Cerchi pulsanti sulla O — centro da viewBox SVG 385.57 × 111.49 */}
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                left: `${(245.98 / 385.57) * 100}%`,
+                top: `${(55.74 / 111.49) * 100}%`,
+                transform: "translate(-50%, -50%)",
+                width: `${(111.48 / 385.57) * 100}%`,
+                aspectRatio: "1",
+                pointerEvents: "none",
+                zIndex: 0,
+              }}
+            >
+              {[0, 1, 2].map((i) => (
+                <span key={i} className={`intro-o-ripple intro-o-ripple--${i}`} />
+              ))}
+            </div>
+            <img
+              src={bundleResources.logoWhiteOrange}
+              alt="Drop"
+              style={{
+                position: "relative",
+                zIndex: 1,
+                width: "100%",
+                height: "auto",
+                display: "block",
+                animation: "introIn 1.1s cubic-bezier(.2,.7,.2,1) both",
+              }}
+            />
           </div>
           <div
             style={{
@@ -95,8 +153,8 @@ export function DropHomepageApp() {
       <main>
         <DropHero />
         <DropManifesto />
-        <DropServices />
         <DropSectors />
+        <DropServices />
         <DropNumbers />
         <DropProcess />
         <DropValues />
@@ -111,6 +169,33 @@ export function DropHomepageApp() {
           from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes introORippleWave {
+          0% {
+            transform: translate(-50%, -50%) scale(0.85);
+            opacity: 0.65;
+          }
+          70% { opacity: 0.12; }
+          100% {
+            transform: translate(-50%, -50%) scale(3.8);
+            opacity: 0;
+          }
+        }
+        .intro-o-ripple {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          box-sizing: border-box;
+          width: 100%;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          border: 2px solid rgba(233, 74, 49, 0.48);
+          transform: translate(-50%, -50%);
+          animation: introORippleWave 2.15s cubic-bezier(0.28, 0.45, 0.32, 0.95) infinite;
+          pointer-events: none;
+        }
+        .intro-o-ripple--0 { animation-delay: 0s; }
+        .intro-o-ripple--1 { animation-delay: 0.55s; }
+        .intro-o-ripple--2 { animation-delay: 1.1s; }
       `}</style>
     </Fragment>
   );
