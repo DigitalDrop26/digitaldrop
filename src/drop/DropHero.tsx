@@ -125,7 +125,7 @@ export function DropHero() {
                 </span>
               </div>
               <div className="line-reveal hero-line-reveal" data-idx={4}>
-                <span>primario.</span>
+                <span>agrifood.</span>
               </div>
             </h1>
 
