@@ -18,7 +18,7 @@ export function DropNumbers() {
       ref={rootRef}
       className="section"
       style={{
-        background: "#ffffff",
+        background: "var(--paper-tint)",
         paddingTop: "clamp(80px, 10vw, 140px)",
         paddingBottom: "clamp(80px, 10vw, 140px)",
       }}

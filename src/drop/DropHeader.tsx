@@ -74,7 +74,7 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
 
   const logoMark = (
     <img
-      src={bundleResources.logoWhiteOrange}
+      src={bundleResources.logoColor}
       alt="Drop"
       style={{ height: 36, width: "auto", maxWidth: "min(220px, 42vw)", display: "block" }}
     />
@@ -82,8 +82,8 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
 
   const logoSubtitleStyle = {
     fontSize: 11,
-    fontWeight: 500,
-    color: "rgba(255,255,255,0.88)",
+    fontWeight: 600,
+    color: "var(--drop-teal)",
     letterSpacing: "0.06em",
     lineHeight: 1.2,
     maxWidth: logoSubtitle ? 220 : 200,
@@ -99,19 +99,19 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
           right: 0,
           zIndex: 10100,
           padding: scrolled ? "14px 0" : "24px 0",
-          background: "var(--drop-teal)",
-          backdropFilter: "none",
-          WebkitBackdropFilter: "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(255,255,255,0.08)",
-          transition: "padding .45s var(--ease), border-color .45s var(--ease)",
-          boxShadow: scrolled ? "0 8px 32px rgba(0,26,52,0.18)" : "none",
+          background: scrolled ? "rgba(255,255,255,0.42)" : "rgba(255,255,255,0.22)",
+          backdropFilter: "saturate(180%) blur(22px)",
+          WebkitBackdropFilter: "saturate(180%) blur(22px)",
+          borderBottom: scrolled ? "1px solid rgba(0,26,52,0.1)" : "1px solid rgba(0,26,52,0.06)",
+          transition: "padding .45s var(--ease), background .45s var(--ease), border-color .45s var(--ease)",
+          boxShadow: scrolled ? "0 8px 32px rgba(0,26,52,0.12)" : "0 2px 12px rgba(0,26,52,0.05)",
         }}
       >
         <div className="container-wide" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
           {logoSubtitle ? (
             <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "inherit" }}>
               {logoMark}
-              <span style={{ display: "inline-block", height: 22, width: 1, background: "rgba(255,255,255,0.28)" }} />
+              <span style={{ display: "inline-block", height: 22, width: 1, background: "rgba(0,80,119,0.25)" }} />
               <span style={logoSubtitleStyle}>{logoSubtitle}</span>
             </Link>
           ) : (
@@ -128,12 +128,6 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
               style={{ display: "flex", alignItems: "center", gap: 12 }}
             >
               {logoMark}
-              <span style={{ display: "inline-block", height: 22, width: 1, background: "rgba(255,255,255,0.28)" }} />
-              <span style={logoSubtitleStyle}>
-                Marketing &amp; Comunicazione
-                <br />
-                per il settore primario
-              </span>
             </a>
           )}
 
@@ -152,7 +146,7 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
                   fontFamily: "inherit",
                   fontSize: 14,
                   fontWeight: 600,
-                  color: "white",
+                  color: "var(--drop-teal)",
                   letterSpacing: "-0.005em",
                   display: "inline-flex",
                   alignItems: "baseline",
@@ -160,7 +154,7 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
                   transition: "background .35s var(--ease), color .35s var(--ease)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                  e.currentTarget.style.background = "rgba(0,80,119,0.08)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "transparent";
@@ -172,7 +166,7 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
             ))}
           </nav>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          <div className="show-mobile" style={{ alignItems: "center", gap: 18 }}>
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -356,8 +350,10 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
       </div>
 
       <style>{`
+        .show-mobile { display: none; }
         @media (max-width: 1100px) {
           .hide-mobile { display: none !important; }
+          .show-mobile { display: flex !important; }
         }
       `}</style>
     </Fragment>

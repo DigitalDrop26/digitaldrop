@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import sfondoHeroSrc from "@Immagini/Sfondo_hero.jpg?url";
+import { bundleResources } from "./bundleResources";
 import { useReveal, useScrollY, Btn } from "./hooksAndUi";
 
 /** Dopo overlay intro (~2200ms) mentre l’hero diventa leggibile (DropHomepageApp). */
@@ -110,22 +111,48 @@ export function DropHero() {
           transform: titleTransform,
           willChange: 'transform',
         }}>
-          <h1 className="display display-xxl hero-title-fold" style={{ margin: 0, color: 'var(--drop-teal)' }}>
-            <div className="line-reveal hero-line-reveal" data-idx={1}>
-              <span>Parliamo</span>
+          <div className="hero-head">
+            <h1 className="display display-xxl hero-title-fold" style={{ margin: 0, color: 'var(--drop-teal)' }}>
+              <div className="line-reveal hero-line-reveal" data-idx={1}>
+                <span>Parliamo</span>
+              </div>
+              <div className="line-reveal hero-line-reveal" data-idx={2} style={{ marginLeft: 'clamp(24px, 6vw, 120px)' }}>
+                <span>la lingua</span>
+              </div>
+              <div className="line-reveal hero-line-reveal" data-idx={3}>
+                <span>
+                  <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>del</em>{" "}settore
+                </span>
+              </div>
+              <div className="line-reveal hero-line-reveal" data-idx={4}>
+                <span>primario.</span>
+              </div>
+            </h1>
+
+            <div
+              className="reveal hero-claim-card"
+              data-idx="5"
+              style={{
+                position: 'relative',
+                borderRadius: 24,
+                overflow: 'hidden',
+                flexShrink: 0,
+                background: 'var(--teal-100)',
+                boxShadow: '0 24px 60px rgba(0,26,52,0.22)',
+              }}
+            >
+              <img
+                src={bundleResources.imgWheat1600}
+                alt="Campo di grano al tramonto"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
             </div>
-            <div className="line-reveal hero-line-reveal" data-idx={2} style={{ marginLeft: 'clamp(24px, 6vw, 120px)' }}>
-              <span>la lingua</span>
-            </div>
-            <div className="line-reveal hero-line-reveal" data-idx={3}>
-              <span>
-                <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>del</em>{" "}settore
-              </span>
-            </div>
-            <div className="line-reveal hero-line-reveal" data-idx={4}>
-              <span>primario.</span>
-            </div>
-          </h1>
+          </div>
         </div>
 
         {/* Lead block + meta — piede fisso della fold */}
@@ -194,6 +221,20 @@ export function DropHero() {
         .hero-fold {
           min-height: 100vh;
           min-height: 100dvh;
+        }
+        .hero-head {
+          display: flex;
+          align-items: center;
+          gap: clamp(32px, 5vw, 80px);
+          width: 100%;
+        }
+        .hero-head h1 { flex: 1 1 auto; min-width: 0; }
+        .hero-claim-card {
+          width: clamp(280px, 30vw, 440px);
+          aspect-ratio: 4 / 5;
+        }
+        @media (max-width: 960px) {
+          .hero-claim-card { display: none; }
         }
       `}</style>
     </section>
