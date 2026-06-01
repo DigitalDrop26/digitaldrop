@@ -15,9 +15,11 @@ const NAV_LINKS = [
 type DropHeaderProps = {
   /** Sostituisce il sottotitolo marketing accanto al logo (es. archivio / case study). */
   logoSubtitle?: string;
+  /** Mostra la CTA «Torna ai progetti» (pagine dettaglio progetto). */
+  backToProjects?: boolean;
 };
 
-export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
+export function DropHeader({ logoSubtitle, backToProjects = false }: DropHeaderProps = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const y = useScrollY();
@@ -131,7 +133,7 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
             </a>
           )}
 
-          <nav style={{ display: "flex", alignItems: "center", gap: 4 }} className="hide-mobile">
+          <nav style={{ display: "flex", alignItems: "center", gap: 4, marginLeft: "auto" }} className="hide-mobile">
             {NAV_LINKS.map((l) => (
               <button
                 key={l.id}
@@ -166,9 +168,40 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
             ))}
           </nav>
 
-          <div className="show-mobile" style={{ alignItems: "center", gap: 18 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            {backToProjects ? (
+              <Link
+                to="/projects"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "baseline",
+                  gap: 8,
+                  padding: "11px 18px",
+                  borderRadius: 999,
+                  fontFamily: "inherit",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  letterSpacing: "-0.005em",
+                  textDecoration: "none",
+                  color: "var(--drop-teal)",
+                  border: "1px solid rgba(0,80,119,0.25)",
+                  background: "rgba(0,80,119,0.06)",
+                  transition: "background .35s var(--ease), border-color .35s var(--ease)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(0,80,119,0.12)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(0,80,119,0.06)";
+                }}
+              >
+                <span style={{ fontSize: 10, color: "var(--drop-orange)", fontWeight: 500 }}>←</span>
+                Torna ai progetti
+              </Link>
+            ) : null}
             <button
               type="button"
+              className="show-mobile"
               onClick={() => setOpen(true)}
               aria-label="Menu"
               style={{
@@ -179,7 +212,6 @@ export function DropHeader({ logoSubtitle }: DropHeaderProps = {}) {
                 width: 52,
                 height: 52,
                 borderRadius: 999,
-                display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
                 transition: "background .35s var(--ease), transform .35s var(--ease)",

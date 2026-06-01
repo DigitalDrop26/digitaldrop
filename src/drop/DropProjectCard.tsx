@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "./hooksAndUi";
 import type { DropProject } from "./dropProjects";
+import { PROJECT_CATEGORY_LABELS } from "./dropProjects";
 
 type DropProjectCardProps = {
   project: DropProject;
@@ -72,20 +73,25 @@ export function DropProjectCard({
           color: "white",
         }}
       >
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            background: "rgba(255,255,255,0.15)",
-            backdropFilter: "blur(8px)",
-            padding: "6px 12px",
-            borderRadius: 999,
-            border: "1px solid rgba(255,255,255,0.2)",
-          }}
-        >
-          {project.sector}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          {project.categories.map((cat) => (
+            <div
+              key={cat}
+              style={{
+                fontSize: 11,
+                fontWeight: 500,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                background: "rgba(255,255,255,0.15)",
+                backdropFilter: "blur(8px)",
+                padding: "6px 12px",
+                borderRadius: 999,
+                border: "1px solid rgba(255,255,255,0.2)",
+              }}
+            >
+              {PROJECT_CATEGORY_LABELS[cat]}
+            </div>
+          ))}
         </div>
         <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", opacity: 0.8 }}>{project.year}</div>
       </div>

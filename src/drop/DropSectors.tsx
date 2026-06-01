@@ -1,13 +1,24 @@
 import { useRef } from "react";
+import formazioneVideoSrc from "@Immagini/FormazioneDrop.mp4?url";
 import { bundleResources } from "./bundleResources";
 import { Reveal, useReveal } from "./hooksAndUi";
+
+type Sector = {
+  key: string;
+  num: string;
+  title: string;
+  tag: string;
+  img: string;
+  video?: string;
+  tags: string[];
+};
 
 // Sectors — Agri / Food / Formazione three big tiles
 export function DropSectors() {
   const rootRef = useRef(null);
   useReveal(rootRef);
 
-  const sectors = [
+  const sectors: Sector[] = [
     {
       key: 'agri',
       num: '01',
@@ -30,6 +41,7 @@ export function DropSectors() {
       title: 'Formazione',
       tag: 'Enti, scuole, istituti professionali',
       img: bundleResources.imgClass,
+      video: formazioneVideoSrc,
       tags: ['ITS', 'CFP', 'Master', 'Workshop AI'],
     },
   ];
@@ -61,32 +73,7 @@ export function DropSectors() {
         {/* Tiles */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(20px, 2vw, 32px)' }} className="sectors-grid">
           {sectors.map((s, i) => (
-            <Reveal key={s.key} delay={i} className="sector-tile" data-cursor="hover">
-              <img src={s.img} alt={s.title} />
-              {/* Num */}
-              <div style={{
-                position: 'absolute',
-                top: 30, right: 24,
-                fontSize: 13, fontWeight: 500,
-                color: 'rgba(255,255,255,0.85)', letterSpacing: '0.06em',
-                zIndex: 2,
-              }}>{s.num}</div>
-              {/* Label */}
-              <div className="label">
-                <div style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', marginBottom: 8 }}>{s.tag}</div>
-                <div style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 700, letterSpacing: '-0.025em', color: 'white' }}>{s.title}</div>
-                <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                  {s.tags.map(t => (
-                    <span key={t} style={{
-                      fontSize: 11, fontWeight: 500, letterSpacing: '0.03em',
-                      padding: '6px 12px', borderRadius: 999,
-                      background: 'rgba(255,255,255,0.15)', color: 'white',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                    }}>{t}</span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+            <SectorTile key={s.key} s={s} delay={i} />
           ))}
         </div>
       </div>
@@ -98,5 +85,66 @@ export function DropSectors() {
         }
       `}</style>
     </section>
+  );
+}
+
+/** Tile settore — immagine o video (fermo immagine, play all'hover). */
+function SectorTile({ s, delay }: { s: Sector; delay: number }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  function playVideo() {
+    const v = videoRef.current;
+    if (v) v.play().catch(() => {});
+  }
+
+  function pauseVideo() {
+    const v = videoRef.current;
+    if (v) v.pause();
+  }
+
+  return (
+    <Reveal
+      delay={delay}
+      className="sector-tile"
+      data-cursor="hover"
+      onMouseEnter={s.video ? playVideo : undefined}
+      onMouseLeave={s.video ? pauseVideo : undefined}
+    >
+      {s.video ? (
+        <video
+          ref={videoRef}
+          src={s.video}
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+      ) : (
+        <img src={s.img} alt={s.title} />
+      )}
+      {/* Num */}
+      <div style={{
+        position: 'absolute',
+        top: 30, right: 24,
+        fontSize: 13, fontWeight: 500,
+        color: 'rgba(255,255,255,0.85)', letterSpacing: '0.06em',
+        zIndex: 2,
+      }}>{s.num}</div>
+      {/* Label */}
+      <div className="label">
+        <div style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', marginBottom: 8 }}>{s.tag}</div>
+        <div style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 700, letterSpacing: '-0.025em', color: 'white' }}>{s.title}</div>
+        <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          {s.tags.map(t => (
+            <span key={t} style={{
+              fontSize: 11, fontWeight: 500, letterSpacing: '0.03em',
+              padding: '6px 12px', borderRadius: 999,
+              background: 'rgba(255,255,255,0.15)', color: 'white',
+              border: '1px solid rgba(255,255,255,0.2)',
+            }}>{t}</span>
+          ))}
+        </div>
+      </div>
+    </Reveal>
   );
 }

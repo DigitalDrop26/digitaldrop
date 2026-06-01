@@ -58,6 +58,7 @@ export function DropHero() {
 
   const titleTransform = `translate3d(0, ${Math.min(y * -0.08, 60)}px, 0)`;
   const fadeOnScroll = Math.max(0, 1 - y / 600);
+  const cardParallax = Math.min(70, y * 0.12);
 
   return (
     <section id="top" ref={rootRef} className="hero-fold" style={{
@@ -139,6 +140,8 @@ export function DropHero() {
                 flexShrink: 0,
                 background: 'var(--teal-100)',
                 boxShadow: '0 24px 60px rgba(0,26,52,0.22)',
+                transform: `translate3d(0, ${-cardParallax}px, 0)`,
+                willChange: 'transform',
               }}
             >
               <img
@@ -230,8 +233,9 @@ export function DropHero() {
         }
         .hero-head h1 { flex: 1 1 auto; min-width: 0; }
         .hero-claim-card {
-          width: clamp(280px, 30vw, 440px);
-          aspect-ratio: 4 / 5;
+          width: clamp(440px, 48vw, 820px);
+          aspect-ratio: 3 / 2;
+          margin-right: calc(-1 * var(--page-gutter) - 110px);
         }
         @media (max-width: 960px) {
           .hero-claim-card { display: none; }

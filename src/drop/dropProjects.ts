@@ -6,9 +6,8 @@ export type ProjectCategoryId =
   | "tutti"
   | "branding"
   | "strategy"
+  | "communication"
   | "food"
-  | "pharma"
-  | "travel"
   | "formazione";
 
 export type ProjectCategory = Exclude<ProjectCategoryId, "tutti">;
@@ -16,12 +15,20 @@ export type ProjectCategory = Exclude<ProjectCategoryId, "tutti">;
 export const PROJECT_CATEGORY_FILTERS: { id: ProjectCategoryId; label: string }[] = [
   { id: "tutti", label: "Tutti" },
   { id: "branding", label: "Branding & identity" },
-  { id: "strategy", label: "Strategy & communication" },
+  { id: "strategy", label: "Strategy" },
+  { id: "communication", label: "Communication" },
   { id: "food", label: "Food & agro" },
-  { id: "pharma", label: "Pharma & animal health" },
-  { id: "travel", label: "Travel & luxury" },
   { id: "formazione", label: "Formazione" },
 ];
+
+/** Label brevi delle categorie, usate come pill nell'anteprima delle card. */
+export const PROJECT_CATEGORY_LABELS: Record<ProjectCategory, string> = {
+  branding: "Branding",
+  strategy: "Strategy",
+  communication: "Communication",
+  food: "Food & agro",
+  formazione: "Formazione",
+};
 
 export type DropProject = {
   id: string;
@@ -57,7 +64,7 @@ export const DROP_PROJECTS: DropProject[] = [
     sector: "Travel · Luxury",
     year: "2024",
     img: aliveCaseBusStopSrc,
-    categories: ["branding", "travel"],
+    categories: ["branding", "strategy"],
     detailPath: "/projects/alive",
   },
   {
@@ -67,7 +74,7 @@ export const DROP_PROJECTS: DropProject[] = [
     sector: "Animal Health · Pharma",
     year: "2025",
     img: giocoCar01,
-    categories: ["strategy", "pharma"],
+    categories: ["strategy", "communication"],
     detailPath: "/projects/gioco-di-squadra",
   },
   {

@@ -7,10 +7,10 @@ import giocoCar08 from "@Immagini/Gioco di squadra/08.png?url";
 import giocoCar11 from "@Immagini/Gioco di squadra/11.png?url";
 import { bundleResources } from "./bundleResources";
 import { DropFooter } from "./DropFooter";
-import { DropInnerPageHeader } from "./DropInnerPageHeader";
+import { DropHeader } from "./DropHeader";
+import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectCarousel } from "./DropProjectCarousel";
-import { Btn, CursorFollower, Reveal, useReveal, useScrollY } from "./hooksAndUi";
-import { homeHash } from "./sitePaths";
+import { CursorFollower, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
 const giocoCarouselSlides = [
   giocoCar01,
@@ -51,7 +51,7 @@ export function DropProjectGiocoDiSquadraPage() {
   return (
     <Fragment>
       <CursorFollower />
-      <DropInnerPageHeader />
+      <DropHeader logoSubtitle="Progetti & case study" backToProjects />
 
       <main id="top" ref={mainRef}>
         <section
@@ -250,36 +250,8 @@ export function DropProjectGiocoDiSquadraPage() {
           />
         </section>
 
-        <section id="progetto-contatti" className="section" style={{ background: "#ffffff" }}>
-          <div className="container-wide">
-            <Reveal delay={0} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <span className="eyebrow">Progetto · Contatti</span>
-              <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0, textAlign: "center", maxWidth: "18ch" }}>
-                Pronto a dare{" "}
-                <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>nuova vita</em>
-                <br />
-                al tuo brand?
-              </h2>
-              <p
-                style={{
-                  marginTop: 28,
-                  fontSize: 17,
-                  lineHeight: 1.65,
-                  fontWeight: 500,
-                  maxWidth: 620,
-                  marginBottom: 28,
-                  textAlign: "center",
-                  color: "var(--ink)",
-                }}
-              >
-                Scopri come possiamo accompagnarti in un rebranding memorabile.
-              </p>
-              <Btn variant="primary" href={homeHash("contatti")}>
-                Prenota un appuntamento
-              </Btn>
-            </Reveal>
-          </div>
-        </section>
+        {/* Contatti — stessa sezione della homepage */}
+        <DropNewsletter />
       </main>
 
       <style>{`
