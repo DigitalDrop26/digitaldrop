@@ -131,29 +131,37 @@ export function DropHero() {
             </h1>
 
             <div
-              className="reveal hero-claim-card"
-              data-idx="5"
+              className="hero-claim-card"
               style={{
-                position: 'relative',
-                borderRadius: 24,
-                overflow: 'hidden',
                 flexShrink: 0,
-                background: 'var(--teal-100)',
-                boxShadow: '0 24px 60px rgba(0,26,52,0.22)',
                 transform: `translate3d(0, ${-cardParallax}px, 0)`,
                 willChange: 'transform',
               }}
             >
-              <img
-                src={bundleResources.imgWheat1600}
-                alt="Campo di grano al tramonto"
+              <div
+                className="reveal hero-claim-card-inner"
+                data-idx="5"
                 style={{
+                  position: 'relative',
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
+                  borderRadius: 24,
+                  overflow: 'hidden',
+                  background: 'var(--teal-100)',
+                  boxShadow: '0 24px 60px rgba(0,26,52,0.22)',
                 }}
-              />
+              >
+                <img
+                  src={bundleResources.imgWheat1600}
+                  alt="Campo di grano al tramonto"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -236,6 +244,12 @@ export function DropHero() {
           width: clamp(440px, 48vw, 820px);
           aspect-ratio: 3 / 2;
           margin-right: calc(-1 * var(--page-gutter) - 110px);
+        }
+        .hero-claim-card-inner {
+          transition: transform .6s var(--ease);
+        }
+        .hero-claim-card:hover .hero-claim-card-inner {
+          transform: rotate(5deg);
         }
         @media (max-width: 960px) {
           .hero-claim-card { display: none; }

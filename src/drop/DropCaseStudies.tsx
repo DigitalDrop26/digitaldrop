@@ -22,7 +22,7 @@ export function DropCaseStudies() {
             </h2>
           </Reveal>
           <Reveal delay={1} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Link to="/projects" className="ulink" style={{ fontSize: 15, fontWeight: 600 }}>
+            <Link to="/projects" className="ulink" style={{ fontSize: 17, fontWeight: 600 }}>
               tutti i progetti
               <span className="ulink-bar2"></span>
             </Link>

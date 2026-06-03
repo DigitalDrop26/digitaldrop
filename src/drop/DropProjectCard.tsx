@@ -93,21 +93,10 @@ export function DropProjectCard({
             </div>
           ))}
         </div>
-        <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", opacity: 0.8 }}>{project.year}</div>
+        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", opacity: 0.8 }}>{project.year}</div>
       </div>
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 28, color: "white" }}>
         <div>
-          <div
-            style={{
-              fontSize: 12,
-              fontWeight: 500,
-              color: "var(--drop-orange)",
-              letterSpacing: "0.06em",
-              marginBottom: 8,
-            }}
-          >
-            {project.client}
-          </div>
           <h3
             className="display"
             style={{

@@ -1,5 +1,6 @@
 import aliveCaseBusStopSrc from "@Immagini/aliveX/Rebranding AliveXperiences_ Lusso Su Misura nel Travel Trade_files/medium_Free_Bus_Stop_Poster_at_Night_Mockup_db35d03013.png?url";
 import giocoCar01 from "@Immagini/Gioco di squadra/01.png?url";
+import agrovitMascotte03 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-03.png?url";
 import { bundleResources } from "./bundleResources";
 
 export type ProjectCategoryId =
@@ -7,6 +8,9 @@ export type ProjectCategoryId =
   | "branding"
   | "strategy"
   | "communication"
+  | "visual"
+  | "content"
+  | "social"
   | "food"
   | "formazione";
 
@@ -17,6 +21,9 @@ export const PROJECT_CATEGORY_FILTERS: { id: ProjectCategoryId; label: string }[
   { id: "branding", label: "Branding & identity" },
   { id: "strategy", label: "Strategy" },
   { id: "communication", label: "Communication" },
+  { id: "visual", label: "Visual" },
+  { id: "content", label: "Content" },
+  { id: "social", label: "Social" },
   { id: "food", label: "Food & agro" },
   { id: "formazione", label: "Formazione" },
 ];
@@ -26,6 +33,9 @@ export const PROJECT_CATEGORY_LABELS: Record<ProjectCategory, string> = {
   branding: "Branding",
   strategy: "Strategy",
   communication: "Communication",
+  visual: "Visual",
+  content: "Content",
+  social: "Social",
   food: "Food & agro",
   formazione: "Formazione",
 };
@@ -49,15 +59,6 @@ export type HomepageFeaturedProject = DropProject & {
 
 export const DROP_PROJECTS: DropProject[] = [
   {
-    id: "caseificio-roero",
-    client: "Caseificio Roero",
-    title: "Un caseificio piemontese diventa brand nazionale",
-    sector: "Food · DOP",
-    year: "2024",
-    img: bundleResources.imgCheese,
-    categories: ["food", "branding"],
-  },
-  {
     id: "alive-xperiences",
     client: "branding, strategy",
     title: "Alive Xperiences",
@@ -78,6 +79,16 @@ export const DROP_PROJECTS: DropProject[] = [
     detailPath: "/projects/gioco-di-squadra",
   },
   {
+    id: "agrovit",
+    client: "visual, content, social",
+    title: "Agrovit",
+    sector: "Agro · Brand World",
+    year: "2025",
+    img: agrovitMascotte03,
+    categories: ["visual", "content", "social"],
+    detailPath: "/projects/agrovit",
+  },
+  {
     id: "its-agroalimentare",
     client: "ITS Agroalimentare",
     title: "Formazione AI per 600 studenti tra Parma e Modena",
@@ -89,14 +100,14 @@ export const DROP_PROJECTS: DropProject[] = [
 ];
 
 const featuredLayout: Record<string, { span: string; height: number }> = {
-  "caseificio-roero": { span: "span 7", height: 560 },
+  "agrovit": { span: "span 7", height: 560 },
   "alive-xperiences": { span: "span 5", height: 560 },
   "gioco-di-squadra": { span: "span 5", height: 420 },
   "its-agroalimentare": { span: "span 7", height: 420 },
 };
 
 export const HOMEPAGE_FEATURED_PROJECT_IDS = [
-  "caseificio-roero",
+  "agrovit",
   "alive-xperiences",
   "gioco-di-squadra",
   "its-agroalimentare",

@@ -56,10 +56,6 @@ export function DropManifesto() {
                   <div style={{ fontSize: 13, color: 'var(--teal-500)', fontWeight: 500 }}>Strateghi, designer, contadini digitali.</div>
                 </div>
               </div>
-              <a href="#chi-siamo" className="ulink" style={{ display: 'inline-block', fontWeight: 600, fontSize: 15 }}>
-                Conosci il team
-                <span className="ulink-bar2"></span>
-              </a>
             </Reveal>
         </div>
       </div>

@@ -2,8 +2,13 @@ import { useRef } from "react";
 import { bundleResources } from "./bundleResources";
 import { useReveal, LineReveal, Btn, Reveal } from "./hooksAndUi";
 
+type DropNewsletterProps = {
+  /** Mostra il numero di sezione («08 — ») nell'eyebrow. Attivo in home, off nelle pagine progetto. */
+  showNumber?: boolean;
+};
+
 // Contatti — blocco dark, headline + dirette
-export function DropNewsletter() {
+export function DropNewsletter({ showNumber = true }: DropNewsletterProps = {}) {
   const rootRef = useRef(null);
   useReveal(rootRef);
   return (
@@ -28,7 +33,7 @@ export function DropNewsletter() {
 
       <div className="container-wide" style={{ position: 'relative', zIndex: 2 }}>
         <Reveal delay={0}>
-          <span className="eyebrow on-dark">08 — Iniziamo</span>
+          <span className="eyebrow on-dark">{showNumber ? "08 — Iniziamo" : "Iniziamo"}</span>
         </Reveal>
 
         <h2 className="display display-xl" style={{ color: 'white', maxWidth: '14ch', marginTop: 32, marginBottom: 0 }}>
@@ -55,10 +60,6 @@ export function DropNewsletter() {
               lineHeight: 1.05,
               marginBottom: 8,
             }}>info@digitaldrop.eu</a>
-
-            <div style={{ fontSize: 18, fontWeight: 500, color: 'rgba(255,255,255,0.75)', letterSpacing: '-0.01em' }}>
-              <a href="tel:+393475571187" style={{ color: 'inherit', textDecoration: 'none' }}>+39 347 557 1187</a>
-            </div>
 
             <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <Btn variant="light" href="#calendly">

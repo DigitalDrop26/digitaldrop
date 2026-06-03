@@ -51,7 +51,7 @@ export function DropProjectGiocoDiSquadraPage() {
   return (
     <Fragment>
       <CursorFollower />
-      <DropHeader logoSubtitle="Progetti & case study" backToProjects />
+      <DropHeader logoSubtitle="Progetti" projectName="Gioco di Squadra" backToProjects />
 
       <main id="top" ref={mainRef}>
         <section
@@ -251,7 +251,7 @@ export function DropProjectGiocoDiSquadraPage() {
         </section>
 
         {/* Contatti — stessa sezione della homepage */}
-        <DropNewsletter />
+        <DropNewsletter showNumber={false} />
       </main>
 
       <style>{`

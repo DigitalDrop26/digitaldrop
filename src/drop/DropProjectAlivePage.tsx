@@ -276,7 +276,7 @@ export function DropProjectAlivePage() {
   return (
     <Fragment>
       <CursorFollower />
-      <DropHeader logoSubtitle="Progetti & case study" backToProjects />
+      <DropHeader logoSubtitle="Progetti" projectName="Alive Xperiences" backToProjects />
 
       <main id="top" ref={mainRef}>
         {/* Hero — mockup rollup AliveXperiences (fullscreen fold + scroll cue) */}
@@ -781,7 +781,7 @@ export function DropProjectAlivePage() {
         </section>
 
         {/* Contatti — stessa sezione della homepage */}
-        <DropNewsletter />
+        <DropNewsletter showNumber={false} />
       </main>
 
       <style>{`

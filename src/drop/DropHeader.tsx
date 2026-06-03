@@ -15,11 +15,13 @@ const NAV_LINKS = [
 type DropHeaderProps = {
   /** Sostituisce il sottotitolo marketing accanto al logo (es. archivio / case study). */
   logoSubtitle?: string;
+  /** Nome progetto mostrato in colore accento, preceduto da «/». */
+  projectName?: string;
   /** Mostra la CTA «Torna ai progetti» (pagine dettaglio progetto). */
   backToProjects?: boolean;
 };
 
-export function DropHeader({ logoSubtitle, backToProjects = false }: DropHeaderProps = {}) {
+export function DropHeader({ logoSubtitle, projectName, backToProjects = false }: DropHeaderProps = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const y = useScrollY();
@@ -88,7 +90,7 @@ export function DropHeader({ logoSubtitle, backToProjects = false }: DropHeaderP
     color: "var(--drop-teal)",
     letterSpacing: "0.06em",
     lineHeight: 1.2,
-    maxWidth: logoSubtitle ? 220 : 200,
+    maxWidth: projectName ? 420 : logoSubtitle ? 220 : 200,
   } as const;
 
   return (
@@ -114,7 +116,15 @@ export function DropHeader({ logoSubtitle, backToProjects = false }: DropHeaderP
             <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "inherit" }}>
               {logoMark}
               <span style={{ display: "inline-block", height: 22, width: 1, background: "rgba(0,80,119,0.25)" }} />
-              <span style={logoSubtitleStyle}>{logoSubtitle}</span>
+              <span style={logoSubtitleStyle}>
+                {logoSubtitle}
+                {projectName ? (
+                  <span style={{ color: "var(--drop-orange)" }}>
+                    {" / "}
+                    {projectName}
+                  </span>
+                ) : null}
+              </span>
             </Link>
           ) : (
             <a

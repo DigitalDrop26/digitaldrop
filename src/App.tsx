@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { DropHomepageApp } from "./drop/DropHomepageApp";
+import { DropProjectAgrovitPage } from "./drop/DropProjectAgrovitPage";
 import { DropProjectAlivePage } from "./drop/DropProjectAlivePage";
 import { DropProjectGiocoDiSquadraPage } from "./drop/DropProjectGiocoDiSquadraPage";
 import { DropProjectsArchivePage } from "./drop/DropProjectsArchivePage";
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/projects" element={<DropProjectsArchivePage />} />
         <Route path="/projects/alive" element={<DropProjectAlivePage />} />
         <Route path="/projects/gioco-di-squadra" element={<DropProjectGiocoDiSquadraPage />} />
+        <Route path="/projects/agrovit" element={<DropProjectAgrovitPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

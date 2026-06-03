@@ -39,7 +39,7 @@ export function DropSectors() {
       key: 'formazione',
       num: '03',
       title: 'Formazione',
-      tag: 'Enti, scuole, istituti professionali',
+      tag: 'Aziende e imprenditori agrifood',
       img: bundleResources.imgClass,
       video: formazioneVideoSrc,
       tags: ['ITS', 'CFP', 'Master', 'Workshop AI'],
