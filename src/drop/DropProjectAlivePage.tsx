@@ -10,6 +10,7 @@ import aliveCar08 from "@Immagini/aliveX/carosello/08.png?url";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
+import { DropProjectBackFab } from "./DropProjectBackFab";
 import { CursorFollower, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
 /** Con strip duplicata (stesso gruppo ripetuto): riporta `scrollLeft` nel range fisico con salti ±loopPx sulla sutura clone/originale — nessun modulo “fantasma”, riparte come se continuasse a scorrere. */
@@ -276,7 +277,7 @@ export function DropProjectAlivePage() {
   return (
     <Fragment>
       <CursorFollower />
-      <DropHeader logoSubtitle="Progetti" projectName="Alive Xperiences" backToProjects />
+      <DropHeader logoSubtitle="Progetti" projectName="Alive Xperiences" />
 
       <main id="top" ref={mainRef}>
         {/* Hero — mockup rollup AliveXperiences (fullscreen fold + scroll cue) */}
@@ -781,7 +782,7 @@ export function DropProjectAlivePage() {
         </section>
 
         {/* Contatti — stessa sezione della homepage */}
-        <DropNewsletter showNumber={false} />
+        <DropNewsletter />
       </main>
 
       <style>{`
@@ -811,6 +812,7 @@ export function DropProjectAlivePage() {
       `}</style>
 
       <DropFooter anchorsResolveHome />
+      <DropProjectBackFab />
     </Fragment>
   );
 }

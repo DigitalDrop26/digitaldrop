@@ -16,13 +16,18 @@ export function DropCaseStudies() {
       <div className="container-wide">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'end', marginBottom: 'clamp(48px, 6vw, 80px)' }} className="cs-head">
           <Reveal delay={0}>
-            <span className="eyebrow">07 — Progetti</span>
+            <span className="eyebrow">05 — Progetti</span>
             <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-              Progetti veri,<br/>per <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>persone vere</em>.
+              Quello che<br />
+              <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>facciamo</em>
             </h2>
           </Reveal>
           <Reveal delay={1} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Link to="/projects" className="ulink" style={{ fontSize: 17, fontWeight: 600 }}>
+            <Link
+              to="/projects"
+              className="ulink"
+              style={{ fontSize: "clamp(19px, 1.35vw, 22px)", fontWeight: 600, color: "var(--drop-orange)" }}
+            >
               tutti i progetti
               <span className="ulink-bar2"></span>
             </Link>

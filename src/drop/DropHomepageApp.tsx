@@ -1,4 +1,4 @@
-import { useEffect, Fragment, useState, useLayoutEffect } from "react";
+import { useEffect, Fragment, useState, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { bundleResources } from "./bundleResources";
 import { CursorFollower } from "./hooksAndUi";
@@ -6,17 +6,44 @@ import { DropCaseStudies } from "./DropCaseStudies";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropHero } from "./DropHero";
-import { DropManifesto } from "./DropManifesto";
 import { DropNewsletter } from "./DropNewsletter";
-import { DropNumbers } from "./DropNumbers";
 import { DropProcess } from "./DropProcess";
 import { DropSectors } from "./DropSectors";
 import { DropServices } from "./DropServices";
-import { DropValues } from "./DropValues";
 
 export function DropHomepageApp() {
   const [intro, setIntro] = useState(true);
   const location = useLocation();
+  const introStackRef = useRef<HTMLDivElement>(null);
+  const introSubtitleRef = useRef<HTMLParagraphElement>(null);
+
+  useLayoutEffect(() => {
+    const stack = introStackRef.current;
+    const subtitle = introSubtitleRef.current;
+    if (!stack || !subtitle) return;
+
+    const fitSubtitle = () => {
+      const maxWidth = stack.clientWidth;
+      if (maxWidth <= 0) return;
+
+      subtitle.style.whiteSpace = "nowrap";
+      let min = 8;
+      let max = 96;
+      while (min < max) {
+        const mid = Math.ceil((min + max) / 2);
+        subtitle.style.fontSize = `${mid}px`;
+        if (subtitle.scrollWidth <= maxWidth) min = mid;
+        else max = mid - 1;
+      }
+      subtitle.style.fontSize = `${min}px`;
+    };
+
+    fitSubtitle();
+    const ro = new ResizeObserver(fitSubtitle);
+    ro.observe(stack);
+    void document.fonts?.ready.then(fitSubtitle);
+    return () => ro.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
     if (intro) {
@@ -83,7 +110,10 @@ export function DropHomepageApp() {
         }}
       >
         <div
+          ref={introStackRef}
           style={{
+            width: "min(88vw, 440px)",
+            margin: "0 auto",
             textAlign: "center",
             color: "white",
             opacity: intro ? 1 : 0,
@@ -95,8 +125,7 @@ export function DropHomepageApp() {
             className="intro-splash-logo"
             style={{
               position: "relative",
-              width: "min(88vw, 440px)",
-              margin: "0 auto",
+              width: "100%",
               lineHeight: 0,
             }}
           >
@@ -131,20 +160,23 @@ export function DropHomepageApp() {
               }}
             />
           </div>
-          <div
+          <p
+            ref={introSubtitleRef}
+            className="intro-splash-subtitle"
             style={{
-              marginTop: 20,
-              fontSize: 12,
-              fontWeight: 500,
-              letterSpacing: "0.2em",
+              width: "100%",
+              marginTop: 24,
+              marginBottom: 0,
+              fontWeight: 600,
+              letterSpacing: "0.04em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(255,255,255,0.82)",
               opacity: 0,
               animation: "introIn 1.1s cubic-bezier(.2,.7,.2,1) .4s both",
             }}
           >
-            Agenzia · Marketing &amp; Comunicazione · Settore primario
-          </div>
+            Marketing e comunicazione
+          </p>
         </div>
       </div>
 
@@ -152,12 +184,9 @@ export function DropHomepageApp() {
 
       <main>
         <DropHero />
-        <DropManifesto />
         <DropSectors />
         <DropServices />
-        <DropNumbers />
         <DropProcess />
-        <DropValues />
         <DropCaseStudies />
         <DropNewsletter />
       </main>

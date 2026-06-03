@@ -3,6 +3,7 @@ import agrovitMascotte01 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-01.pn
 import agrovitMascotte02 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-02.png?url";
 import agrovitMascotte03 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-03.png?url";
 import agrovitMascotte04 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-04.png?url";
+import agrovitHeroTestata from "@Immagini/Agrovit/agrovit_testata.png?url";
 import agrovitCartaceoRivista1 from "@Immagini/Agrovit/Cartaceo/mockup-rivista-1.png?url";
 import agrovitCartaceoRivista2 from "@Immagini/Agrovit/Cartaceo/mockup-rivista-2.png?url";
 import agrovitCartaceoPosterAlleato from "@Immagini/Agrovit/Cartaceo/poster-alleato.jpg?url";
@@ -16,6 +17,7 @@ import agrovitSocialTransizione from "@Immagini/Agrovit/Social/post-transizione.
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
+import { DropProjectBackFab } from "./DropProjectBackFab";
 import { DropProjectMediaMasonry, type MediaMasonryRow } from "./DropProjectMediaMasonry";
 import { CursorFollower, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
@@ -37,6 +39,7 @@ const agrovitCartaceoRows: MediaMasonryRow[] = [
   },
   {
     type: "split",
+    columns: 2,
     items: [
       {
         src: agrovitCartaceoPosterAlleato,
@@ -57,25 +60,22 @@ const agrovitCartaceoRows: MediaMasonryRow[] = [
   },
 ];
 
-/** Griglia social — post verticali, 2 colonne per riga. */
+/** Griglia social — post verticali, 3 colonne per riga. */
 const agrovitSocialRows: MediaMasonryRow[] = [
   {
     type: "split",
+    columns: 3,
     items: [
       { src: agrovitSocialAcidex, alt: "Agrovit, post social Acidex" },
       { src: agrovitSocialBooster, alt: "Agrovit, post social Booster" },
-    ],
-  },
-  {
-    type: "split",
-    items: [
       { src: agrovitSocialImmunofeet, alt: "Agrovit, post social Immunofeet" },
-      { src: agrovitSocialInsilati, alt: "Agrovit, post social Insilati" },
     ],
   },
   {
     type: "split",
+    columns: 3,
     items: [
+      { src: agrovitSocialInsilati, alt: "Agrovit, post social Insilati" },
       { src: agrovitSocialQualitalatte, alt: "Agrovit, post social Qualità Latte" },
       { src: agrovitSocialTransizione, alt: "Agrovit, post social Transizione" },
     ],
@@ -205,7 +205,7 @@ export function DropProjectAgrovitPage() {
   return (
     <Fragment>
       <CursorFollower />
-      <DropHeader logoSubtitle="Progetti" projectName="Agrovit" backToProjects />
+      <DropHeader logoSubtitle="Progetti" projectName="Agrovit" />
 
       <main id="top" ref={mainRef}>
         <section
@@ -221,9 +221,9 @@ export function DropProjectAgrovitPage() {
             boxSizing: "border-box",
             overflow: "hidden",
             backgroundColor: "var(--paper-warm)",
-            backgroundImage: `url(${agrovitMascotte03})`,
-            backgroundSize: "clamp(280px, 42vw, 560px)",
-            backgroundPosition: "right -24px bottom 6%",
+            backgroundImage: `url(${agrovitHeroTestata})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
         >
@@ -235,7 +235,7 @@ export function DropProjectAgrovitPage() {
               zIndex: 0,
               pointerEvents: "none",
               background:
-                "linear-gradient(105deg, rgba(250,247,242,0.96) 0%, rgba(250,247,242,0.82) 42%, rgba(250,247,242,0.18) 72%, rgba(250,247,242,0) 100%)",
+                "linear-gradient(165deg, rgba(0, 19, 40, 0.78) 0%, rgba(0, 26, 52, 0.62) min(48%, 560px), rgba(0, 19, 40, 0.72) 100%)",
             }}
           />
           <div
@@ -262,7 +262,7 @@ export function DropProjectAgrovitPage() {
                       margin: 0,
                       letterSpacing: "-0.038em",
                       lineHeight: 1.03,
-                      color: "var(--drop-teal)",
+                      color: "#ffffff",
                       maxWidth: "22ch",
                     }}
                   >
@@ -276,12 +276,15 @@ export function DropProjectAgrovitPage() {
                       fontWeight: 600,
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
-                      color: "var(--teal-500)",
+                      color: "rgba(255,255,255,0.92)",
                     }}
                   >
                     Visual / Content / Social — 2025
                   </p>
-                  <p className="alive-project-hero-meta-line" style={{ marginTop: 14, fontWeight: 500, color: "var(--ink)" }}>
+                  <p
+                    className="alive-project-hero-meta-line"
+                    style={{ marginTop: 14, fontWeight: 500, color: "rgba(255,255,255,0.82)" }}
+                  >
                     Un mondo di personaggi per dare voce al brand Agrovit
                   </p>
                 </Reveal>
@@ -295,7 +298,7 @@ export function DropProjectAgrovitPage() {
                 alignItems: "center",
                 gap: 12,
                 marginTop: "clamp(8px, 2vh, 24px)",
-                color: "var(--teal-500)",
+                color: "rgba(255,255,255,0.88)",
                 fontSize: 11,
                 fontWeight: 500,
                 letterSpacing: "0.16em",
@@ -485,7 +488,7 @@ export function DropProjectAgrovitPage() {
         </section>
 
         {/* Contatti — stessa sezione della homepage */}
-        <DropNewsletter showNumber={false} />
+        <DropNewsletter />
       </main>
 
       <style>{`
@@ -537,6 +540,7 @@ export function DropProjectAgrovitPage() {
       `}</style>
 
       <DropFooter anchorsResolveHome />
+      <DropProjectBackFab />
     </Fragment>
   );
 }

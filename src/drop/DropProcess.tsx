@@ -8,7 +8,7 @@ export function DropProcess() {
 
   const steps = [
     { n: '01', t: 'Ascolto', d: 'Veniamo da te, in cascina, in stabilimento, in vigna. Capiamo persone, processi, prodotto.' },
-    { n: '02', t: 'Discovery', d: 'Audit di brand, comunicazione e mercato. Restituiamo una foto netta — niente fumo.' },
+    { n: '02', t: 'Analisi', d: 'Audit di brand, comunicazione e mercato. Restituiamo una foto netta — niente fumo.' },
     { n: '03', t: 'Strategia', d: 'Posizionamento, piano editoriale, brand identity. Un solo documento operativo, condiviso.' },
     { n: '04', t: 'Esecuzione', d: 'Produciamo, lanciamo, misuriamo. Sempre con due metriche: valore reale e tempo.' },
   ];
@@ -20,12 +20,13 @@ export function DropProcess() {
           {/* Sticky title */}
           <div style={{ position: 'sticky', top: 120, alignSelf: 'start' }}>
             <Reveal delay={0}>
-              <span className="eyebrow">05 — Processo</span>
+              <span className="eyebrow">04 — Processo</span>
             </Reveal>
             <Reveal delay={1}>
               <h2 className="display display-md" style={{ marginTop: 28, marginBottom: 0 }}>
-                Quattro<br/>passi<br/>
-                <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>fondamentali</em>.
+                1 metodo,
+                <br />
+                4 <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>passaggi</em>
               </h2>
             </Reveal>
             <Reveal delay={2}>

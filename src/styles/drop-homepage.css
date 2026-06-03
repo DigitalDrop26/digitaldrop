@@ -506,24 +506,34 @@ body.is-intro-loading .cursor-ring {
 }
 .btn:hover .btn-fill::before { transform: translateY(0); }
 
-.btn-primary { color: white; background: var(--drop-teal); }
-.btn-primary .btn-fill::before { background: var(--drop-orange); }
+.btn-primary { color: white; background: var(--drop-orange); }
+.btn-primary .btn-fill::before { background: var(--orange-400); }
 .btn-primary:hover { color: white; }
 
 .btn-ghost {
-  color: var(--drop-teal);
+  color: var(--drop-orange);
   background: transparent;
-  border: 1.5px solid var(--drop-teal);
+  border: 1.5px solid var(--drop-orange);
 }
-.btn-ghost .btn-fill::before { background: var(--drop-teal); }
-.btn-ghost:hover { color: white; border-color: var(--drop-teal); }
+.btn-ghost .btn-fill::before { background: var(--drop-orange); }
+.btn-ghost:hover { color: white; border-color: var(--drop-orange); }
 
 .btn-light {
-  color: var(--drop-teal);
-  background: white;
+  color: white;
+  background: var(--drop-orange);
 }
-.btn-light .btn-fill::before { background: var(--drop-orange); }
+.btn-light .btn-fill::before { background: var(--orange-400); }
 .btn-light:hover { color: white; }
+
+.btn-compact {
+  padding: 11px 18px;
+  font-size: 14px;
+  gap: 8px;
+}
+.btn-compact .arrow {
+  width: 14px;
+  height: 14px;
+}
 
 .btn .arrow {
   display: inline-flex;
@@ -683,11 +693,27 @@ body.is-intro-loading .cursor-ring {
 }
 .sector-tile:hover img,
 .sector-tile:hover video { transform: scale(1.06); }
+.sector-tile-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 28, 45, 0.28) 0%,
+    rgba(0, 28, 45, 0.52) 45%,
+    rgba(0, 18, 32, 0.88) 100%
+  );
+}
+.sector-tile--dark .label {
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 18, 32, 0.55) 100%);
+}
 .sector-tile .label {
   position: absolute;
   inset: auto 0 0 0;
   padding: 28px;
   color: white;
+  z-index: 2;
   background: linear-gradient(180deg, transparent 0%, rgba(0,20,40,0.75) 100%);
 }
 
@@ -817,6 +843,115 @@ body.is-intro-loading .cursor-ring {
   50% { transform: scaleY(1); transform-origin: top; }
   50.01% { transform: scaleY(1); transform-origin: bottom; }
   100% { transform: scaleY(0.2); transform-origin: bottom; }
+}
+
+/* ---------- Project back FAB ---------- */
+.project-back-fab {
+  position: fixed;
+  right: var(--page-gutter);
+  bottom: clamp(24px, 4vw, 40px);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--drop-orange);
+  color: #ffffff;
+  box-shadow: 0 10px 32px rgba(233, 74, 49, 0.32);
+  text-decoration: none;
+  transition:
+    transform .35s var(--ease),
+    background .35s var(--ease),
+    box-shadow .35s var(--ease);
+}
+.project-back-fab:hover {
+  background: var(--orange-400);
+  transform: scale(1.06);
+  box-shadow: 0 14px 36px rgba(233, 74, 49, 0.4);
+}
+.project-back-fab:active {
+  transform: scale(0.98);
+}
+@media (max-width: 760px) {
+  .project-back-fab {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+  }
+}
+
+/* ---------- Archive hero title + place ticker ---------- */
+.archive-hero-fold {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.archive-hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 28px;
+  margin-bottom: 0;
+  max-width: none;
+  line-height: 0.95;
+  color: var(--drop-teal);
+}
+.archive-hero-line {
+  display: block;
+  line-height: 0.95;
+}
+.archive-hero-line--place {
+  position: relative;
+  overflow: hidden;
+}
+.archive-place-ticker {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+.archive-place-ticker-measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  inset: 0 auto auto 0;
+  height: auto;
+}
+.archive-place-ticker-viewport {
+  display: block;
+  overflow: hidden;
+}
+.archive-place-ticker-track {
+  display: block;
+  transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+.archive-place-ticker-line {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.archive-place-word {
+  font-style: italic;
+  line-height: 1;
+  display: block;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---------- Responsive guards ---------- */

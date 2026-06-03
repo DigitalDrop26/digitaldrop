@@ -2,13 +2,8 @@ import { useRef } from "react";
 import { bundleResources } from "./bundleResources";
 import { useReveal, LineReveal, Btn, Reveal } from "./hooksAndUi";
 
-type DropNewsletterProps = {
-  /** Mostra il numero di sezione («08 — ») nell'eyebrow. Attivo in home, off nelle pagine progetto. */
-  showNumber?: boolean;
-};
-
 // Contatti — blocco dark, headline + dirette
-export function DropNewsletter({ showNumber = true }: DropNewsletterProps = {}) {
+export function DropNewsletter() {
   const rootRef = useRef(null);
   useReveal(rootRef);
   return (
@@ -33,7 +28,7 @@ export function DropNewsletter({ showNumber = true }: DropNewsletterProps = {}) 
 
       <div className="container-wide" style={{ position: 'relative', zIndex: 2 }}>
         <Reveal delay={0}>
-          <span className="eyebrow on-dark">{showNumber ? "08 — Iniziamo" : "Iniziamo"}</span>
+          <span className="eyebrow on-dark">Iniziamo un progetto</span>
         </Reveal>
 
         <h2 className="display display-xl" style={{ color: 'white', maxWidth: '14ch', marginTop: 32, marginBottom: 0 }}>
@@ -62,15 +57,12 @@ export function DropNewsletter({ showNumber = true }: DropNewsletterProps = {}) 
             }}>info@digitaldrop.eu</a>
 
             <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Btn variant="light" href="#calendly">
+              <Btn variant="primary" href="#calendly">
                 Prenota un call
               </Btn>
-              <a href="#wp" className="btn" style={{ background: 'transparent', color: 'white', border: '1px solid rgba(255,255,255,0.3)' }}>
-                <span style={{ position: 'relative' }}>Scrivici su WhatsApp</span>
-                <span className="arrow" style={{ position: 'relative' }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" strokeWidth="1.5"/></svg>
-                </span>
-              </a>
+              <Btn variant="ghost" href="#wp">
+                Scrivici su WhatsApp
+              </Btn>
             </div>
           </Reveal>
         </div>

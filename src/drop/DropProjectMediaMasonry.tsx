@@ -11,10 +11,11 @@ export type MediaMasonryFullRow = {
   item: MediaMasonryItem;
 };
 
-/** Riga doppia — immagini verticali, due colonne. */
+/** Riga a griglia — immagini verticali su 2 o 3 colonne. */
 export type MediaMasonrySplitRow = {
   type: "split";
-  items: [MediaMasonryItem, MediaMasonryItem];
+  columns: 2 | 3;
+  items: MediaMasonryItem[];
 };
 
 export type MediaMasonryRow = MediaMasonryFullRow | MediaMasonrySplitRow;
@@ -60,6 +61,7 @@ export function DropProjectMediaMasonry({ rows, ariaLabel }: DropProjectMediaMas
             <div
               key={row.items.map((item) => item.src).join("|")}
               className="project-media-row project-media-row--split"
+              data-columns={row.columns}
               role="presentation"
             >
               {row.items.map((item) => (
@@ -84,9 +86,14 @@ export function DropProjectMediaMasonry({ rows, ariaLabel }: DropProjectMediaMas
         }
         .project-media-row--split {
           display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: clamp(16px, 2vw, 24px);
           align-items: stretch;
+        }
+        .project-media-row--split[data-columns="2"] {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .project-media-row--split[data-columns="3"] {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
         }
         .project-media-cell {
           min-width: 0;
@@ -107,9 +114,14 @@ export function DropProjectMediaMasonry({ rows, ariaLabel }: DropProjectMediaMas
         .project-media-card:hover img {
           transform: scale(1.02);
         }
+        @media (max-width: 900px) {
+          .project-media-row--split[data-columns="3"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
         @media (max-width: 720px) {
           .project-media-row--split {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>

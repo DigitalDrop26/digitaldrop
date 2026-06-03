@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { DropChiSiamoPage } from "./drop/DropChiSiamoPage";
 import { DropHomepageApp } from "./drop/DropHomepageApp";
 import { DropProjectAgrovitPage } from "./drop/DropProjectAgrovitPage";
 import { DropProjectAlivePage } from "./drop/DropProjectAlivePage";
@@ -34,6 +35,7 @@ export default function App() {
     <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/" element={<DropHomepageApp />} />
+        <Route path="/chi-siamo" element={<DropChiSiamoPage />} />
         <Route path="/projects" element={<DropProjectsArchivePage />} />
         <Route path="/projects/alive" element={<DropProjectAlivePage />} />
         <Route path="/projects/gioco-di-squadra" element={<DropProjectGiocoDiSquadraPage />} />

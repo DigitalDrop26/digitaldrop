@@ -6,10 +6,12 @@ import {
 } from "./dropProjects";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
+import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectCard } from "./DropProjectCard";
+import { DropProjectsArchiveHero } from "./DropProjectsArchiveHero";
 import { CursorFollower, Reveal, useReveal } from "./hooksAndUi";
 
-/** Archivio progetti — griglia filtrabile per categoria. */
+/** Archivio progetti — hero + griglia filtrabile per categoria. */
 export function DropProjectsArchivePage() {
   const mainRef = useRef<HTMLElement>(null);
   const [activeCategory, setActiveCategory] = useState<ProjectCategoryId>("tutti");
@@ -34,31 +36,12 @@ export function DropProjectsArchivePage() {
       <CursorFollower />
       <DropHeader logoSubtitle="Progetti & case study" />
 
-      <main id="top" ref={mainRef} style={{ paddingTop: "clamp(100px, 12vh, 140px)" }}>
-        <section id="archive" className="section" style={{ background: "#ffffff", paddingTop: 0 }}>
+      <main id="top" ref={mainRef}>
+        <DropProjectsArchiveHero />
+
+        <section id="archive" className="section" style={{ background: "#ffffff" }}>
           <div className="container-wide">
             <Reveal delay={0}>
-              <span className="eyebrow">Archivio · Progetti</span>
-              <h1 className="display display-lg" style={{ marginTop: 28, marginBottom: 0, maxWidth: "20ch" }}>
-                Tutti i{" "}
-                <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>progetti</em>.
-              </h1>
-              <p
-                style={{
-                  marginTop: "clamp(24px, 4vw, 36px)",
-                  fontSize: 17,
-                  lineHeight: 1.65,
-                  fontWeight: 500,
-                  color: "var(--ink)",
-                  maxWidth: "52ch",
-                  marginBottom: 0,
-                }}
-              >
-                Case study, campagne e identità per il settore primario — filtra per area di competenza.
-              </p>
-            </Reveal>
-
-            <Reveal delay={1}>
               <div
                 className="projects-archive-filters"
                 role="tablist"
@@ -67,7 +50,6 @@ export function DropProjectsArchivePage() {
                   display: "flex",
                   flexWrap: "wrap",
                   gap: 10,
-                  marginTop: "clamp(40px, 6vw, 56px)",
                 }}
               >
                 {PROJECT_CATEGORY_FILTERS.map((cat) => {
@@ -146,6 +128,8 @@ export function DropProjectsArchivePage() {
             ) : null}
           </div>
         </section>
+
+        <DropNewsletter />
       </main>
 
       <style>{`

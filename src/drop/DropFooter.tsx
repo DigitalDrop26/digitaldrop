@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { bundleResources } from "./bundleResources";
 import { getDropContactLinks } from "./dropContactLinks";
-import { homeHash } from "./sitePaths";
+import { chiSiamoPath, homeHash } from "./sitePaths";
 import { useReveal, Reveal } from "./hooksAndUi";
 
 type DropFooterProps = { anchorsResolveHome?: boolean };
@@ -35,7 +35,7 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
           <Reveal delay={1}>
             <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Studio</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <a href={h("manifesto")} className="footer-link">Chi siamo</a>
+              <a href={chiSiamoPath()} className="footer-link">Chi siamo</a>
               <a href={h("team")} className="footer-link">Team</a>
               <a href={h("carriere")} className="footer-link">Carriere</a>
               <a href={h("stampa")} className="footer-link">Stampa</a>

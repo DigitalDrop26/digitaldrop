@@ -9,6 +9,7 @@ import { bundleResources } from "./bundleResources";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
+import { DropProjectBackFab } from "./DropProjectBackFab";
 import { DropProjectCarousel } from "./DropProjectCarousel";
 import { CursorFollower, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
@@ -51,7 +52,7 @@ export function DropProjectGiocoDiSquadraPage() {
   return (
     <Fragment>
       <CursorFollower />
-      <DropHeader logoSubtitle="Progetti" projectName="Gioco di Squadra" backToProjects />
+      <DropHeader logoSubtitle="Progetti" projectName="Gioco di Squadra" />
 
       <main id="top" ref={mainRef}>
         <section
@@ -251,7 +252,7 @@ export function DropProjectGiocoDiSquadraPage() {
         </section>
 
         {/* Contatti — stessa sezione della homepage */}
-        <DropNewsletter showNumber={false} />
+        <DropNewsletter />
       </main>
 
       <style>{`
@@ -281,6 +282,7 @@ export function DropProjectGiocoDiSquadraPage() {
       `}</style>
 
       <DropFooter anchorsResolveHome />
+      <DropProjectBackFab />
     </Fragment>
   );
 }

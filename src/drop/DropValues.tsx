@@ -36,8 +36,9 @@ export function DropValues() {
           <Reveal delay={0}><span className="eyebrow">06 — Valori</span></Reveal>
           <Reveal delay={1}>
             <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-              Tre <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>principi</em><br/>
-              non negoziabili.
+              Il nostro modo
+              <br />
+              di stare nel <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>settore</em>.
             </h2>
           </Reveal>
         </div>

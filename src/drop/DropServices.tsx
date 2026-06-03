@@ -9,32 +9,32 @@ export function DropServices() {
 
   const services = [
     {
+      title: "Brand Identity",
+      tag: 'Naming · Logo · Payoff · Brand book · Tone of voice',
+      img: bundleResources.imgCheese,
+      desc: 'Costruiamo identità solide e riconoscibili, che parlano al cuore del tuo pubblico e rendono il tuo marchio memorabile.',
+    },
+    {
       title: "Marketing strategico",
-      tag: 'Audit · Posizionamento · Piani editoriali',
+      tag: 'Analisi di mercato · Posizionamento · Piano strategico · Budget · KPI',
       img: bundleResources.imgTractor,
       desc: 'Analizziamo mercato e obiettivi per creare piani strategici mirati, capaci di generare valore reale e misurabile.',
     },
     {
       title: "Piani di comunicazione",
-      tag: 'Piani editoriali · Calendario · Messaggi',
+      tag: 'Media mix · Calendario editoriale · Messaggi chiave · Canali · Campagne',
       img: bundleResources.imgPaint,
       desc: 'Definiamo messaggi, canali e tempistiche per raggiungere il tuo target in modo chiaro, efficace e coordinato.',
     },
     {
-      title: "Brand Identity",
-      tag: 'Naming · Logo · Packaging · Linee guida',
-      img: bundleResources.imgCheese,
-      desc: 'Costruiamo identità solide e riconoscibili, che parlano al cuore del tuo pubblico e rendono il tuo marchio memorabile.',
-    },
-    {
       title: "Creazione contenuti",
-      tag: 'Siti · App · Foto · Video · Social',
+      tag: 'Copywriting · Fotografia · Video · Social media · Grafiche',
       img: bundleResources.imgPaint,
       desc: 'Produciamo contenuti creativi e di qualità. Testi, immagini, video per raccontare il tuo brand e coinvolgere il pubblico. Spaziamo dalle campagne ADV, ai Social, ai chatbot AI.',
     },
     {
       title: 'Alta formazione AI',
-      tag: 'Workshop · Toolkit · Adoption',
+      tag: 'Workshop · Prompt design · Automazioni · Strumenti AI · Casi pratici',
       img: bundleResources.imgCode900,
       desc: "Formiamo aziende e professionisti all'uso strategico dell'AI, con percorsi pratici pensati per innovare e crescere.",
     },
@@ -53,8 +53,8 @@ export function DropServices() {
           </Reveal>
           <Reveal delay={1}>
             <p style={{ fontSize: 17, lineHeight: 1.65, color: 'var(--ink)', fontWeight: 500, margin: 0, maxWidth: 420, marginLeft: 'auto' }}>
-              Cinque pratiche connesse, una sola filosofia: trasformare imprese del settore
-              primario in <strong style={{ color: 'var(--drop-teal)', fontWeight: 700 }}>brand riconosciuti, affidabili e competitivi</strong>.
+              Cinque pratiche connesse, una sola filosofia: trasformare le imprese in{" "}
+              <strong style={{ color: 'var(--drop-teal)', fontWeight: 700 }}>brand riconosciuti, affidabili e competitivi</strong>.
             </p>
           </Reveal>
         </div>
@@ -85,7 +85,7 @@ export function DropServices() {
         {/* Bottom CTA */}
         <Reveal delay={0} style={{ marginTop: 64, display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
           <Btn variant="primary" href="#contatti" onClick={(e) => { e.preventDefault(); document.getElementById('contatti')?.scrollIntoView({ behavior: 'smooth' }); }}>
-            Prenota un appuntamento
+            Iniziamo un progetto
           </Btn>
         </Reveal>
       </div>

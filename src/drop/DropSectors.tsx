@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import formazioneVideoSrc from "@Immagini/FormazioneDrop.mp4?url";
+import agrovitIndustriaImg from "@Immagini/Agrovit/agrovit_testata.png?url";
 import { bundleResources } from "./bundleResources";
 import { Reveal, useReveal } from "./hooksAndUi";
 
@@ -10,6 +10,7 @@ type Sector = {
   tag: string;
   img: string;
   video?: string;
+  darkOverlay?: boolean;
   tags: string[];
 };
 
@@ -23,26 +24,26 @@ export function DropSectors() {
       key: 'agri',
       num: '01',
       title: 'Agri',
-      tag: 'Agricoltori, cooperative, consorzi',
+      tag: 'Allevatori, cooperative, associazioni di categoria',
       img: bundleResources.imgWheat900,
-      tags: ['Cerealicoltura', 'Vino', 'Olio', 'Ortofrutta'],
+      tags: ['Zootecnia', 'Cerealicoltura', 'Vino', 'Olio', 'Ortofrutta'],
     },
     {
       key: 'food',
       num: '02',
       title: 'Food',
-      tag: 'Trasformatori, distributori, DOP',
+      tag: 'Trasformatori, consorzi DOP/IGP, brand alimentari',
       img: bundleResources.imgCheese,
       tags: ['Caseifici', 'Pasta', 'Conserve', 'Salumi'],
     },
     {
-      key: 'formazione',
+      key: 'industria',
       num: '03',
-      title: 'Formazione',
-      tag: 'Aziende e imprenditori agrifood',
-      img: bundleResources.imgClass,
-      video: formazioneVideoSrc,
-      tags: ['ITS', 'CFP', 'Master', 'Workshop AI'],
+      title: 'Industria',
+      tag: 'Farmaceutici, produttori di macchinari, fornitori di servizi',
+      img: agrovitIndustriaImg,
+      darkOverlay: true,
+      tags: ['Farmaceutiche', 'Nutrizione animale', 'Tecnologie di stalla', 'Agri-software'],
     },
   ];
 
@@ -64,8 +65,7 @@ export function DropSectors() {
           </Reveal>
           <Reveal delay={1}>
             <p style={{ fontSize: 17, lineHeight: 1.6, color: 'rgba(255,255,255,0.75)', fontWeight: 500, margin: 0, maxWidth: 440, marginLeft: 'auto' }}>
-              Agri, Food, Formazione. Tre settori interconnessi del comparto primario italiano —
-              ognuno con un suo lessico, una sua filiera, una sua urgenza.
+              Agri, Food, Industria. Tre anelli della stessa catena — ognuno con il suo lessico, la sua logica, i suoi interlocutori.
             </p>
           </Reveal>
         </div>
@@ -105,7 +105,7 @@ function SectorTile({ s, delay }: { s: Sector; delay: number }) {
   return (
     <Reveal
       delay={delay}
-      className="sector-tile"
+      className={`sector-tile${s.darkOverlay ? " sector-tile--dark" : ""}`}
       data-cursor="hover"
       onMouseEnter={s.video ? playVideo : undefined}
       onMouseLeave={s.video ? pauseVideo : undefined}
@@ -122,6 +122,7 @@ function SectorTile({ s, delay }: { s: Sector; delay: number }) {
       ) : (
         <img src={s.img} alt={s.title} />
       )}
+      {s.darkOverlay ? <div className="sector-tile-shade" aria-hidden /> : null}
       {/* Num */}
       <div style={{
         position: 'absolute',

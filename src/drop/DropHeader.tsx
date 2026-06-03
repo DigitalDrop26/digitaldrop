@@ -5,11 +5,8 @@ import { getDropContactLinks } from "./dropContactLinks";
 import { useScrollY } from "./hooksAndUi";
 
 const NAV_LINKS = [
-  { id: "manifesto", label: "Chi siamo", num: "01" },
-  { id: "settori", label: "Settori", num: "02" },
-  { id: "servizi", label: "Servizi", num: "03" },
-  { id: "progetti", label: "Progetti", num: "04" },
-  { id: "contatti", label: "Contatti", num: "05" },
+  { id: "progetti", label: "Progetti", num: "01" },
+  { id: "manifesto", label: "Chi siamo", num: "02" },
 ] as const;
 
 type DropHeaderProps = {
@@ -17,11 +14,9 @@ type DropHeaderProps = {
   logoSubtitle?: string;
   /** Nome progetto mostrato in colore accento, preceduto da «/». */
   projectName?: string;
-  /** Mostra la CTA «Torna ai progetti» (pagine dettaglio progetto). */
-  backToProjects?: boolean;
 };
 
-export function DropHeader({ logoSubtitle, projectName, backToProjects = false }: DropHeaderProps = {}) {
+export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const y = useScrollY();
@@ -42,7 +37,35 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
   }, [open]);
 
   const isHome = location.pathname === "/";
+  /** Pagine scheda progetto (/projects/…) — nav hero trasparente, testi bianchi fino allo scroll. */
+  const isProjectDetailPage = location.pathname.startsWith("/projects/");
+  const heroOverlayNav = isProjectDetailPage && !scrolled;
   const contactLinks = getDropContactLinks(!isHome);
+
+  const navTextColor = heroOverlayNav ? "#ffffff" : "var(--drop-teal)";
+  const navHoverBg = heroOverlayNav ? "rgba(255,255,255,0.12)" : "rgba(0,80,119,0.08)";
+  const logoSrc = heroOverlayNav ? bundleResources.logoWhiteOrange : bundleResources.logoColor;
+  const subtitleColor = heroOverlayNav ? "rgba(255,255,255,0.92)" : "var(--drop-teal)";
+  const subtitleDivider = heroOverlayNav ? "rgba(255,255,255,0.32)" : "rgba(0,80,119,0.25)";
+
+  const headerBackground = isProjectDetailPage
+    ? scrolled
+      ? "rgba(255,255,255,0.62)"
+      : "transparent"
+    : scrolled
+      ? "rgba(255,255,255,0.42)"
+      : "rgba(255,255,255,0.22)";
+  const headerBorder = heroOverlayNav
+    ? "1px solid transparent"
+    : scrolled
+      ? "1px solid rgba(0,26,52,0.1)"
+      : "1px solid rgba(0,26,52,0.06)";
+  const headerShadow = heroOverlayNav
+    ? "none"
+    : scrolled
+      ? "0 8px 32px rgba(0,26,52,0.12)"
+      : "0 2px 12px rgba(0,26,52,0.05)";
+  const headerBackdrop = heroOverlayNav ? "none" : "saturate(180%) blur(22px)";
 
   function scrollToSection(id: string) {
     const el = document.getElementById(id);
@@ -58,7 +81,7 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
   function go(id: string) {
     setOpen(false);
 
-    if (id === "progetti" && location.pathname.startsWith("/projects")) {
+    if (id === "progetti") {
       if (location.pathname === "/projects") {
         if (window.__lenis) {
           window.__lenis.scrollTo(0, { duration: 1.2 });
@@ -71,14 +94,37 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
       return;
     }
 
-    if (isHome && scrollToSection(id)) return;
+    if (id === "manifesto") {
+      if (location.pathname === "/chi-siamo") {
+        if (window.__lenis) {
+          window.__lenis.scrollTo(0, { duration: 1.2 });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      } else {
+        navigate("/chi-siamo");
+      }
+      return;
+    }
+
+    if (id === "contatti") {
+      if (scrollToSection(id)) return;
+      navigate({ pathname: "/", hash: id });
+      return;
+    }
+
+    if (scrollToSection(id)) return;
 
     navigate({ pathname: "/", hash: id });
   }
 
+  function goToContatti() {
+    go("contatti");
+  }
+
   const logoMark = (
     <img
-      src={bundleResources.logoColor}
+      src={logoSrc}
       alt="Drop"
       style={{ height: 36, width: "auto", maxWidth: "min(220px, 42vw)", display: "block" }}
     />
@@ -87,7 +133,7 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
   const logoSubtitleStyle = {
     fontSize: 11,
     fontWeight: 600,
-    color: "var(--drop-teal)",
+    color: subtitleColor,
     letterSpacing: "0.06em",
     lineHeight: 1.2,
     maxWidth: projectName ? 420 : logoSubtitle ? 220 : 200,
@@ -103,19 +149,20 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
           right: 0,
           zIndex: 10100,
           padding: scrolled ? "14px 0" : "24px 0",
-          background: scrolled ? "rgba(255,255,255,0.42)" : "rgba(255,255,255,0.22)",
-          backdropFilter: "saturate(180%) blur(22px)",
-          WebkitBackdropFilter: "saturate(180%) blur(22px)",
-          borderBottom: scrolled ? "1px solid rgba(0,26,52,0.1)" : "1px solid rgba(0,26,52,0.06)",
-          transition: "padding .45s var(--ease), background .45s var(--ease), border-color .45s var(--ease)",
-          boxShadow: scrolled ? "0 8px 32px rgba(0,26,52,0.12)" : "0 2px 12px rgba(0,26,52,0.05)",
+          background: headerBackground,
+          backdropFilter: headerBackdrop,
+          WebkitBackdropFilter: headerBackdrop,
+          borderBottom: headerBorder,
+          transition:
+            "padding .45s var(--ease), background .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease), backdrop-filter .45s var(--ease)",
+          boxShadow: headerShadow,
         }}
       >
         <div className="container-wide" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
           {logoSubtitle ? (
             <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "inherit" }}>
               {logoMark}
-              <span style={{ display: "inline-block", height: 22, width: 1, background: "rgba(0,80,119,0.25)" }} />
+              <span style={{ display: "inline-block", height: 22, width: 1, background: subtitleDivider }} />
               <span style={logoSubtitleStyle}>
                 {logoSubtitle}
                 {projectName ? (
@@ -158,7 +205,7 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
                   fontFamily: "inherit",
                   fontSize: 14,
                   fontWeight: 600,
-                  color: "var(--drop-teal)",
+                  color: navTextColor,
                   letterSpacing: "-0.005em",
                   display: "inline-flex",
                   alignItems: "baseline",
@@ -166,7 +213,7 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
                   transition: "background .35s var(--ease), color .35s var(--ease)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(0,80,119,0.08)";
+                  e.currentTarget.style.background = navHoverBg;
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "transparent";
@@ -176,39 +223,18 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
                 {l.label}
               </button>
             ))}
+            <button
+              type="button"
+              className="btn btn-primary btn-compact"
+              onClick={goToContatti}
+              style={{ marginLeft: 8, flexShrink: 0 }}
+            >
+              <span className="btn-fill" aria-hidden />
+              <span style={{ position: "relative" }}>Iniziamo un progetto</span>
+            </button>
           </nav>
 
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            {backToProjects ? (
-              <Link
-                to="/projects"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "baseline",
-                  gap: 8,
-                  padding: "11px 18px",
-                  borderRadius: 999,
-                  fontFamily: "inherit",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  letterSpacing: "-0.005em",
-                  textDecoration: "none",
-                  color: "var(--drop-teal)",
-                  border: "1px solid rgba(0,80,119,0.25)",
-                  background: "rgba(0,80,119,0.06)",
-                  transition: "background .35s var(--ease), border-color .35s var(--ease)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(0,80,119,0.12)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(0,80,119,0.06)";
-                }}
-              >
-                <span style={{ fontSize: 10, color: "var(--drop-orange)", fontWeight: 500 }}>←</span>
-                Torna ai progetti
-              </Link>
-            ) : null}
             <button
               type="button"
               className="show-mobile"
@@ -355,6 +381,20 @@ export function DropHeader({ logoSubtitle, projectName, backToProjects = false }
                 {l.label}
               </button>
             ))}
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={goToContatti}
+              style={{
+                marginTop: 32,
+                alignSelf: "flex-start",
+                opacity: open ? 1 : 0,
+                transform: open ? "translateY(0)" : "translateY(20px)",
+                transition: `opacity .6s var(--ease) ${0.2 + NAV_LINKS.length * 0.06}s, transform .6s var(--ease) ${0.2 + NAV_LINKS.length * 0.06}s`,
+              }}
+            >
+              Iniziamo un progetto
+            </button>
           </nav>
 
           <div
