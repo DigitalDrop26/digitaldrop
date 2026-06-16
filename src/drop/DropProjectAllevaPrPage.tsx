@@ -298,8 +298,7 @@ export function DropProjectAllevaPrPage() {
               <Reveal delay={0}>
                 <span className="eyebrow">03 · La soluzione</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  Un luogo{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>dove dialogare.</em>
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>Un luogo</em> dove dialogare.
                 </h2>
                 <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
                   Abbiamo dato alla filiera ciò che le mancava: un{" "}
@@ -339,20 +338,18 @@ export function DropProjectAllevaPrPage() {
                 />
               </div>
             </Reveal>
+          </div>
+        </section>
 
-            <Reveal delay={1}>
-              <h2
-                className="display display-md"
-                style={{
-                  marginTop: "clamp(48px, 7vw, 80px)",
-                  marginBottom: 0,
-                  color: "var(--drop-teal)",
-                  maxWidth: "22ch",
-                }}
-              >
-                Dialogo aperto, innovazione condivisa:{" "}
-                <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>la community avvicina.</em>
-              </h2>
+        <section id="progetto-conclusione" className="section alleva-conclusion" style={{ background: "#ffffff" }}>
+          <div className="container-wide">
+            <Reveal delay={0}>
+              <div className="alleva-conclusion-inner">
+                <h2 className="display display-md" style={{ margin: 0, color: "var(--drop-teal)" }}>
+                  Dialogo aperto, innovazione condivisa:{" "}
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>la community avvicina.</em>
+                </h2>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -494,6 +491,15 @@ export function DropProjectAllevaPrPage() {
           .alleva-value-cards {
             grid-template-columns: 1fr;
           }
+        }
+        .alleva-conclusion {
+          padding-top: clamp(80px, 12vw, 120px);
+          padding-bottom: clamp(80px, 12vw, 120px);
+        }
+        .alleva-conclusion-inner {
+          max-width: 820px;
+          margin: 0 auto;
+          text-align: center;
         }
         @media (max-width: 720px) {
           .alive-project-hero-meta-line,

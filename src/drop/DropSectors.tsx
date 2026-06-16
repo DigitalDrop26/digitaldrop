@@ -58,7 +58,7 @@ export function DropSectors() {
         {/* Heading */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'end', marginBottom: 'clamp(48px, 8vw, 96px)' }} className="sec-head">
           <Reveal delay={0}>
-            <span className="eyebrow on-dark">02 — Settori</span>
+            <span className="eyebrow on-dark">01 — Settori</span>
             <h2 className="display display-lg" style={{ color: 'white', marginTop: 28, marginBottom: 0 }}>
               Tre mondi,<br/>una sola <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>lingua</em>.
             </h2>

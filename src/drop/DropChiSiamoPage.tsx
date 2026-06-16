@@ -5,7 +5,6 @@ import { DropManifesto } from "./DropManifesto";
 import { DropNewsletter } from "./DropNewsletter";
 import { DropPageHero } from "./DropPageHero";
 import { DropTeam } from "./DropTeam";
-import { DropTestimonials } from "./DropTestimonials";
 import { DropValues } from "./DropValues";
 import { CursorFollower, useReveal } from "./hooksAndUi";
 
@@ -61,7 +60,6 @@ export function DropChiSiamoPage() {
         <DropTeam />
         <DropValues />
         <DropManifesto />
-        <DropTestimonials />
         <DropNewsletter />
       </main>
 

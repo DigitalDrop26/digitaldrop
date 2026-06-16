@@ -46,7 +46,7 @@ export function DropServices() {
         {/* Heading */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'end', marginBottom: 'clamp(48px, 8vw, 120px)' }} className="svc-head">
           <Reveal delay={0}>
-            <span className="eyebrow">03 — Servizi</span>
+            <span className="eyebrow">02 — Servizi</span>
             <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
               Di cosa<br/>ci <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>occupiamo</em>.
             </h2>

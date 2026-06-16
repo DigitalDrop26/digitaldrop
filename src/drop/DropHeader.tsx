@@ -5,8 +5,10 @@ import { getDropContactLinks } from "./dropContactLinks";
 import { useScrollY } from "./hooksAndUi";
 
 const NAV_LINKS = [
-  { id: "progetti", label: "Progetti", num: "01" },
-  { id: "manifesto", label: "Chi siamo", num: "02" },
+  { id: "settori", label: "Settori", num: "01" },
+  { id: "servizi", label: "Servizi", num: "02" },
+  { id: "progetti", label: "Progetti", num: "03" },
+  { id: "chi-siamo", label: "Chi siamo", num: "04" },
 ] as const;
 
 type DropHeaderProps = {
@@ -81,20 +83,7 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
   function go(id: string) {
     setOpen(false);
 
-    if (id === "progetti") {
-      if (location.pathname === "/projects") {
-        if (window.__lenis) {
-          window.__lenis.scrollTo(0, { duration: 1.2 });
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      } else {
-        navigate("/projects");
-      }
-      return;
-    }
-
-    if (id === "manifesto") {
+    if (id === "chi-siamo") {
       if (location.pathname === "/chi-siamo") {
         if (window.__lenis) {
           window.__lenis.scrollTo(0, { duration: 1.2 });

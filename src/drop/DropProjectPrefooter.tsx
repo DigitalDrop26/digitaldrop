@@ -74,96 +74,41 @@ function PrefooterNavLink({
   );
 }
 
-/** Quote di chiusura — prima della sezione contatti, su ogni pagina progetto. */
+/** Navigazione tra progetti — fine pagina case study. */
 export function DropProjectPrefooter() {
   const { pathname } = useLocation();
   const previousProject = getPreviousProject(pathname);
   const nextProject = getNextProject(pathname);
   const showNav = Boolean(previousProject?.detailPath || nextProject?.detailPath);
 
+  if (!showNav) return null;
+
   return (
     <>
-      <section id="progetto-prefooter" className="section drop-project-prefooter" aria-label="Chiusura progetto">
+      <section id="progetto-nav" className="section drop-project-nav" aria-label="Altri progetti">
         <div className="container-wide">
           <Reveal delay={0}>
-            <blockquote className="drop-project-prefooter-quote">
-              <span className="drop-project-prefooter-quote-mark" aria-hidden>
-                &ldquo;
-              </span>
-              <p className="display display-lg drop-project-prefooter-quote-text">
-                Anche il tuo brand può avere
-                <br />
-                <em className="italic-serif">una voce tutta sua.</em>
-              </p>
-              <span className="drop-project-prefooter-quote-mark drop-project-prefooter-quote-mark--close" aria-hidden>
-                &rdquo;
-              </span>
-            </blockquote>
+            <nav className="drop-project-prefooter-nav" aria-label="Navigazione tra i progetti">
+              {previousProject?.detailPath ? (
+                <PrefooterNavLink project={previousProject} direction="prev" />
+              ) : (
+                <span aria-hidden />
+              )}
+              {nextProject?.detailPath ? (
+                <PrefooterNavLink project={nextProject} direction="next" />
+              ) : (
+                <span aria-hidden />
+              )}
+            </nav>
           </Reveal>
         </div>
       </section>
 
-      {showNav ? (
-        <section id="progetto-nav" className="section drop-project-nav" aria-label="Altri progetti">
-          <div className="container-wide">
-            <Reveal delay={0}>
-              <nav className="drop-project-prefooter-nav" aria-label="Navigazione tra i progetti">
-                {previousProject?.detailPath ? (
-                  <PrefooterNavLink project={previousProject} direction="prev" />
-                ) : (
-                  <span aria-hidden />
-                )}
-                {nextProject?.detailPath ? (
-                  <PrefooterNavLink project={nextProject} direction="next" />
-                ) : (
-                  <span aria-hidden />
-                )}
-              </nav>
-            </Reveal>
-          </div>
-        </section>
-      ) : null}
-
       <style>{`
-        .drop-project-prefooter {
-          background: #ffffff;
-          padding-top: clamp(80px, 12vw, 140px);
-          padding-bottom: clamp(48px, 8vw, 80px);
-          text-align: center;
-        }
         .drop-project-nav {
           background: var(--paper-warm);
           padding-top: clamp(48px, 8vw, 80px);
           padding-bottom: clamp(64px, 10vw, 112px);
-        }
-        .drop-project-prefooter-quote {
-          margin: 0 auto;
-          padding: 0;
-          border: none;
-          text-align: center;
-        }
-        .drop-project-prefooter-quote-mark {
-          display: block;
-          margin-bottom: clamp(12px, 2vw, 20px);
-          font-size: clamp(48px, 6vw, 88px);
-          line-height: 1;
-          font-weight: 700;
-          color: var(--drop-orange);
-          font-family: Georgia, "Times New Roman", serif;
-        }
-        .drop-project-prefooter-quote-mark--close {
-          margin-top: clamp(12px, 2vw, 20px);
-          margin-bottom: 0;
-          font-size: clamp(40px, 5vw, 72px);
-        }
-        .drop-project-prefooter-quote-text {
-          margin: 0;
-          color: var(--drop-teal);
-          line-height: 1.05;
-          text-wrap: balance;
-        }
-        .drop-project-prefooter-quote-text .italic-serif {
-          color: var(--drop-orange);
         }
         .drop-project-prefooter-nav {
           display: grid;

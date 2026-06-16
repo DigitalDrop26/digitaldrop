@@ -48,19 +48,19 @@ const astaAppCards = [
   {
     n: "01",
     title: "Portata globale",
-    body: "Partecipazione internazionale senza barriere geografiche: l'asta live raggiunge buyer e operatori ovunque.",
+    body: "Compratori da ogni angolo del mondo partecipano all'asta in diretta, senza più barriere geografiche.",
     dark: false,
   },
   {
     n: "02",
-    title: "Supporto h24/7",
-    body: "Team operativo dedicato per tutta la durata dell'evento, con assistenza continua durante le sessioni d'asta.",
+    title: "Trasparenza & equità",
+    body: "Offerte tracciate in tempo reale: un processo chiaro che rafforza la fiducia dei partecipanti.",
     dark: true,
   },
   {
     n: "03",
-    title: "Esperienza fluida",
-    body: "Interfaccia intuitiva pensata per utenti di ogni età: catalogo, offerte e notifiche in tempo reale.",
+    title: "Esperienza ibrida",
+    body: "Ring fisico e piattaforma digitale convivono: chi è in fiera e chi è da remoto vive la stessa asta.",
     dark: false,
   },
 ] as const;
@@ -241,16 +241,12 @@ export function DropProjectAstaCremonaPage() {
                 <Reveal delay={0}>
                   <span className="eyebrow">01 · Il progetto</span>
                   <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                    La Fiera Zootecnica Internazionale di Cremona è un appuntamento storico che ogni
-                    anno riunisce allevatori, buyer e operatori da tutta Europa. Per l&apos;edizione 2023, l&apos;obiettivo era
-                    portare nel digitale l&apos;esperienza dell&apos;asta live — mantenendo emozione, ritmo e fiducia del
-                    modello tradizionale.
-                  </p>
-                  <p style={{ ...bodyStyle, marginTop: 24 }}>
-                    Abbiamo accompagnato l&apos;evento con una{" "}
-                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>strategia integrata</strong> che unisce
-                    concept visual, app dedicata, campagna social e un&apos;asta di beneficenza parallela — per aprire la fiera
-                    a un pubblico più ampio, senza perdere l&apos;identità del settore.
+                    AstaCR è la{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>European Sale di Cremona</strong>: l&apos;asta
+                    internazionale di bovine da latte che anima le Fiere Zootecniche Internazionali di Cremona. Un
+                    appuntamento storico del settore, da sempre legato alla fisicità del ring — animali, allevatori e
+                    compratori riuniti nello stesso spazio. La sfida: portarne il cuore, l&apos;asta, nell&apos;era digitale senza
+                    perderne il valore.
                   </p>
                 </Reveal>
               </div>
@@ -295,19 +291,16 @@ export function DropProjectAstaCremonaPage() {
               <Reveal delay={0}>
                 <span className="eyebrow">02 · La sfida</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  Digitalizzare il cuore{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>dell&apos;evento.</em>
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>Digitalizzare</em> il cuore
+                  dell&apos;evento.
                 </h2>
               </Reveal>
               <Reveal delay={1}>
                 <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                  L&apos;asta è sempre stata il momento più atteso della fiera: un rito collettivo basato su presenza fisica,
-                  relazione diretta e fiducia tra operatori. La sfida era{" "}
-                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>
-                    digitalizzare quell&apos;esperienza
-                  </strong>{" "}
-                  senza perderne l&apos;emozione, aprendo le porte a partecipanti da tutto il mondo e garantendo continuità tra
-                  arena fisica e piattaforma online.
+                  Le fiere zootecniche sono eventi immersivi: i partecipanti vivono un&apos;esperienza diretta con animali,
+                  attrezzature e prodotti del settore. La Fiera di Cremona voleva però{" "}
+                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>innovare l&apos;esperienza</strong>,
+                  digitalizzando una parte fondamentale dell&apos;evento: l&apos;asta.
                 </p>
               </Reveal>
             </div>
@@ -321,13 +314,17 @@ export function DropProjectAstaCremonaPage() {
                 <Reveal delay={0}>
                   <span className="eyebrow">03 · La soluzione</span>
                   <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                    Un&apos;asta ibrida{" "}
-                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>e globale.</em>
+                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>Un&apos;asta</em> ibrida e globale.
                   </h2>
                   <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                    Abbiamo progettato un modello ibrido: asta in diretta streaming dall&apos;arena di Cremona, con
-                    partecipazione remota tramite app dedicata. Un sistema che unisce tradizione zootecnica e innovazione
-                    tecnologica, permettendo offerte in tempo reale da chi è in fiera e da chi segue l&apos;evento a distanza.
+                    La risposta a questa sfida è stata l&apos;implementazione di una soluzione ibrida: lo sviluppo di
+                    un&apos;{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>applicazione dedicata</strong> che ha
+                    permesso la partecipazione all&apos;asta, abbattendo le barriere geografiche e culturali. Incorporando i{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>valori della zootecnia</strong>, abbiamo
+                    organizzato{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>raccolte fondi</strong> per supportare
+                    associazioni e progetti sociali virtuosi, dimostrando un impegno concreto verso il sociale.
                   </p>
                 </Reveal>
               </div>
@@ -371,13 +368,14 @@ export function DropProjectAstaCremonaPage() {
               <Reveal delay={0}>
                 <span className="eyebrow">04 · Visual &amp; concept</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  Metamorfosi: un evento che{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>si trasforma.</em>
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>Metamorfosi</em>: un evento che si
+                  trasforma.
                 </h2>
                 <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                  Il concept visual traduce il passaggio dal mondo fisico a quello digitale attraverso immagini evocative: il
-                  bestiame che si apre a nuove dimensioni, farfalle e colori che segnalano cambiamento e rinascita. Un
-                  linguaggio grafico capace di raccontare l&apos;evoluzione di un settore senza tradirne le radici.
+                  Abbiamo rivoluzionato il visual e il concept dell&apos;asta, presentando un&apos;immagine rinnovata che riflette
+                  l&apos;innovazione e l&apos;apertura internazionale dell&apos;evento. Un rinnovamento che non migliora solo
+                  l&apos;estetica, ma comunica con efficacia{" "}
+                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>l&apos;evoluzione del settore.</strong>
                 </p>
               </Reveal>
             </div>
@@ -403,13 +401,14 @@ export function DropProjectAstaCremonaPage() {
                 <Reveal delay={0}>
                   <span className="eyebrow">05 · L&apos;app dedicata</span>
                   <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                    L&apos;asta in diretta,{" "}
-                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>in tasca a chiunque.</em>
+                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>L&apos;asta</em> in diretta,{" "}
+                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>in tasca</em> a chiunque.
                   </h2>
                   <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                    Un&apos;applicazione mobile che permette di seguire le aste live, consultare cataloghi, fare offerte e
-                    ricevere notifiche in tempo reale — ovunque ci si trovi. L&apos;esperienza dell&apos;arena portata sullo
-                    schermo, con la stessa tensione e lo stesso ritmo dell&apos;evento fisico.
+                    Con l&apos;app dedicata, AstaCR ha ampliato la sua portata, attirando partecipanti da tutto il mondo e
+                    migliorando la qualità dell&apos;esperienza d&apos;asta. La tecnologia ha reso il processo{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>più trasparente ed equo</strong>,
+                    rafforzando fiducia e soddisfazione tra gli utenti.
                   </p>
                 </Reveal>
               </div>
@@ -449,13 +448,14 @@ export function DropProjectAstaCremonaPage() {
               <Reveal delay={0}>
                 <span className="eyebrow">06 · L&apos;asta di beneficenza</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  @CR for Charity: l&apos;asta che{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>fa del bene.</em>
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>@CR for Charity:</em> l&apos;asta che fa
+                  del bene.
                 </h2>
                 <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                  Un&apos;iniziativa parallela dedicata alla raccolta fondi, con un&apos;asta online che unisce solidarietà e
-                  tradizione fieristica. Un progetto capace di coinvolgere il pubblico oltre il comparto zootecnico, dando
-                  visibilità a una causa sociale con lo stesso impatto emotivo dell&apos;asta principale.
+                  Una componente fondamentale della strategia è stata l&apos;introduzione di un&apos;iniziativa di beneficenza,
+                  che ha raccolto fondi per associazioni e progetti sociali virtuosi. Un impegno concreto verso il sociale, che
+                  ha arricchito l&apos;esperienza dell&apos;asta di{" "}
+                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>un valore aggiunto significativo.</strong>
                 </p>
               </Reveal>
             </div>
@@ -477,15 +477,19 @@ export function DropProjectAstaCremonaPage() {
         <section id="progetto-conclusione" className="section asta-conclusion" style={{ background: "var(--paper-tint)" }}>
           <div className="container-wide">
             <Reveal delay={0}>
-              <h2 className="display display-md" style={{ margin: 0, color: "var(--drop-teal)", maxWidth: "20ch" }}>
-                Asta@CR ha riscritto le regole{" "}
-                <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>delle aste zootecniche.</em>
-              </h2>
-              <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 48px)", maxWidth: "58ch" }}>
-                Un modello ibrido che ha dimostrato come un settore radicato nella tradizione possa innovare con coraggio —
-                portando l&apos;evento live dentro l&apos;esperienza digitale di migliaia di partecipanti, in fiera e nel
-                mondo.
-              </p>
+              <div className="asta-conclusion-inner">
+                <h2 className="display display-md" style={{ margin: 0, color: "var(--drop-teal)" }}>
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>
+                    Ast@CR ha riscritto le regole
+                  </em>
+                  <br />
+                  delle aste zootecniche.
+                </h2>
+                <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 48px)", maxWidth: "42ch", marginLeft: "auto", marginRight: "auto" }}>
+                  Le abbiamo portate nell&apos;era digitale. Aiutiamo imprese e istituzioni del settore primario a
+                  innovare, comunicare e crescere con il mercato.
+                </p>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -652,6 +656,11 @@ export function DropProjectAstaCremonaPage() {
         .asta-conclusion {
           padding-top: clamp(80px, 12vw, 120px);
           padding-bottom: clamp(80px, 12vw, 120px);
+        }
+        .asta-conclusion-inner {
+          max-width: 820px;
+          margin: 0 auto;
+          text-align: center;
         }
         .alive-project-hero-meta-line {
           white-space: nowrap;

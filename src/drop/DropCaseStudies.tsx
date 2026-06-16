@@ -34,7 +34,7 @@ export function DropCaseStudies() {
       <div className="container-wide">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'end', marginBottom: 'clamp(48px, 6vw, 80px)' }} className="cs-head">
           <Reveal delay={0}>
-            <span className="eyebrow">05 — Progetti</span>
+            <span className="eyebrow">03 — Progetti</span>
             <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
               Quello che<br />
               <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>facciamo</em>

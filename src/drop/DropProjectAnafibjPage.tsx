@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import anafibjHeroBg from "@Immagini/Anafibj/Anafibj_hero.png?url";
 import anafibjGalleryBarn from "@Immagini/Anafibj/anafibj09.png?url";
 import anafibjSolutionApp from "@Immagini/Anafibj/cell anafibj-04.png?url";
@@ -32,22 +32,95 @@ const anafibjPlatformCards = [
   {
     n: "01",
     title: "App personalizzata",
-    body: "Un'applicazione pensata sui bisogni reali degli allevatori: contenuti utili, aggiornamenti mirati e strumenti operativi sempre a portata di mano.",
+    body: "Una piattaforma costruita sui processi reali dell'associazione: contatti, regioni, servizi e consensi in un colpo d'occhio.",
     dark: false,
   },
   {
     n: "02",
     title: "WhatsApp Business",
-    body: "Il canale più immediato per avviare il dialogo: messaggistica diretta, risposte rapide e un accesso familiare per un target difficile da raggiungere online.",
+    body: "Il canale primario di contatto: messaggi e broadcast su uno strumento che gli allevatori usano ogni giorno.",
     dark: true,
   },
   {
     n: "03",
     title: "Dialogo bidirezionale",
-    body: "Comunicazione a doppio senso: ascoltare le esigenze del territorio, rispondere in tempo reale e costruire relazione, non solo diffusione.",
+    body: "Non più solo annunci: un flusso di comunicazione personalizzato, in entrata e in uscita, con ogni socio.",
     dark: false,
   },
 ] as const;
+
+function AnafibjSocialGallery() {
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const landscapeRef = useRef<HTMLImageElement>(null);
+
+  const syncGalleryHeight = useCallback(() => {
+    const landscape = landscapeRef.current;
+    const gallery = galleryRef.current;
+    if (!landscape || !gallery) return;
+
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      gallery.style.removeProperty("--anafibj-duo-height");
+      return;
+    }
+
+    const height = landscape.getBoundingClientRect().height;
+    if (height <= 0) {
+      gallery.style.removeProperty("--anafibj-duo-height");
+      return;
+    }
+
+    gallery.style.setProperty("--anafibj-duo-height", `${height}px`);
+  }, []);
+
+  useLayoutEffect(() => {
+    syncGalleryHeight();
+
+    const landscape = landscapeRef.current;
+    if (!landscape) return;
+
+    const onLoad = () => syncGalleryHeight();
+    landscape.addEventListener("load", onLoad);
+
+    const ro = new ResizeObserver(syncGalleryHeight);
+    ro.observe(landscape);
+
+    const mq = window.matchMedia("(max-width: 900px)");
+    const onMqChange = () => syncGalleryHeight();
+    mq.addEventListener("change", onMqChange);
+    window.addEventListener("resize", syncGalleryHeight);
+
+    return () => {
+      ro.disconnect();
+      landscape.removeEventListener("load", onLoad);
+      mq.removeEventListener("change", onMqChange);
+      window.removeEventListener("resize", syncGalleryHeight);
+    };
+  }, [syncGalleryHeight]);
+
+  return (
+    <div ref={galleryRef} className="anafibj-duo-gallery" role="list" aria-label={`Campagna social ${PROJECT_NAME}`}>
+      <Reveal delay={0} role="listitem" className="anafibj-media-card anafibj-duo-gallery__item anafibj-duo-gallery__item--portrait">
+        <img
+          src={anafibjSocialGallery[0].src}
+          alt={anafibjSocialGallery[0].alt}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+        />
+      </Reveal>
+      <Reveal delay={1} role="listitem" className="anafibj-media-card anafibj-duo-gallery__item anafibj-duo-gallery__item--landscape">
+        <img
+          ref={landscapeRef}
+          src={anafibjSocialGallery[1].src}
+          alt={anafibjSocialGallery[1].alt}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+        />
+      </Reveal>
+    </div>
+  );
+}
 
 /** Pagina progetto — Anafibj · ANAFIJ. */
 export function DropProjectAnafibjPage() {
@@ -227,17 +300,13 @@ export function DropProjectAnafibjPage() {
                 <Reveal delay={0}>
                   <span className="eyebrow">01 · Il progetto</span>
                   <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                    L&apos;Associazione Nazionale Allevatori della razza Frisona, Bruna e Jersey Italiana è un punto di
-                    riferimento per gli allevatori di tutta la penisola: rappresenta, forma e accompagna una filiera fatta
-                    di competenze, tradizione e persone che ogni giorno lavorano in stalla.
-                  </p>
-                  <p style={{ ...bodyStyle, marginTop: 24 }}>
-                    Il progetto nasce per{" "}
+                    Anafibj è l&apos;{" "}
                     <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>
-                      mettere in connessione gli allevatori
+                      Associazione Nazionale Allevatori della razza Frisona, Bruna e Jersey Italiana
                     </strong>
-                    , superando i limiti di una comunicazione frammentata e poco interattiva, con strumenti digitali su
-                    misura del loro modo di lavorare e di relazionarsi.
+                    : il punto di riferimento per la selezione genetica e i servizi tecnici alle stalle da latte del Paese.
+                    Una rete capillare di soci allevatori, dalle grandi aziende alle realtà familiari, distribuiti su tutto
+                    il territorio. Il valore è enorme — ma raggiungere e ingaggiare ogni socio resta una sfida quotidiana.
                   </p>
                 </Reveal>
               </div>
@@ -247,19 +316,19 @@ export function DropProjectAnafibjPage() {
                   <div className="anafibj-meta-block">
                     <h3 className="anafibj-meta-label">Attività</h3>
                     <ul className="anafibj-meta-list">
-                      <li>Analisi dei bisogni degli allevatori</li>
-                      <li>Progettazione piattaforma digitale</li>
-                      <li>Piano di comunicazione integrato</li>
-                      <li>Strategia social &amp; editorial</li>
+                      <li>Analisi dei bisogni dei soci</li>
+                      <li>Sviluppo web application</li>
+                      <li>Integrazione WhatsApp Business</li>
+                      <li>Identità visiva &amp; strategia social</li>
                     </ul>
                   </div>
                   <div className="anafibj-meta-block" style={{ marginTop: 32 }}>
                     <h3 className="anafibj-meta-label">Deliverables</h3>
                     <ul className="anafibj-meta-list">
-                      <li>App personalizzata per la filiera</li>
-                      <li>Integrazione WhatsApp Business</li>
-                      <li>Piano editoriale social</li>
-                      <li>Identità visiva campagna</li>
+                      <li>Prima community della filiera PR</li>
+                      <li>Punto d&apos;incontro digitale</li>
+                      <li>Strategia di dialogo aperto</li>
+                      <li>Spazi di condivisione risorse</li>
                     </ul>
                   </div>
                 </Reveal>
@@ -286,18 +355,17 @@ export function DropProjectAnafibjPage() {
               <Reveal delay={0}>
                 <span className="eyebrow">02 · La sfida</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  Un target{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>difficile da raggiungere.</em>
+                  Un <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>target</em> difficile da
+                  raggiungere.
                 </h2>
               </Reveal>
               <Reveal delay={1}>
                 <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                  Gli allevatori sono un pubblico esigente: poco tempo, alta familiarità con il territorio, scarsa propensione
-                  ai canali digitali tradizionali. La sfida era{" "}
+                  Nel settore zootecnico, Anafibj ha affrontato una sfida cruciale:{" "}
                   <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>
                     migliorare e intensificare la comunicazione
-                  </strong>
-                  , trovando un linguaggio e strumenti capaci di entrare nella loro quotidianità senza forzature.
+                  </strong>{" "}
+                  con i soci allevatori. Un pubblico difficile da raggiungere, a causa di barriere comunicative persistenti.
                 </p>
               </Reveal>
             </div>
@@ -318,12 +386,10 @@ export function DropProjectAnafibjPage() {
                     <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>bidirezionale.</em>
                   </h2>
                   <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                    Abbiamo progettato un ecosistema di comunicazione{" "}
-                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>
-                      bidirezionale e personalizzata
-                    </strong>
-                    : non più messaggi a senso unico, ma un sistema che ascolta, risponde e si adatta ai bisogni di chi
-                    lavora ogni giorno in stalla.
+                    Abbiamo implementato un approccio innovativo, usando la tecnologia per facilitare una comunicazione{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>bidirezionale e personalizzata</strong>.
+                    Dall&apos;analisi dei bisogni degli allevatori, l&apos;associazione ha rivisto e potenziato i suoi canali
+                    digitali.
                   </p>
                 </Reveal>
               </div>
@@ -360,16 +426,15 @@ export function DropProjectAnafibjPage() {
             <div style={{ maxWidth: 980 }}>
               <Reveal delay={0}>
                 <h2 className="display display-lg" style={{ marginTop: 0, marginBottom: 0 }}>
-                  Una piattaforma su misura,{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>
-                    WhatsApp come porta d&apos;ingresso.
-                  </em>
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>Una piattaforma su misura,</em>{" "}
+                  WhatsApp come porta d&apos;ingresso.
                 </h2>
                 <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                  Un&apos;app dedicata e una piattaforma web per gestire contenuti, aggiornamenti e interazioni — con{" "}
-                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>WhatsApp Business</strong> come primo
-                  punto di contatto, il canale più naturale per avviare il dialogo con un target difficile da intercettare
-                  sui social tradizionali.
+                  Abbiamo sviluppato un&apos;{" "}
+                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>applicazione dedicata</strong> e adottato{" "}
+                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>WhatsApp Business</strong> come touch point
+                  primario, per valorizzare e facilitare il rapporto tra l&apos;associazione e gli allevatori. Un canale
+                  familiare, immediato, già nelle mani di tutti.
                 </p>
               </Reveal>
             </div>
@@ -396,25 +461,20 @@ export function DropProjectAnafibjPage() {
               <Reveal delay={0}>
                 <span className="eyebrow">04 · Strategia di comunicazione</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>&ldquo;Your cow,</em>{" "}
-                  <span style={{ color: "var(--drop-teal)" }}>our</span>{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>future.&rdquo;</em>
+                  &ldquo;
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>Your</em> cow,
+                  <br />
+                  our <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>future</em>.&rdquo;
                 </h2>
                 <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
-                  La campagna social traduce il legame tra allevatore e mandria in un messaggio universale: ogni animale
-                  rappresenta il futuro della filiera. Un linguaggio visivo immediato, riconoscibile e capace di parlare
-                  sia agli addetti ai lavori sia al grande pubblico.
+                  Anafibj ha rivoluzionato l&apos;approccio ai social media, sviluppando un&apos;identità visiva coerente e un
+                  nuovo claim: &laquo;your cow, our future&raquo;. Il messaggio mette al centro la relazione tra allevatore,
+                  mandria e futuro della razza.
                 </p>
               </Reveal>
             </div>
 
-            <div className="anafibj-duo-gallery" role="list" aria-label={`Campagna social ${PROJECT_NAME}`}>
-              {anafibjSocialGallery.map((item, i) => (
-                <Reveal key={item.src} delay={i} role="listitem" className="anafibj-media-card">
-                  <img src={item.src} alt={item.alt} loading="lazy" decoding="async" draggable={false} />
-                </Reveal>
-              ))}
-            </div>
+            <AnafibjSocialGallery />
           </div>
         </section>
 
@@ -561,27 +621,31 @@ export function DropProjectAnafibjPage() {
         .anafibj-duo-gallery {
           margin-top: clamp(48px, 7vw, 80px);
           display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: auto minmax(0, 1fr);
           gap: clamp(16px, 2vw, 24px);
-          align-items: stretch;
+          align-items: start;
         }
-        .anafibj-duo-gallery .anafibj-media-card {
-          aspect-ratio: 16 / 10;
-          overflow: hidden;
-          line-height: 0;
+        .anafibj-duo-gallery__item {
+          min-width: 0;
         }
-        .anafibj-duo-gallery .anafibj-media-card:last-child img {
-          width: 100%;
-          height: 100%;
+        .anafibj-duo-gallery__item--portrait {
+          width: fit-content;
+          max-width: min(42vw, 100%);
+          justify-self: start;
+        }
+        .anafibj-duo-gallery .anafibj-media-card img {
           object-fit: contain;
-          object-position: center;
-          background: var(--teal-100);
         }
-        .anafibj-duo-gallery .anafibj-media-card:first-child img {
+        .anafibj-duo-gallery__item--landscape img {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
+          height: auto;
+          display: block;
+        }
+        .anafibj-duo-gallery__item--portrait img {
+          height: var(--anafibj-duo-height, auto);
+          width: auto;
+          max-width: 100%;
+          display: block;
         }
         .anafibj-conclusion {
           padding-top: clamp(80px, 12vw, 120px);
@@ -610,7 +674,18 @@ export function DropProjectAnafibjPage() {
           .anafibj-split-media {
             justify-content: flex-start;
           }
-          .anafibj-duo-gallery,
+          .anafibj-duo-gallery {
+            grid-template-columns: 1fr;
+          }
+          .anafibj-duo-gallery__item--portrait {
+            width: 100%;
+            max-width: none;
+          }
+          .anafibj-duo-gallery__item--portrait img,
+          .anafibj-duo-gallery__item--landscape img {
+            width: 100%;
+            height: auto;
+          }
           .anafibj-value-cards {
             grid-template-columns: 1fr;
           }

@@ -20,16 +20,13 @@ export function DropProcess() {
           {/* Sticky title */}
           <div style={{ position: 'sticky', top: 120, alignSelf: 'start' }}>
             <Reveal delay={0}>
-              <span className="eyebrow">04 — Processo</span>
-            </Reveal>
-            <Reveal delay={1}>
-              <h2 className="display display-md" style={{ marginTop: 28, marginBottom: 0 }}>
+              <h2 className="display display-md" style={{ marginTop: 0, marginBottom: 0 }}>
                 1 metodo,
                 <br />
                 4 <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>passaggi</em>
               </h2>
             </Reveal>
-            <Reveal delay={2}>
+            <Reveal delay={1}>
               <p style={{ marginTop: 24, color: 'var(--teal-500)', fontSize: 14, lineHeight: 1.6, maxWidth: 320 }}>
                 Un metodo collaudato in quasi 30 anni di lavoro fianco a fianco con agricoltori,
                 allevatori e PMI del food.
