@@ -2,8 +2,9 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { DropChiSiamoPage } from "./drop/DropChiSiamoPage";
 import { DropHomepageApp } from "./drop/DropHomepageApp";
 import { DropProjectAgrovitPage } from "./drop/DropProjectAgrovitPage";
-import { DropProjectAlivePage } from "./drop/DropProjectAlivePage";
-import { DropProjectGiocoDiSquadraPage } from "./drop/DropProjectGiocoDiSquadraPage";
+import { DropProjectAllevaPrPage } from "./drop/DropProjectAllevaPrPage";
+import { DropProjectAnafibjPage } from "./drop/DropProjectAnafibjPage";
+import { DropProjectAstaCremonaPage } from "./drop/DropProjectAstaCremonaPage";
 import { DropProjectsArchivePage } from "./drop/DropProjectsArchivePage";
 
 /** Normalizza `import.meta.env.BASE_URL` (es. `/digitaldrop/` → `/digitaldrop`). */
@@ -37,9 +38,10 @@ export default function App() {
         <Route path="/" element={<DropHomepageApp />} />
         <Route path="/chi-siamo" element={<DropChiSiamoPage />} />
         <Route path="/projects" element={<DropProjectsArchivePage />} />
-        <Route path="/projects/alive" element={<DropProjectAlivePage />} />
-        <Route path="/projects/gioco-di-squadra" element={<DropProjectGiocoDiSquadraPage />} />
         <Route path="/projects/agrovit" element={<DropProjectAgrovitPage />} />
+        <Route path="/projects/fiera-cremona" element={<DropProjectAstaCremonaPage />} />
+        <Route path="/projects/alleva-pr" element={<DropProjectAllevaPrPage />} />
+        <Route path="/projects/anafibj" element={<DropProjectAnafibjPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

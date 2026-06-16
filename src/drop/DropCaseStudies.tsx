@@ -4,6 +4,24 @@ import { getHomepageFeaturedProjects } from "./dropProjects";
 import { DropProjectCard } from "./DropProjectCard";
 import { useReveal, MarqueeRow, Reveal } from "./hooksAndUi";
 
+const DROP_CLIENTS = [
+  "Boehringer Ingelheim Animal Health Italia S.p.A.",
+  "Cremona Fiere S.P.A.",
+  "Agrovit Srl",
+  "milkrite | InterPuls",
+  "Consorzio del Formaggio Parmigiano Reggiano",
+  "ARIENTI & C. SRL",
+  "Associazione Nazionale Allevatori della Razza Frisona, Bruna e Jersey Italiana",
+  "Genesi Project srl",
+  "Commercial Dairy Farmers",
+  "DairyLens",
+  "Quartomoro di Sardegna snc",
+  "gruppo 3A",
+  "CAI Nutrizione S.P.A.",
+] as const;
+
+const clientMarqueeItems = DROP_CLIENTS.flatMap((name) => [name, "•"]);
+
 // CaseStudies — asymmetric grid with hover scale
 export function DropCaseStudies() {
   const rootRef = useRef(null);
@@ -55,7 +73,7 @@ export function DropCaseStudies() {
             <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--teal-500)' }}>47 brand · 8 regioni · 25 anni</span>
           </Reveal>
           <MarqueeRow>
-            {['Caseificio Roero', '•', 'AliveXperiences', '•', 'Cooperativa Verde', '•', 'Conserve Toscane', '•', 'ITS Agroalimentare', '•', 'Olio Pugliese DOP', '•', 'Salumi del Po', '•', 'Cantine Etna', '•'].map((t, i) => (
+            {clientMarqueeItems.map((t, i) => (
               <span key={i} style={{
                 fontSize: 'clamp(22px, 2.6vw, 36px)',
                 fontWeight: t === '•' ? 700 : 600,

@@ -55,9 +55,18 @@ export function DropProjectCard({
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          transition: "transform 1.4s var(--ease), filter .6s var(--ease)",
+          transition: "transform 1.4s var(--ease)",
           transform: hovered ? "scale(1.06)" : "scale(1)",
-          filter: hovered ? "brightness(0.65)" : "brightness(0.85)",
+        }}
+      />
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: hovered ? "rgba(0, 0, 0, 0.32)" : "rgba(0, 0, 0, 0.2)",
+          transition: "background .6s var(--ease)",
+          pointerEvents: "none",
         }}
       />
       <div
@@ -66,6 +75,7 @@ export function DropProjectCard({
           top: 0,
           left: 0,
           right: 0,
+          zIndex: 1,
           padding: "28px 28px 0",
           display: "flex",
           justifyContent: "space-between",
@@ -95,7 +105,7 @@ export function DropProjectCard({
         </div>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", opacity: 0.8 }}>{project.year}</div>
       </div>
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 28, color: "white" }}>
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 1, padding: 28, color: "white" }}>
         <div>
           <h3
             className="display"

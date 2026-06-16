@@ -375,6 +375,31 @@ export function CursorFollower() {
   return null;
 }
 
+type DropProjectHeroYearLineProps = {
+  className?: string;
+  style?: React.CSSProperties;
+  categories: string;
+  separator?: string;
+  year: string;
+};
+
+/** Categorie/servizi + anno nell'hero progetto — l'anno è sempre arancione Drop. */
+export function DropProjectHeroYearLine({
+  className = "alive-project-hero-meta-line",
+  style,
+  categories,
+  separator = " · ",
+  year,
+}: DropProjectHeroYearLineProps) {
+  return (
+    <p className={className} style={style}>
+      {categories}
+      {separator}
+      <span className="alive-project-hero-year">{year}</span>
+    </p>
+  );
+}
+
 type BtnProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: "primary" | "ghost" | "light";
   href?: string;

@@ -17,7 +17,7 @@ const ARCHIVE_PLACES = [
   "in distilleria",
 ] as const;
 
-const PLACE_TICK_MS = 4000;
+const PLACE_TICK_MS = 2500;
 
 function formatPlaceLabel(raw: string) {
   return raw.charAt(0).toUpperCase() + raw.slice(1);
@@ -164,6 +164,8 @@ export function DropProjectsArchiveHero() {
       >
         <div
           style={{
+            position: "relative",
+            zIndex: 5,
             flex: "1 1 auto",
             display: "flex",
             flexDirection: "column",
@@ -176,16 +178,24 @@ export function DropProjectsArchiveHero() {
           <div className="reveal" data-idx={0}>
             <span className="eyebrow">Archivio · Progetti</span>
           </div>
-          <h1 className="display display-lg archive-hero-title reveal" data-idx={1}>
-            <span className="archive-hero-line">
-              Quello che facciamo.
-            </span>
-            <ArchivePlaceTicker />
-            <span className="archive-hero-line">e in agenzia.</span>
-          </h1>
+          <div className="hero-head archive-hero-head">
+            <h1
+              className="display display-xxl hero-title-fold archive-hero-title reveal"
+              data-idx={1}
+              style={{ marginTop: 28, marginBottom: 0, color: "var(--drop-teal)" }}
+            >
+              <span className="archive-hero-line">Quello che facciamo.</span>
+              <ArchivePlaceTicker />
+              <span className="archive-hero-line">e in agenzia.</span>
+            </h1>
+          </div>
         </div>
 
-        <div className="hero-bottom reveal" data-idx={2} style={{ flexShrink: 0, maxWidth: 560 }}>
+        <div
+          className="hero-bottom reveal"
+          data-idx={2}
+          style={{ flexShrink: 0, maxWidth: 560, position: "relative", zIndex: 5, marginTop: 0 }}
+        >
           <p
             style={{
               fontSize: "clamp(16px, 1.3vw, 20px)",
@@ -227,6 +237,23 @@ export function DropProjectsArchiveHero() {
           <span>Scroll</span>
         </div>
       </div>
+
+      <style>{`
+        .archive-hero-fold {
+          min-height: 100vh;
+          min-height: 100dvh;
+        }
+        .archive-hero-head {
+          display: flex;
+          align-items: center;
+          width: 100%;
+        }
+        .archive-hero-head h1 {
+          flex: 1 1 auto;
+          min-width: 0;
+          max-width: none;
+        }
+      `}</style>
     </section>
   );
 }

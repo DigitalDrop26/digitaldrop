@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import agrovitIndustriaImg from "@Immagini/Agrovit/agrovit_testata.png?url";
+import agrovitIndustriaImg from "@Immagini/Agrovit/adv stampa/agrovit_testata.png?url";
 import { bundleResources } from "./bundleResources";
 import { Reveal, useReveal } from "./hooksAndUi";
 

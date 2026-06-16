@@ -1,25 +1,46 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import agrovitMascotte01 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-01.png?url";
+import agrovitLogoAnimation from "@Immagini/Agrovit/prova animazione.mov?url";
 import agrovitMascotte02 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-02.png?url";
 import agrovitMascotte03 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-03.png?url";
 import agrovitMascotte04 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-04.png?url";
-import agrovitHeroTestata from "@Immagini/Agrovit/agrovit_testata.png?url";
-import agrovitCartaceoRivista1 from "@Immagini/Agrovit/Cartaceo/mockup-rivista-1.png?url";
-import agrovitCartaceoRivista2 from "@Immagini/Agrovit/Cartaceo/mockup-rivista-2.png?url";
-import agrovitCartaceoPosterAlleato from "@Immagini/Agrovit/Cartaceo/poster-alleato.jpg?url";
-import agrovitCartaceoPosterSacco from "@Immagini/Agrovit/Cartaceo/poster-sacco.jpg?url";
-import agrovitSocialAcidex from "@Immagini/Agrovit/Social/post-acidex.jpg?url";
-import agrovitSocialBooster from "@Immagini/Agrovit/Social/post-booster.jpg?url";
-import agrovitSocialImmunofeet from "@Immagini/Agrovit/Social/post-immunofeet.jpg?url";
-import agrovitSocialInsilati from "@Immagini/Agrovit/Social/post-insilati.jpg?url";
-import agrovitSocialQualitalatte from "@Immagini/Agrovit/Social/post-qualitalatte.jpg?url";
-import agrovitSocialTransizione from "@Immagini/Agrovit/Social/post-transizione.jpg?url";
+import agrovitHeroTestata from "@Immagini/Agrovit/adv stampa/agrovit_testata.png?url";
+import agrovitContesto1 from "@Immagini/Agrovit/Agrovit_1.jpg?url";
+import agrovitContesto2 from "@Immagini/Agrovit/Agrovit 2.png?url";
+import agrovitContesto3 from "@Immagini/Agrovit/Agrovit 3.jpg?url";
+import agrovitOfflineAdvMockup03 from "@Immagini/Agrovit/adv stampa/adv mockup-03.jpg?url";
+import agrovitOfflineAdvMockup04 from "@Immagini/Agrovit/adv stampa/adv mockup-04.jpg?url";
+import agrovitOfflineAdvMockup05 from "@Immagini/Agrovit/adv stampa/adv mockup-05.jpg?url";
+import agrovitOfflineRivistaTavolo from "@Immagini/Agrovit/adv stampa/ChatGPT Image 1 giu 2026, 16_01_53.png?url";
+import agrovitOfflinePosterAlleato from "@Immagini/Agrovit/adv stampa/agrovit MARZO-APRILE-39.jpg?url";
+import agrovitOfflinePosterSacco from "@Immagini/Agrovit/adv stampa/agrovit MARZO-APRILE-40.jpg?url";
+import agrovitSocial06 from "@Immagini/Agrovit/social/06.02.png?url";
+import agrovitSocial09 from "@Immagini/Agrovit/social/09.12_Tavola disegno 2 copia 14-21.png?url";
+import agrovitSocial10 from "@Immagini/Agrovit/social/10.06-01.jpg?url";
+import agrovitSocial12 from "@Immagini/Agrovit/social/12.02.jpg?url";
+import agrovitSocial14 from "@Immagini/Agrovit/social/14.01.jpg?url";
+import agrovitSocial17 from "@Immagini/Agrovit/social/17.04_Tavola disegno 2 copia 15.jpg?url";
+import agrovitSocial20 from "@Immagini/Agrovit/social/20.07_Tavola disegno 2 copia 17.jpg?url";
+import agrovitSocial21 from "@Immagini/Agrovit/social/21.10_01.jpg?url";
+import agrovitSocial24 from "@Immagini/Agrovit/social/24.06-08.jpg?url";
+import agrovitSocial25 from "@Immagini/Agrovit/social/25.02.jpg?url";
+import agrovitSocial26 from "@Immagini/Agrovit/social/26.11.jpg?url";
+import agrovitSocial28 from "@Immagini/Agrovit/social/28.01.jpg?url";
+import agrovitSocialAgronia from "@Immagini/Agrovit/social/agronia.jpg?url";
+import agrovitSocialAsciutta from "@Immagini/Agrovit/social/agrovit MARZO-APRILE_Tavola disegno 2 copia 14.jpg?url";
+import agrovitSocialLiveYeast from "@Immagini/Agrovit/social/LIVE YEAST STB.jpg?url";
+import agrovitReel1R from "@Immagini/Agrovit/social/reel/1R.mp4?url";
+import agrovitReel2D from "@Immagini/Agrovit/social/reel/2D-valore e visione.mp4?url";
+import agrovitReel2M from "@Immagini/Agrovit/social/reel/2M.mp4?url";
+import agrovitReel3E from "@Immagini/Agrovit/social/reel/3E.mp4?url";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
+import { DropProjectPrefooter } from "./DropProjectPrefooter";
 import { DropProjectBackFab } from "./DropProjectBackFab";
 import { DropProjectMediaMasonry, type MediaMasonryRow } from "./DropProjectMediaMasonry";
-import { CursorFollower, Reveal, useReveal, useScrollY } from "./hooksAndUi";
+import { DropProjectSocialMasonry, type SocialMasonryItem } from "./DropProjectSocialMasonry";
+import { CursorFollower, DropProjectHeroYearLine, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
 const agrovitCarouselSlides = [
   agrovitMascotte01,
@@ -28,64 +49,155 @@ const agrovitCarouselSlides = [
   agrovitMascotte04,
 ] as const;
 
-/** Griglia cartaceo — orizzontali a colonna intera, verticali su 2 colonne. */
-const agrovitCartaceoRows: MediaMasonryRow[] = [
+const agrovitContestoGallery = [
   {
-    type: "full",
-    item: {
-      src: agrovitCartaceoRivista1,
-      alt: "Agrovit, mockup rivista — campagna cartacea",
-    },
+    src: agrovitContesto1,
+    alt: "Agrovit, palletizzazione sacchi in stabilimento industriale",
   },
   {
+    src: agrovitContesto2,
+    alt: "Agrovit, sede a vista aerea",
+  },
+  {
+    src: agrovitContesto3,
+    alt: "Agrovit, sacco prodotti in ambiente industriale",
+    objectPosition: "center bottom",
+  },
+] as const;
+
+const agrovitLogoCards = [
+  {
+    n: "01",
+    title: "Concept",
+    body: "Un'idea guida: gli integratori come alleati. Ogni molecola, ogni fase del ciclo produttivo ha un suo personaggio dedicato.",
+    dark: false,
+  },
+  {
+    n: "02",
+    title: "Carattere",
+    body: "Bozzetti, espressioni, pose e accessori: re, scienziato, detective, atleta. Un cast costruito tratto dopo tratto.",
+    dark: true,
+  },
+  {
+    n: "03",
+    title: "Obiettivo",
+    body: "Palette, tono di voce e pattern goccia mandano in sincrono packaging, social e stampa — sempre riconoscibili.",
+    dark: false,
+  },
+] as const;
+
+const agrovitSocialSteps = [
+  {
+    n: "01",
+    title: "Awareness",
+    body: "Far conoscere il brand e i suoi valori, presidiando il feed con continuità e coerenza.",
+  },
+  {
+    n: "02",
+    title: "Produzione contenuti",
+    body: "Post, caroselli e format ricorrenti che traducono la tecnica in messaggi chiari.",
+  },
+  {
+    n: "03",
+    title: "Shooting",
+    body: "Servizi fotografici in stabilimento e in stalla: prodotto, persone e mandria reali.",
+  },
+  {
+    n: "04",
+    title: "Produzione video",
+    body: "Sigle animate e pillole di prodotto per dare ritmo e voce al racconto.",
+  },
+] as const;
+
+/** Griglia materiale offline — 3 mockup, hero rivista, 3 poster. */
+const agrovitOfflineRows: MediaMasonryRow[] = [
+  {
     type: "split",
-    columns: 2,
+    columns: 3,
     items: [
       {
-        src: agrovitCartaceoPosterAlleato,
-        alt: "Agrovit, poster verticale — Dentro Agrovit c'è un tuo alleato",
+        src: agrovitOfflineAdvMockup03,
+        alt: "Agrovit, mockup pagina rivista di settore",
       },
       {
-        src: agrovitCartaceoPosterSacco,
-        alt: "Agrovit, poster verticale — sacco prodotti",
+        src: agrovitOfflineAdvMockup04,
+        alt: "Agrovit, griglia flyer e brochure coordinate",
+      },
+      {
+        src: agrovitOfflineAdvMockup05,
+        alt: "Agrovit, biglietti da visita e materiali POS",
       },
     ],
   },
   {
     type: "full",
     item: {
-      src: agrovitCartaceoRivista2,
-      alt: "Agrovit, mockup rivista — doppia pagina",
+      src: agrovitOfflineRivistaTavolo,
+      alt: "Agrovit, rivista aperta su tavolo in stalla",
     },
+  },
+  {
+    type: "split",
+    columns: 3,
+    items: [
+      {
+        src: agrovitOfflinePosterSacco,
+        alt: "Agrovit, poster — mi piace un sacco",
+      },
+      {
+        src: agrovitOfflinePosterAlleato,
+        alt: "Agrovit, poster — Dentro Agrovit c'è un tuo alleato",
+      },
+      {
+        src: agrovitOfflinePosterSacco,
+        alt: "Agrovit, poster — mi piace un sacco",
+      },
+    ],
   },
 ];
 
-/** Griglia social — post verticali, 3 colonne per riga. */
-const agrovitSocialRows: MediaMasonryRow[] = [
-  {
-    type: "split",
-    columns: 3,
-    items: [
-      { src: agrovitSocialAcidex, alt: "Agrovit, post social Acidex" },
-      { src: agrovitSocialBooster, alt: "Agrovit, post social Booster" },
-      { src: agrovitSocialImmunofeet, alt: "Agrovit, post social Immunofeet" },
-    ],
-  },
-  {
-    type: "split",
-    columns: 3,
-    items: [
-      { src: agrovitSocialInsilati, alt: "Agrovit, post social Insilati" },
-      { src: agrovitSocialQualitalatte, alt: "Agrovit, post social Qualità Latte" },
-      { src: agrovitSocialTransizione, alt: "Agrovit, post social Transizione" },
-    ],
-  },
+/** Feed social — 3 colonne masonry (ordine wireframe). */
+const agrovitSocialColumns: SocialMasonryItem[][] = [
+  [
+    { type: "image", src: agrovitSocial21, alt: "Agrovit, post social — Cosa facciamo", variant: "post" },
+    { type: "image", src: agrovitSocial24, alt: "Agrovit, post social — Transizione", variant: "post" },
+    { type: "image", src: agrovitSocial28, alt: "Agrovit, post social — Safemold Plus E", variant: "post" },
+    { type: "video", src: agrovitReel1R, alt: "Agrovit, reel — stabilimento e prodotti", variant: "reel" },
+    { type: "image", src: agrovitSocial09, alt: "Agrovit, post social — Chelati", variant: "post" },
+    { type: "image", src: agrovitSocial12, alt: "Agrovit, post social — Vitelli in stalla", variant: "post" },
+  ],
+  [
+    { type: "video", src: agrovitReel2D, alt: "Agrovit, reel — valore e visione", variant: "reel" },
+    { type: "image", src: agrovitSocial25, alt: "Agrovit, post social — GS Manze", variant: "post" },
+    { type: "image", src: agrovitSocialAgronia, alt: "Agrovit, post social — Agro Nia Chol XC", variant: "post" },
+    { type: "video", src: agrovitReel2M, alt: "Agrovit, reel — magazzino e team", variant: "reel" },
+    { type: "image", src: agrovitSocial06, alt: "Agrovit, post social — Amino K Plus", variant: "post" },
+    { type: "image", src: agrovitSocialAsciutta, alt: "Agrovit, post social — Asciutta", variant: "post" },
+  ],
+  [
+    { type: "image", src: agrovitSocial20, alt: "Agrovit, post social — Stress da caldo", variant: "post" },
+    { type: "image", src: agrovitSocial26, alt: "Agrovit, post social — GS Lattazione", variant: "post" },
+    { type: "image", src: agrovitSocial17, alt: "Agrovit, post social — Qualità del latte", variant: "post" },
+    { type: "video", src: agrovitReel3E, alt: "Agrovit, reel — prodotto in campo", variant: "reel" },
+    { type: "image", src: agrovitSocial10, alt: "Agrovit, post social — Insilati", variant: "post" },
+    { type: "image", src: agrovitSocial14, alt: "Agrovit, post social — Stalla e mandria", variant: "post" },
+    { type: "image", src: agrovitSocialLiveYeast, alt: "Agrovit, post social — Live Yeast STB", variant: "post" },
+  ],
 ];
+
+const bodyStyle = {
+  fontSize: 17,
+  lineHeight: 1.72,
+  fontWeight: 500,
+  color: "var(--ink)",
+  maxWidth: "52ch",
+  margin: 0,
+} as const;
 
 /** Durata (ms) di permanenza di ogni mascotte nello showcase auto-play. */
 const AGROVIT_MASCOT_INTERVAL_MS = 4000;
 
-/** Mascotte che si alternano come un breve filmato (crossfade, zoom lento, 5s ciascuna). */
+/** Mascotte che si alternano come un breve filmato (crossfade, zoom lento). */
 function AgrovitMascotShowcase() {
   const [active, setActive] = useState(0);
   const slides = agrovitCarouselSlides;
@@ -108,7 +220,6 @@ function AgrovitMascotShowcase() {
       style={{ width: "100%" }}
     >
       <div style={{ position: "relative", width: "100%", aspectRatio: "1 / 1" }}>
-        {/* alone tenue dietro la mascotte, senza creare un box */}
         <div
           aria-hidden
           style={{
@@ -191,8 +302,8 @@ export function DropProjectAgrovitPage() {
     };
   }, []);
 
-  const scrollToSfida = () => {
-    const el = document.getElementById("progetto-sfida");
+  const scrollToContent = () => {
+    const el = document.getElementById("progetto-contesto");
     if (!el) return;
     const lenis = window.__lenis;
     if (lenis) {
@@ -256,21 +367,36 @@ export function DropProjectAgrovitPage() {
               <div aria-hidden style={{ flex: "3 0 0%", minHeight: 0 }} />
               <div style={{ flex: "1 1 auto", display: "flex", flexDirection: "column", justifyContent: "flex-start", minHeight: 0 }}>
                 <Reveal delay={0}>
+                  <p
+                    className="alive-project-hero-kicker-line"
+                    style={{
+                      margin: 0,
+                      fontWeight: 600,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,0.82)",
+                    }}
+                  >
+                    Agrovit
+                  </p>
                   <h1
                     className="display display-lg"
                     style={{
-                      margin: 0,
+                      marginTop: 16,
+                      marginBottom: 0,
                       letterSpacing: "-0.038em",
-                      lineHeight: 1.03,
+                      lineHeight: 1.06,
                       color: "#ffffff",
-                      maxWidth: "22ch",
+                      maxWidth: "16ch",
                     }}
                   >
-                    Agro
-                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>vit</em>
+                    Un brand agro che{" "}
+                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>parla alle persone.</em>
                   </h1>
-                  <p
-                    className="alive-project-hero-kicker-line"
+                  <DropProjectHeroYearLine
+                    categories="Visual - Content - Social"
+                    separator=" - "
+                    year="2025"
                     style={{
                       marginTop: 20,
                       fontWeight: 600,
@@ -278,15 +404,7 @@ export function DropProjectAgrovitPage() {
                       textTransform: "uppercase",
                       color: "rgba(255,255,255,0.92)",
                     }}
-                  >
-                    Visual / Content / Social — 2025
-                  </p>
-                  <p
-                    className="alive-project-hero-meta-line"
-                    style={{ marginTop: 14, fontWeight: 500, color: "rgba(255,255,255,0.82)" }}
-                  >
-                    Un mondo di personaggi per dare voce al brand Agrovit
-                  </p>
+                  />
                 </Reveal>
               </div>
             </div>
@@ -330,7 +448,7 @@ export function DropProjectAgrovitPage() {
                   color: "inherit",
                   cursor: "pointer",
                 }}
-                onClick={scrollToSfida}
+                onClick={scrollToContent}
               >
                 Scroll
               </button>
@@ -338,32 +456,88 @@ export function DropProjectAgrovitPage() {
           </div>
         </section>
 
-        <section id="progetto-sfida" className="section" style={{ background: "#ffffff" }}>
+        <section id="progetto-contesto" className="section" style={{ background: "#ffffff" }}>
+          <div className="container-wide">
+            <div className="agrovit-contesto-grid">
+              <div>
+                <Reveal delay={0}>
+                  <span className="eyebrow">01 · Contesto</span>
+                  <p
+                    style={{
+                      ...bodyStyle,
+                      marginTop: "clamp(32px, 5vw, 56px)",
+                    }}
+                  >
+                    Agrovit è un&apos;azienda di{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>
+                      integratori e nuclei minerali vitaminici
+                    </strong>{" "}
+                    per la zootecnia da oltre 30 anni. Un&apos;azienda fatta di persone per le persone, vicina ai territori,
+                    attenta al benessere animale e alla redditività dell&apos;allevatore — focalizzata sull&apos;offerta di prodotti
+                    sani, naturali e sicuri, ad alto valore aggiunto.
+                  </p>
+                </Reveal>
+              </div>
+
+              <aside className="agrovit-contesto-aside">
+                <Reveal delay={1}>
+                  <div className="agrovit-meta-block">
+                    <h3 className="agrovit-meta-label">Focus</h3>
+                    <ul className="agrovit-meta-list">
+                      <li>Brand Identity</li>
+                      <li>Comunicazione offline</li>
+                      <li>Comunicazione online</li>
+                      <li>Social media strategy</li>
+                    </ul>
+                  </div>
+                  <div className="agrovit-meta-block" style={{ marginTop: 32 }}>
+                    <h3 className="agrovit-meta-label">Outcome</h3>
+                    <ul className="agrovit-meta-list">
+                      <li>Sistema di icone e fregi</li>
+                      <li>Creatività materiale offline</li>
+                      <li>ADV cartaceo</li>
+                      <li>Social feed</li>
+                    </ul>
+                  </div>
+                </Reveal>
+              </aside>
+            </div>
+
+            <div className="agrovit-contesto-gallery" role="list" aria-label="Contesto Agrovit">
+              {agrovitContestoGallery.map((item, i) => (
+                <Reveal key={item.src} delay={i} role="listitem" className="agrovit-contesto-gallery-item">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                    style={"objectPosition" in item ? { objectPosition: item.objectPosition } : undefined}
+                  />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="progetto-sfida" className="section" style={{ background: "var(--paper-tint)" }}>
           <div className="container-wide">
             <div style={{ maxWidth: 980 }}>
               <Reveal delay={0}>
-                <span className="eyebrow">Progetto · La sfida</span>
+                <span className="eyebrow">02 · Sfida</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  Un brand agro che{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>parla alle persone</em>.
+                  Dare voce a un partner tecnico{" "}
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>per gli allevatori.</em>
                 </h2>
               </Reveal>
               <Reveal delay={1}>
-                <p
-                  style={{
-                    marginTop: "clamp(32px, 5vw, 56px)",
-                    fontSize: 17,
-                    lineHeight: 1.65,
-                    fontWeight: 500,
-                    color: "var(--ink)",
-                    maxWidth: "52ch",
-                    marginBottom: 0,
-                  }}
-                >
-                  Agrovit aveva bisogno di un&apos;identità capace di distinguersi in un settore{" "}
-                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>tecnico e affollato</strong>, parlando in modo
-                  caldo e diretto a un pubblico ampio. La sfida: trasformare prodotti e competenze in un racconto riconoscibile,
-                  capace di costruire una relazione quotidiana sui canali digitali.
+                <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
+                  Agrovit aveva la necessità di creare un brand coerente e riconoscibile dalla mano del proprio partner di
+                  riferimento: l&apos;allevatore. Un brand che si ponesse al di sopra dell&apos;offerta di settore, basata su
+                  parametri di{" "}
+                  <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>
+                    qualità, servizio tecnico e amichevolezza del brand.
+                  </strong>
                 </p>
               </Reveal>
             </div>
@@ -373,47 +547,21 @@ export function DropProjectAgrovitPage() {
         <section
           id="progetto-soluzione"
           className="section"
-          style={{ background: "var(--paper-tint)", paddingBottom: "clamp(64px, 10vw, 120px)" }}
+          style={{ background: "#ffffff", paddingBottom: "clamp(64px, 10vw, 120px)" }}
         >
           <div className="container-wide">
             <div className="agrovit-solution-grid">
               <div>
                 <Reveal delay={0}>
-                  <span className="eyebrow">Progetto · La soluzione</span>
+                  <span className="eyebrow">03 · Soluzione</span>
                   <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                    Un cast di{" "}
-                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>personaggi</em>.
+                    Un alleato{" "}
+                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>riconoscibile.</em>
                   </h2>
-                  <p
-                    style={{
-                      marginTop: "clamp(32px, 5vw, 56px)",
-                      fontSize: 17,
-                      lineHeight: 1.72,
-                      fontWeight: 500,
-                      color: "var(--ink)",
-                      maxWidth: "52ch",
-                      marginBottom: 20,
-                    }}
-                  >
-                    Abbiamo costruito un{" "}
-                    <strong style={{ fontWeight: 700, color: "var(--drop-teal)" }}>mondo visivo</strong> attorno a una famiglia di
-                    mascotte: forme semplici, colori vivaci e un tratto coerente che rendono il brand immediatamente riconoscibile.
-                    Ogni personaggio porta un carattere diverso, pronto a raccontare prodotti, valori e momenti di Agrovit.
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 17,
-                      lineHeight: 1.72,
-                      fontWeight: 500,
-                      color: "var(--ink)",
-                      maxWidth: "52ch",
-                      margin: 0,
-                    }}
-                  >
-                    Sul fronte <strong style={{ fontWeight: 700, color: "var(--drop-teal)" }}>content</strong> abbiamo definito tono di
-                    voce, format e piano editoriale; sul fronte{" "}
-                    <strong style={{ fontWeight: 700, color: "var(--drop-orange)" }}>social</strong> abbiamo dato vita a una presenza
-                    coerente e continuativa, dove i personaggi diventano il filo conduttore di ogni contenuto.
+                  <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
+                    Abbiamo costruito una strategia di comunicazione integrata, per dare coerenza e riconoscibilità al brand.
+                    L&apos;alleato ideale, colui che vive con loro ogni giornata e ne conosce le dinamiche ed esigenze. Una figura
+                    — anzi un ufficio sportivo — capace di porsi come un&apos;estensione del brand.
                   </p>
                 </Reveal>
               </div>
@@ -427,33 +575,74 @@ export function DropProjectAgrovitPage() {
           </div>
         </section>
 
-        <section id="progetto-cartaceo" className="section" style={{ background: "#ffffff" }}>
+        <section id="progetto-logo" className="section" style={{ background: "var(--paper-tint)" }}>
+          <div className="container-wide">
+            <div className="agrovit-logo-grid">
+              <div>
+                <Reveal delay={0}>
+                  <span className="eyebrow">04 · Logo</span>
+                  <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
+                    Il pittogramma Agrovit{" "}
+                    <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>diventa corpo.</em>
+                  </h2>
+                  <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
+                    La forma del cerchio — la goccia rovesciata di Agrovit — si trasforma in un nuovo personaggio che dà vita al
+                    brand, creando una{" "}
+                    <strong style={{ color: "var(--drop-teal)", fontWeight: 700 }}>famiglia coerente</strong> capace di raccontare
+                    i diversi valori e servizi dell&apos;azienda. Non più solo un logo, ma un progetto che si anima e parla
+                    direttamente con l&apos;utente.
+                  </p>
+                </Reveal>
+              </div>
+
+              <Reveal delay={1} className="agrovit-logo-visual">
+                <div className="agrovit-logo-visual-card">
+                  <video
+                    src={agrovitLogoAnimation}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    aria-label="Animazione mascotte Agrovit — concept dal pittogramma del brand"
+                  />
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="agrovit-logo-cards">
+              {agrovitLogoCards.map((card, i) => (
+                <Reveal
+                  key={card.title}
+                  delay={i}
+                  className={`agrovit-logo-card${card.dark ? " agrovit-logo-card--dark" : ""}`}
+                >
+                  <div className="agrovit-logo-card-index">{card.n}</div>
+                  <h3 className="display agrovit-logo-card-title">{card.title}</h3>
+                  <p className="agrovit-logo-card-body">{card.body}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="progetto-offline" className="section" style={{ background: "#ffffff" }}>
           <div className="container-wide">
             <div style={{ maxWidth: 980 }}>
               <Reveal delay={0}>
-                <span className="eyebrow">Progetto · Cartaceo</span>
+                <span className="eyebrow">05 · Materiale offline</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  Il brand{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>in stampa</em>.
+                  Dalla pagina di rivista{" "}
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>alla brochure.</em>
                 </h2>
-                <p
-                  style={{
-                    marginTop: "clamp(32px, 5vw, 56px)",
-                    fontSize: 17,
-                    lineHeight: 1.72,
-                    fontWeight: 500,
-                    color: "var(--ink)",
-                    maxWidth: "52ch",
-                    marginBottom: 0,
-                  }}
-                >
-                  Riviste di settore, poster e materiali point-of-sale portano le mascotte fuori dal digitale: layout puliti,
-                  gerarchie chiare e un sistema visivo che funziona anche su grande formato.
+                <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
+                  Abbiamo ideato sussidi di comunicazione per i tecnici e i rivenditori, con un&apos;impostazione grafica pulita,
+                  chiara e coordinata, per dare valore ai prodotti e alla qualità del brand.
                 </p>
               </Reveal>
             </div>
 
-            <DropProjectMediaMasonry rows={agrovitCartaceoRows} ariaLabel="Materiali cartacei Agrovit" />
+            <DropProjectMediaMasonry rows={agrovitOfflineRows} ariaLabel="Materiali offline Agrovit" />
           </div>
         </section>
 
@@ -461,37 +650,88 @@ export function DropProjectAgrovitPage() {
           <div className="container-wide">
             <div style={{ maxWidth: 980 }}>
               <Reveal delay={0}>
-                <span className="eyebrow">Progetto · Social</span>
+                <span className="eyebrow">06 · Social media</span>
                 <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
-                  Contenuti che{" "}
-                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>restano in campo</em>.
+                  Un piano editoriale{" "}
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>che parla agli allevatori.</em>
                 </h2>
-                <p
-                  style={{
-                    marginTop: "clamp(32px, 5vw, 56px)",
-                    fontSize: 17,
-                    lineHeight: 1.72,
-                    fontWeight: 500,
-                    color: "var(--ink)",
-                    maxWidth: "52ch",
-                    marginBottom: 0,
-                  }}
-                >
-                  Ogni post traduce prodotti e temi tecnici in format immediati: i personaggi guidano il messaggio, i colori
-                  del brand tengono unita la presenza sui canali social.
+                <p style={{ ...bodyStyle, marginTop: "clamp(32px, 5vw, 56px)" }}>
+                  Dalla strategia alla produzione contenuti, per un feed editoriale coerente e un&apos;immagine coordinata per dare
+                  valore alla brand identity.
                 </p>
               </Reveal>
             </div>
 
-            <DropProjectMediaMasonry rows={agrovitSocialRows} ariaLabel="Post social Agrovit" />
+            <div className="agrovit-social-steps" aria-label="Fasi del piano editoriale Agrovit">
+              {agrovitSocialSteps.map((step, i) => (
+                <Reveal key={step.n} delay={i} className="agrovit-social-step">
+                  <span className="eyebrow agrovit-social-step-index">{step.n}</span>
+                  <h3 className="display agrovit-social-step-title">{step.title}</h3>
+                  <p className="agrovit-social-step-body">{step.body}</p>
+                </Reveal>
+              ))}
+            </div>
+
+            <DropProjectSocialMasonry columns={agrovitSocialColumns} ariaLabel="Feed social Agrovit" />
           </div>
         </section>
 
-        {/* Contatti — stessa sezione della homepage */}
+        <DropProjectPrefooter />
+
         <DropNewsletter />
       </main>
 
       <style>{`
+        .agrovit-contesto-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+          gap: clamp(36px, 5vw, 72px);
+          align-items: start;
+        }
+        .agrovit-meta-label {
+          margin: 0 0 16px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--drop-orange);
+        }
+        .agrovit-meta-list {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          display: grid;
+          gap: 10px;
+        }
+        .agrovit-meta-list li {
+          font-size: 15px;
+          line-height: 1.45;
+          font-weight: 500;
+          color: var(--drop-teal);
+        }
+        .agrovit-contesto-gallery {
+          margin-top: clamp(48px, 7vw, 80px);
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: clamp(16px, 2vw, 24px);
+        }
+        .agrovit-contesto-gallery-item {
+          border-radius: 24px;
+          overflow: hidden;
+          line-height: 0;
+          background: var(--teal-100);
+        }
+        .agrovit-contesto-gallery-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          aspect-ratio: 4 / 5;
+          display: block;
+          transition: transform 1.4s var(--ease);
+        }
+        .agrovit-contesto-gallery-item:hover img {
+          transform: scale(1.02);
+        }
         .agrovit-solution-grid {
           display: grid;
           grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -503,16 +743,111 @@ export function DropProjectAgrovitPage() {
           max-width: 598px;
           margin-left: auto;
         }
-        @media (max-width: 900px) {
-          .agrovit-solution-grid {
-            grid-template-columns: 1fr;
-            gap: clamp(32px, 8vw, 48px);
-          }
-          .agrovit-solution-media {
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 483px;
-          }
+        .agrovit-logo-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+          gap: clamp(36px, 5vw, 72px);
+          align-items: center;
+        }
+        .agrovit-logo-visual {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          width: 100%;
+        }
+        .agrovit-logo-visual-card {
+          width: min(100%, clamp(480px, 44vw, 620px));
+          border-radius: 28px;
+          overflow: hidden;
+          background: #ffffff;
+          box-shadow: 0 30px 60px -30px rgba(0, 44, 66, 0.25);
+          line-height: 0;
+        }
+        .agrovit-logo-visual-card video {
+          width: 100%;
+          height: auto;
+          display: block;
+          object-fit: cover;
+        }
+        .agrovit-logo-cards {
+          margin-top: clamp(48px, 7vw, 80px);
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: clamp(20px, 2.5vw, 28px);
+          align-items: stretch;
+        }
+        .agrovit-logo-card {
+          border-radius: 28px;
+          padding: clamp(32px, 3.5vw, 40px) clamp(28px, 3vw, 36px);
+          min-height: 100%;
+          background: #ffffff;
+          box-shadow: 0 30px 60px -30px rgba(0, 44, 66, 0.25);
+          transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease);
+        }
+        .agrovit-logo-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 40px 80px -28px rgba(0, 44, 66, 0.35);
+        }
+        .agrovit-logo-card--dark {
+          background: var(--drop-teal);
+        }
+        .agrovit-logo-card-index {
+          margin: 0 0 18px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          line-height: 1;
+          color: var(--drop-orange);
+        }
+        .agrovit-logo-card-title {
+          margin: 0 0 16px;
+          font-size: clamp(28px, 2.8vw, 36px);
+          font-weight: 700;
+          letter-spacing: -0.025em;
+          line-height: 1.08;
+          color: var(--drop-teal);
+        }
+        .agrovit-logo-card--dark .agrovit-logo-card-title {
+          color: #ffffff;
+        }
+        .agrovit-logo-card-body {
+          margin: 0;
+          font-size: 15px;
+          line-height: 1.65;
+          font-weight: 500;
+          color: var(--ink);
+          max-width: 36ch;
+        }
+        .agrovit-logo-card--dark .agrovit-logo-card-body {
+          color: rgba(255, 255, 255, 0.82);
+        }
+        .agrovit-social-steps {
+          margin-top: clamp(48px, 7vw, 80px);
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: clamp(24px, 3vw, 40px);
+          align-items: start;
+        }
+        .agrovit-social-step {
+          min-width: 0;
+        }
+        .agrovit-social-step-index {
+          margin: 0 0 18px;
+        }
+        .agrovit-social-step-title {
+          margin: 0 0 16px;
+          font-size: clamp(22px, 2.2vw, 28px);
+          font-weight: 700;
+          letter-spacing: -0.025em;
+          line-height: 1.12;
+          color: var(--drop-teal);
+        }
+        .agrovit-social-step-body {
+          margin: 0;
+          font-size: 15px;
+          line-height: 1.65;
+          font-weight: 500;
+          color: var(--ink);
         }
         .alive-project-hero-fold {
           min-height: 100vh;
@@ -520,8 +855,8 @@ export function DropProjectAgrovitPage() {
         }
         .alive-project-hero-meta-line {
           white-space: nowrap;
-          font-size: clamp(13px, 1.08vw, 17px);
-          line-height: 1.35;
+          font-size: clamp(11px, 0.92vw, 14px);
+          line-height: 1.3;
         }
         .alive-project-hero-kicker-line {
           white-space: nowrap;
@@ -529,12 +864,37 @@ export function DropProjectAgrovitPage() {
           line-height: 1.3;
           font-size: clamp(11px, 0.92vw, 14px);
         }
-        @media (max-width: 720px) {
-          .alive-project-hero-meta-line {
-            white-space: normal;
+        @media (max-width: 900px) {
+          .agrovit-contesto-grid,
+          .agrovit-solution-grid,
+          .agrovit-logo-grid {
+            grid-template-columns: 1fr;
           }
+          .agrovit-solution-media {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 483px;
+          }
+          .agrovit-contesto-gallery {
+            grid-template-columns: 1fr;
+          }
+          .agrovit-contesto-gallery-item img {
+            aspect-ratio: 16 / 10;
+          }
+          .agrovit-logo-cards {
+            grid-template-columns: 1fr;
+          }
+          .agrovit-social-steps {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        @media (max-width: 720px) {
+          .alive-project-hero-meta-line,
           .alive-project-hero-kicker-line {
             white-space: normal;
+          }
+          .agrovit-social-steps {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

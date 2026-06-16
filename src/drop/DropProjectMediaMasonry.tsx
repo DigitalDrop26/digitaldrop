@@ -64,8 +64,8 @@ export function DropProjectMediaMasonry({ rows, ariaLabel }: DropProjectMediaMas
               data-columns={row.columns}
               role="presentation"
             >
-              {row.items.map((item) => (
-                <Reveal key={item.src} delay={rowIdx} role="listitem" className="project-media-cell">
+              {row.items.map((item, itemIdx) => (
+                <Reveal key={`${rowIdx}-${itemIdx}-${item.src}`} delay={rowIdx} role="listitem" className="project-media-cell">
                   <MediaCard item={item} />
                 </Reveal>
               ))}
