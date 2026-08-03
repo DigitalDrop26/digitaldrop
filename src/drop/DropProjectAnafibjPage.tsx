@@ -6,6 +6,7 @@ import anafibjPlatformLaptop from "@Immagini/Anafibj/Anafibij_laptop.png?url";
 import anafibjSocial01 from "@Immagini/Anafibj/anafibj01_mobile.png?url";
 import anafibjSocial02 from "@Immagini/Anafibj/CLAIM.png?url";
 import { DropFooter } from "./DropFooter";
+import { DropHeroBackground } from "./DropHeroBackground";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectBackFab } from "./DropProjectBackFab";
@@ -168,12 +169,9 @@ export function DropProjectAnafibjPage() {
             boxSizing: "border-box",
             overflow: "hidden",
             backgroundColor: "var(--ink-deep)",
-            backgroundImage: `url(${anafibjHeroBg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
           }}
         >
+          <DropHeroBackground src={anafibjHeroBg} />
           <div
             aria-hidden
             style={{

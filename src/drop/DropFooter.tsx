@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { bundleResources } from "./bundleResources";
 import { getDropContactLinks } from "./dropContactLinks";
-import { chiSiamoPath, homeHash } from "./sitePaths";
+import { chiSiamoHash, chiSiamoPath, homeHash, projectsPath } from "./sitePaths";
 import { useReveal, Reveal } from "./hooksAndUi";
 
 type DropFooterProps = { anchorsResolveHome?: boolean };
@@ -12,7 +12,16 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
   useReveal(rootRef);
 
   const h = (fragmentId: string) => (anchorsResolveHome ? homeHash(fragmentId) : `#${fragmentId.replace(/^#/, "")}`);
+  const chiSiamoSection = (fragmentId: string) => chiSiamoHash(fragmentId);
   const contactLinks = getDropContactLinks(anchorsResolveHome);
+
+  const serviceLinks = [
+    "Brand Identity",
+    "Marketing strategico",
+    "Piani di comunicazione",
+    "Creazione contenuti",
+    "Alta formazione AI",
+  ] as const;
   return (
     <footer ref={rootRef} style={{
       background: 'var(--drop-teal)',
@@ -33,22 +42,24 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
           </Reveal>
 
           <Reveal delay={1}>
-            <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Studio</h4>
+            <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Navigazione</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <a href={h("settori")} className="footer-link">Settori</a>
+              <a href={h("servizi")} className="footer-link">Servizi</a>
+              <a href={anchorsResolveHome ? projectsPath() : "/projects"} className="footer-link">Progetti</a>
               <a href={chiSiamoPath()} className="footer-link">Chi siamo</a>
-              <a href={h("team")} className="footer-link">Team</a>
-              <a href={h("carriere")} className="footer-link">Carriere</a>
-              <a href={h("stampa")} className="footer-link">Stampa</a>
+              <a href={chiSiamoSection("team")} className="footer-link">Team</a>
+              <a href={chiSiamoSection("valori")} className="footer-link">Valori</a>
+              <a href={chiSiamoSection("manifesto")} className="footer-link">Manifesto</a>
             </div>
           </Reveal>
 
           <Reveal delay={2}>
             <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Servizi</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <a href={h("servizi")} className="footer-link">Strategia</a>
-              <a href={h("servizi")} className="footer-link">Brand identity</a>
-              <a href={h("servizi")} className="footer-link">Contenuti digitali</a>
-              <a href={h("servizi")} className="footer-link">Formazione AI</a>
+              {serviceLinks.map((label) => (
+                <a key={label} href={h("servizi")} className="footer-link">{label}</a>
+              ))}
             </div>
           </Reveal>
 

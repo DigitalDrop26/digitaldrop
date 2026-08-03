@@ -1,5 +1,5 @@
-import agrovitHeroTestata from "@Immagini/Agrovit/adv stampa/agrovit_testata.png?url";
-import allevaHero from "@Immagini/Alleva PR/AllevaPR_hero.png?url";
+import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?url";
+import allevaHero from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?url";
 import anafibjHero from "@Immagini/Anafibj/Anafibj_hero.png?url";
 import astaHero from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?url";
 
@@ -63,7 +63,7 @@ export const DROP_PROJECTS: DropProject[] = [
     title: "Agrovit",
     sector: "Agro · Brand World",
     year: "2025",
-    img: agrovitHeroTestata,
+    img: agrovitHeroBg,
     categories: ["visual", "content", "social"],
     detailPath: "/projects/agrovit",
   },

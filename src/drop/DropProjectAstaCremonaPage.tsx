@@ -13,6 +13,7 @@ import astaMetamorfosi from "@Immagini/Fiera Cremona/Metamorfosi.png?url";
 import astaAppPhone from "@Immagini/Fiera Cremona/asta in diretta.png?url";
 import astaCharity from "@Immagini/Fiera Cremona/for charity.png?url";
 import { DropFooter } from "./DropFooter";
+import { DropHeroBackground } from "./DropHeroBackground";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectBackFab } from "./DropProjectBackFab";
@@ -111,12 +112,9 @@ export function DropProjectAstaCremonaPage() {
             boxSizing: "border-box",
             overflow: "hidden",
             backgroundColor: "var(--ink-deep)",
-            backgroundImage: `url(${astaHeroBg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
           }}
         >
+          <DropHeroBackground src={astaHeroBg} />
           <div
             aria-hidden
             style={{

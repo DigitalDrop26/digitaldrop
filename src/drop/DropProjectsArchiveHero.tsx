@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import dropHeroSrc from "@Immagini/Drop_hero.png?url";
+import { DropHeroBackground } from "./DropHeroBackground";
 import { useReveal, useScrollY } from "./hooksAndUi";
 
 const ARCHIVE_PLACES = [
@@ -131,12 +132,9 @@ export function DropProjectsArchiveHero() {
         overflowX: "hidden",
         overflowY: "visible",
         backgroundColor: "var(--paper-warm)",
-        backgroundImage: `url(${dropHeroSrc})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
       }}
     >
+      <DropHeroBackground src={dropHeroSrc} />
       <div
         aria-hidden
         style={{

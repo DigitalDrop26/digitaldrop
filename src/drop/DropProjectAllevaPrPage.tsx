@@ -4,6 +4,7 @@ import allevaGallery02 from "@Immagini/Alleva PR/caroline-roose-HgbKnsaAu_0-unsp
 import allevaGallery03 from "@Immagini/Alleva PR/elio-santos-0AIb6bBdgXc-unsplash.jpg?url";
 import allevaWarehouse from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?url";
 import { DropFooter } from "./DropFooter";
+import { DropHeroBackground } from "./DropHeroBackground";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectBackFab } from "./DropProjectBackFab";
@@ -94,12 +95,9 @@ export function DropProjectAllevaPrPage() {
             boxSizing: "border-box",
             overflow: "hidden",
             backgroundColor: "#000000",
-            backgroundImage: `url(${allevaWarehouse})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat",
           }}
         >
+          <DropHeroBackground src={allevaWarehouse} />
           <div
             aria-hidden
             style={{

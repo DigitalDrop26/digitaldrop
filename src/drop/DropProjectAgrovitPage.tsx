@@ -38,6 +38,7 @@ import agrovitReel2D from "@Immagini/Agrovit/social/reel/2D-valore e visione.mp4
 import agrovitReel2M from "@Immagini/Agrovit/social/reel/2M.mp4?url";
 import agrovitReel3E from "@Immagini/Agrovit/social/reel/3E.mp4?url";
 import { DropFooter } from "./DropFooter";
+import { DropHeroBackground } from "./DropHeroBackground";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectPrefooter } from "./DropProjectPrefooter";
@@ -314,12 +315,9 @@ export function DropProjectAgrovitPage() {
             boxSizing: "border-box",
             overflow: "hidden",
             backgroundColor: "var(--paper-warm)",
-            backgroundImage: `url(${agrovitHeroBg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat",
           }}
         >
+          <DropHeroBackground src={agrovitHeroBg} />
           <div
             aria-hidden
             style={{

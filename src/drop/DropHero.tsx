@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import dropHeroSrc from "@Immagini/Drop_hero.png?url";
 import trattoreSrc from "@Immagini/trattore.jpeg?url";
+import { DropHeroBackground } from "./DropHeroBackground";
 import { useReveal, useScrollY, Btn } from "./hooksAndUi";
 
 /** Dopo overlay intro (~2200ms) mentre l’hero diventa leggibile (DropHomepageApp). */
@@ -71,12 +72,8 @@ export function DropHero() {
       overflowX: 'hidden',
       overflowY: 'visible',
       backgroundColor: 'var(--paper-warm)',
-      backgroundImage: `url(${dropHeroSrc})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center center',
-      backgroundRepeat: 'no-repeat',
     }}>
-      {/* Velatura sopra `@Immagini/Drop_hero.png` */}
+      <DropHeroBackground src={dropHeroSrc} priority />
       <div
         aria-hidden
         style={{
@@ -154,6 +151,8 @@ export function DropHero() {
                 <img
                   src={trattoreSrc}
                   alt="Trattore in semina al tramonto"
+                  fetchPriority="high"
+                  decoding="async"
                   style={{
                     width: '100%',
                     height: '100%',

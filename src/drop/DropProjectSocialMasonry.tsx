@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { Reveal } from "./hooksAndUi";
+import { useEffect, useRef, useState } from "react";
+import { Reveal, useInView } from "./hooksAndUi";
 
 export type SocialMasonryItem = {
   type: "image" | "video";
@@ -16,10 +16,17 @@ type DropProjectSocialMasonryProps = {
 
 function SocialMasonryCard({ item }: { item: SocialMasonryItem }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(cardRef, { rootMargin: "240px", threshold: 0.01 });
+  const [videoSrc, setVideoSrc] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (item.type === "video" && inView) setVideoSrc(item.src);
+  }, [inView, item.src, item.type]);
 
   const playVideo = () => {
     const v = videoRef.current;
-    if (!v) return;
+    if (!v || !videoSrc) return;
     void v.play().catch(() => {});
   };
 
@@ -32,6 +39,7 @@ function SocialMasonryCard({ item }: { item: SocialMasonryItem }) {
 
   return (
     <div
+      ref={cardRef}
       className={`social-masonry-card social-masonry-card--${item.variant}`}
       onMouseEnter={item.type === "video" ? playVideo : undefined}
       onMouseLeave={item.type === "video" ? pauseVideo : undefined}
@@ -39,11 +47,11 @@ function SocialMasonryCard({ item }: { item: SocialMasonryItem }) {
       {item.type === "video" ? (
         <video
           ref={videoRef}
-          src={item.src}
+          src={videoSrc}
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           aria-label={item.alt}
         />
       ) : (

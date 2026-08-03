@@ -13,7 +13,6 @@ export function getDropContactLinks(anchorsResolveHome = false): DropContactLink
   return [
     { href: "mailto:info@digitaldrop.eu", label: "info@digitaldrop.eu" },
     { href: "tel:+393475571187", label: "+39 347 557 1187" },
-    { href: h("instagram"), label: "Instagram" },
-    { href: h("linkedin"), label: "LinkedIn" },
+    { href: h("contatti"), label: "Iniziamo un progetto" },
   ];
 }
