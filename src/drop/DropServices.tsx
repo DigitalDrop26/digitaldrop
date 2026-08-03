@@ -1,5 +1,9 @@
 import { useRef } from "react";
-import { bundleResources } from "./bundleResources";
+import brandIdentityImg from "@Immagini/brand identity.png?url";
+import marketingStrategicoImg from "@Immagini/Marketing strategico.png?url";
+import pianiComunicazioneImg from "@Immagini/Piani di comunicazione.png?url";
+import creazioneContenutiImg from "@Immagini/creazione contenuti.png?url";
+import altaFormazioneAiImg from "@Immagini/AI_Drop.png?url";
 import { Btn, Reveal, useReveal } from "./hooksAndUi";
 
 // Services — line-by-line list with hover image preview (motto-style)
@@ -11,31 +15,31 @@ export function DropServices() {
     {
       title: "Brand Identity",
       tag: 'Naming · Logo · Payoff · Brand book · Tone of voice',
-      img: bundleResources.imgCheese,
+      img: brandIdentityImg,
       desc: 'Costruiamo identità solide e riconoscibili, che parlano al cuore del tuo pubblico e rendono il tuo marchio memorabile.',
     },
     {
       title: "Marketing strategico",
       tag: 'Analisi di mercato · Posizionamento · Piano strategico · Budget · KPI',
-      img: bundleResources.imgTractor,
+      img: marketingStrategicoImg,
       desc: 'Analizziamo mercato e obiettivi per creare piani strategici mirati, capaci di generare valore reale e misurabile.',
     },
     {
       title: "Piani di comunicazione",
       tag: 'Media mix · Calendario editoriale · Messaggi chiave · Canali · Campagne',
-      img: bundleResources.imgPaint,
+      img: pianiComunicazioneImg,
       desc: 'Definiamo messaggi, canali e tempistiche per raggiungere il tuo target in modo chiaro, efficace e coordinato.',
     },
     {
       title: "Creazione contenuti",
       tag: 'Copywriting · Fotografia · Video · Social media · Grafiche',
-      img: bundleResources.imgPaint,
+      img: creazioneContenutiImg,
       desc: 'Produciamo contenuti creativi e di qualità. Testi, immagini, video per raccontare il tuo brand e coinvolgere il pubblico. Spaziamo dalle campagne ADV, ai Social, ai chatbot AI.',
     },
     {
       title: 'Alta formazione AI',
       tag: 'Workshop · Prompt design · Automazioni · Strumenti AI · Casi pratici',
-      img: bundleResources.imgCode900,
+      img: altaFormazioneAiImg,
       desc: "Formiamo aziende e professionisti all'uso strategico dell'AI, con percorsi pratici pensati per innovare e crescere.",
     },
   ];

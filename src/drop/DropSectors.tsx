@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import agrovitIndustriaImg from "@Immagini/Agrovit/adv stampa/agrovit_testata.png?url";
+import foodSectorImg from "@Immagini/food-sector-wine.jpg?url";
 import { bundleResources } from "./bundleResources";
 import { Reveal, useReveal } from "./hooksAndUi";
 
@@ -9,6 +10,7 @@ type Sector = {
   title: string;
   tag: string;
   img: string;
+  imgObjectPosition?: string;
   video?: string;
   darkOverlay?: boolean;
   tags: string[];
@@ -29,21 +31,21 @@ export function DropSectors() {
       tags: ['Zootecnia', 'Cerealicoltura', 'Vino', 'Olio', 'Ortofrutta'],
     },
     {
-      key: 'food',
-      num: '02',
-      title: 'Food',
-      tag: 'Trasformatori, consorzi DOP/IGP, brand alimentari',
-      img: bundleResources.imgCheese,
-      tags: ['Caseifici', 'Pasta', 'Conserve', 'Salumi'],
-    },
-    {
       key: 'industria',
-      num: '03',
-      title: 'Industria',
+      num: '02',
+      title: 'Industria e trasformazione',
       tag: 'Farmaceutici, produttori di macchinari, fornitori di servizi',
       img: agrovitIndustriaImg,
       darkOverlay: true,
       tags: ['Farmaceutiche', 'Nutrizione animale', 'Tecnologie di stalla', 'Agri-software'],
+    },
+    {
+      key: 'food',
+      num: '03',
+      title: 'Food',
+      tag: 'Trasformatori, consorzi DOP/IGP, brand alimentari',
+      img: foodSectorImg,
+      tags: ['Caseifici', 'Pasta', 'Conserve', 'Salumi'],
     },
   ];
 
@@ -65,7 +67,7 @@ export function DropSectors() {
           </Reveal>
           <Reveal delay={1}>
             <p style={{ fontSize: 17, lineHeight: 1.6, color: 'rgba(255,255,255,0.75)', fontWeight: 500, margin: 0, maxWidth: 440, marginLeft: 'auto' }}>
-              Agri, Food, Industria. Tre anelli della stessa catena — ognuno con il suo lessico, la sua logica, i suoi interlocutori.
+              Agri, Industria, Food. Tre anelli della stessa catena — ognuno con il suo lessico, la sua logica, i suoi interlocutori.
             </p>
           </Reveal>
         </div>
@@ -120,7 +122,11 @@ function SectorTile({ s, delay }: { s: Sector; delay: number }) {
           preload="auto"
         />
       ) : (
-        <img src={s.img} alt={s.title} />
+        <img
+          src={s.img}
+          alt={s.title}
+          style={s.imgObjectPosition ? { objectPosition: s.imgObjectPosition } : undefined}
+        />
       )}
       {s.darkOverlay ? <div className="sector-tile-shade" aria-hidden /> : null}
       {/* Num */}

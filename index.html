@@ -10,11 +10,32 @@
           if (!t || t.tagName !== "SCRIPT") return;
           var fb = document.getElementById("static-fallback");
           if (!fb) return;
-          fb.innerHTML =
-            "<p style=\"font-weight:700;margin-top:0\">Impossibile caricare la parte interattiva del sito.</p>" +
+          var isFile = location.protocol === "file:";
+          var isLocal =
+            location.hostname === "localhost" || location.hostname === "127.0.0.1";
+          var hint =
             "<p>Apri la console del browser (F12 → scheda Console). Controlla di usare l’URL pubblicato " +
             "(<code>https://digitaldrop26.github.io/digitaldrop/</code>), di non aprire questo file dal disco " +
             "e di non avere estensioni che bloccano JavaScript.</p>";
+          if (isFile) {
+            hint =
+              "<p>Stai aprendo <code>index.html</code> direttamente dal disco: il browser non può eseguire React/Vite così.</p>" +
+              "<p><strong>Fai così:</strong> nella cartella del progetto esegui <code>npm install</code> e poi " +
+              "<code>npm run dev</code> (oppure <code>npm run dev:local</code> se il progetto è su Dropbox).</p>" +
+              "<p>In alternativa usa la versione online: " +
+              "<code>https://digitaldrop26.github.io/digitaldrop/</code></p>";
+          } else if (isLocal) {
+            hint =
+              "<p>Stai usando <code>localhost</code> ma lo script non si carica. Se la cartella del progetto è su " +
+              "<strong>Dropbox</strong> o iCloud, Vite spesso va in timeout (<code>ETIMEDOUT</code>) leggendo i file.</p>" +
+              "<p><strong>Soluzione rapida:</strong> nel terminale esegui <code>npm run dev:local</code> " +
+              "(copia il progetto fuori da Dropbox e avvia il server lì).</p>" +
+              "<p>Oppure apri la versione online già funzionante: " +
+              "<code>https://digitaldrop26.github.io/digitaldrop/</code></p>";
+          }
+          fb.innerHTML =
+            "<p style=\"font-weight:700;margin-top:0\">Impossibile caricare la parte interattiva del sito.</p>" +
+            hint;
         },
         true,
       );

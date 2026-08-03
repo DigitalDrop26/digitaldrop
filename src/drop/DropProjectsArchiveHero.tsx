@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import sfondoHeroSrc from "@Immagini/Sfondo_hero.jpg?url";
+import dropHeroSrc from "@Immagini/Drop_hero.png?url";
 import { useReveal, useScrollY } from "./hooksAndUi";
 
 const ARCHIVE_PLACES = [
@@ -131,9 +131,9 @@ export function DropProjectsArchiveHero() {
         overflowX: "hidden",
         overflowY: "visible",
         backgroundColor: "var(--paper-warm)",
-        backgroundImage: `url(${sfondoHeroSrc})`,
+        backgroundImage: `url(${dropHeroSrc})`,
         backgroundSize: "cover",
-        backgroundPosition: "center 40%",
+        backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
       }}
     >

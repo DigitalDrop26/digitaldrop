@@ -57,9 +57,6 @@ export function DropNewsletter() {
             }}>info@digitaldrop.eu</a>
 
             <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Btn variant="primary" href="#calendly">
-                Prenota un call
-              </Btn>
               <Btn variant="ghost" href="#wp">
                 Scrivici su WhatsApp
               </Btn>

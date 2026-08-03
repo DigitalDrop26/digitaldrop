@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from "react";
-import sfondoHeroSrc from "@Immagini/Sfondo_hero.jpg?url";
+import dropHeroSrc from "@Immagini/Drop_hero.png?url";
 import { useReveal, useScrollY } from "./hooksAndUi";
 
 type DropPageHeroProps = {
@@ -30,9 +30,9 @@ export function DropPageHero({ title, subtitle }: DropPageHeroProps) {
         overflowX: "hidden",
         overflowY: "visible",
         backgroundColor: "var(--paper-warm)",
-        backgroundImage: `url(${sfondoHeroSrc})`,
+        backgroundImage: `url(${dropHeroSrc})`,
         backgroundSize: "cover",
-        backgroundPosition: "center 40%",
+        backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
       }}
     >

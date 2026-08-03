@@ -68,9 +68,8 @@ export function DropCaseStudies() {
 
         {/* Logo strip — clients */}
         <div style={{ marginTop: 'clamp(72px, 10vw, 120px)', paddingTop: 40, borderTop: '1px solid rgba(0,80,119,0.15)' }}>
-          <Reveal delay={0} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32, flexWrap: 'wrap', gap: 16 }}>
+          <Reveal delay={0} style={{ marginBottom: 32 }}>
             <span className="eyebrow">Hanno scelto Drop</span>
-            <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--teal-500)' }}>47 brand · 8 regioni · 25 anni</span>
           </Reveal>
           <MarqueeRow>
             {clientMarqueeItems.map((t, i) => (

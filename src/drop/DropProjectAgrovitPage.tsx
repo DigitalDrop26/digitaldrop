@@ -1,19 +1,23 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import agrovitMascotte01 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-01.png?url";
+import agrovitPersonaggio02 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-02.png?url";
+import agrovitPersonaggio03 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-03.png?url";
+import agrovitPersonaggio04 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-04.png?url";
+import agrovitPersonaggio05 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-05.png?url";
+import agrovitPersonaggio06 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-06.png?url";
+import agrovitPersonaggio07 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-07.png?url";
+import agrovitPersonaggio08 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-08.png?url";
+import agrovitPersonaggio09 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-09.png?url";
+import agrovitPersonaggio10 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-10.png?url";
+import agrovitPersonaggio11 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-11.png?url";
+import agrovitPersonaggio12 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-12.png?url";
+import agrovitPersonaggioTavola from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO_Tavola disegno 6-01.png?url";
 import agrovitLogoAnimation from "@Immagini/Agrovit/prova animazione.mov?url";
-import agrovitMascotte02 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-02.png?url";
-import agrovitMascotte03 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-03.png?url";
-import agrovitMascotte04 from "@Immagini/Agrovit/Mascotte/mascotte_agrovit-04.png?url";
-import agrovitHeroTestata from "@Immagini/Agrovit/adv stampa/agrovit_testata.png?url";
+import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?url";
 import agrovitContesto1 from "@Immagini/Agrovit/Agrovit_1.jpg?url";
 import agrovitContesto2 from "@Immagini/Agrovit/Agrovit 2.png?url";
 import agrovitContesto3 from "@Immagini/Agrovit/Agrovit 3.jpg?url";
-import agrovitOfflineAdvMockup03 from "@Immagini/Agrovit/adv stampa/adv mockup-03.jpg?url";
-import agrovitOfflineAdvMockup04 from "@Immagini/Agrovit/adv stampa/adv mockup-04.jpg?url";
-import agrovitOfflineAdvMockup05 from "@Immagini/Agrovit/adv stampa/adv mockup-05.jpg?url";
+import agrovitOfflineMockupGrid from "@Immagini/Agrovit/adv stampa/mockup agrovit (1).jpg?url";
 import agrovitOfflineRivistaTavolo from "@Immagini/Agrovit/adv stampa/ChatGPT Image 1 giu 2026, 16_01_53.png?url";
-import agrovitOfflinePosterAlleato from "@Immagini/Agrovit/adv stampa/agrovit MARZO-APRILE-39.jpg?url";
-import agrovitOfflinePosterSacco from "@Immagini/Agrovit/adv stampa/agrovit MARZO-APRILE-40.jpg?url";
 import agrovitSocial06 from "@Immagini/Agrovit/social/06.02.png?url";
 import agrovitSocial09 from "@Immagini/Agrovit/social/09.12_Tavola disegno 2 copia 14-21.png?url";
 import agrovitSocial10 from "@Immagini/Agrovit/social/10.06-01.jpg?url";
@@ -43,10 +47,18 @@ import { DropProjectSocialMasonry, type SocialMasonryItem } from "./DropProjectS
 import { CursorFollower, DropProjectHeroYearLine, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
 const agrovitCarouselSlides = [
-  agrovitMascotte01,
-  agrovitMascotte02,
-  agrovitMascotte03,
-  agrovitMascotte04,
+  agrovitPersonaggio02,
+  agrovitPersonaggio03,
+  agrovitPersonaggio04,
+  agrovitPersonaggio05,
+  agrovitPersonaggio06,
+  agrovitPersonaggio07,
+  agrovitPersonaggio08,
+  agrovitPersonaggio09,
+  agrovitPersonaggio10,
+  agrovitPersonaggio11,
+  agrovitPersonaggio12,
+  agrovitPersonaggioTavola,
 ] as const;
 
 const agrovitContestoGallery = [
@@ -109,25 +121,14 @@ const agrovitSocialSteps = [
   },
 ] as const;
 
-/** Griglia materiale offline — 3 mockup, hero rivista, 3 poster. */
+/** Griglia materiale offline — mockup flyer, hero rivista. */
 const agrovitOfflineRows: MediaMasonryRow[] = [
   {
-    type: "split",
-    columns: 3,
-    items: [
-      {
-        src: agrovitOfflineAdvMockup03,
-        alt: "Agrovit, mockup pagina rivista di settore",
-      },
-      {
-        src: agrovitOfflineAdvMockup04,
-        alt: "Agrovit, griglia flyer e brochure coordinate",
-      },
-      {
-        src: agrovitOfflineAdvMockup05,
-        alt: "Agrovit, biglietti da visita e materiali POS",
-      },
-    ],
+    type: "full",
+    item: {
+      src: agrovitOfflineMockupGrid,
+      alt: "Agrovit, mockup griglia flyer coordinati",
+    },
   },
   {
     type: "full",
@@ -135,24 +136,6 @@ const agrovitOfflineRows: MediaMasonryRow[] = [
       src: agrovitOfflineRivistaTavolo,
       alt: "Agrovit, rivista aperta su tavolo in stalla",
     },
-  },
-  {
-    type: "split",
-    columns: 3,
-    items: [
-      {
-        src: agrovitOfflinePosterSacco,
-        alt: "Agrovit, poster — mi piace un sacco",
-      },
-      {
-        src: agrovitOfflinePosterAlleato,
-        alt: "Agrovit, poster — Dentro Agrovit c'è un tuo alleato",
-      },
-      {
-        src: agrovitOfflinePosterSacco,
-        alt: "Agrovit, poster — mi piace un sacco",
-      },
-    ],
   },
 ];
 
@@ -197,7 +180,7 @@ const bodyStyle = {
 /** Durata (ms) di permanenza di ogni mascotte nello showcase auto-play. */
 const AGROVIT_MASCOT_INTERVAL_MS = 4000;
 
-/** Mascotte che si alternano come un breve filmato (crossfade, zoom lento). */
+/** Personaggi Agrovit in alternanza (solo crossfade). */
 function AgrovitMascotShowcase() {
   const [active, setActive] = useState(0);
   const slides = agrovitCarouselSlides;
@@ -246,8 +229,7 @@ function AgrovitMascotShowcase() {
               height: "100%",
               objectFit: "contain",
               opacity: i === active ? 1 : 0,
-              transform: i === active ? "scale(1)" : "scale(1.06)",
-              transition: "opacity 1.1s var(--ease), transform 4.2s linear",
+              transition: "opacity 1.1s var(--ease)",
               filter: "drop-shadow(0 24px 28px rgba(0, 26, 52, 0.16))",
             }}
           />
@@ -332,9 +314,9 @@ export function DropProjectAgrovitPage() {
             boxSizing: "border-box",
             overflow: "hidden",
             backgroundColor: "var(--paper-warm)",
-            backgroundImage: `url(${agrovitHeroTestata})`,
+            backgroundImage: `url(${agrovitHeroBg})`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
           }}
         >
@@ -676,6 +658,19 @@ export function DropProjectAgrovitPage() {
           </div>
         </section>
 
+        <section id="progetto-conclusione" className="section agrovit-conclusion" style={{ background: "#ffffff" }}>
+          <div className="container-wide">
+            <Reveal delay={0}>
+              <div className="agrovit-conclusion-inner">
+                <h2 className="display display-md" style={{ margin: 0, color: "var(--drop-teal)" }}>
+                  Anche il tuo brand può avere una{" "}
+                  <em className="italic-serif" style={{ color: "var(--drop-orange)" }}>voce tutta sua.</em>
+                </h2>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         <DropProjectPrefooter />
 
         <DropNewsletter />
@@ -896,6 +891,15 @@ export function DropProjectAgrovitPage() {
           .agrovit-social-steps {
             grid-template-columns: 1fr;
           }
+        }
+        .agrovit-conclusion {
+          padding-top: clamp(80px, 12vw, 120px);
+          padding-bottom: clamp(80px, 12vw, 120px);
+        }
+        .agrovit-conclusion-inner {
+          max-width: 820px;
+          margin: 0 auto;
+          text-align: center;
         }
       `}</style>
 

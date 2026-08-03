@@ -33,7 +33,7 @@ export function DropValues() {
     <section id="valori" ref={rootRef} className="section" style={{ background: 'var(--paper-warm)' }}>
       <div className="container-wide">
         <div style={{ marginBottom: 'clamp(48px, 6vw, 80px)', maxWidth: 880 }}>
-          <Reveal delay={0}><span className="eyebrow">06 — Valori</span></Reveal>
+          <Reveal delay={0}><span className="eyebrow">Valori</span></Reveal>
           <Reveal delay={1}>
             <h2 className="display display-lg" style={{ marginTop: 28, marginBottom: 0 }}>
               Il nostro modo
