@@ -344,12 +344,6 @@ export function DropProjectAstaCremonaPage() {
 
         <section id="progetto-evento" className="section" style={{ background: "var(--paper-tint)" }}>
           <div className="container-wide">
-            <Reveal delay={0}>
-              <div className="asta-video-placeholder" aria-label={`Video showcase ${PROJECT_NAME}`}>
-                <span>Video</span>
-              </div>
-            </Reveal>
-
             <div className="asta-event-grid" role="list" aria-label={`Galleria evento ${PROJECT_NAME}`}>
               {astaEventGrid.map((item, i) => (
                 <Reveal key={item.src} delay={1 + (i % 3)} role="listitem" className="asta-media-card">
@@ -571,23 +565,7 @@ export function DropProjectAstaCremonaPage() {
         .asta-split-media .asta-media-card img {
           aspect-ratio: 16 / 10;
         }
-        .asta-video-placeholder {
-          min-height: clamp(280px, 42vw, 520px);
-          border: 2px solid var(--drop-orange);
-          border-radius: 24px;
-          display: grid;
-          place-items: center;
-          background: rgba(255, 255, 255, 0.55);
-        }
-        .asta-video-placeholder span {
-          font-size: clamp(28px, 4vw, 48px);
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          color: var(--drop-orange);
-          font-family: Georgia, "Times New Roman", serif;
-        }
         .asta-event-grid {
-          margin-top: clamp(48px, 7vw, 80px);
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: clamp(16px, 2vw, 24px);
