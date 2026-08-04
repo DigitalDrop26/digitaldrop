@@ -37,7 +37,7 @@ export function DropServices() {
       desc: 'Produciamo contenuti creativi e di qualità. Testi, immagini, video per raccontare il tuo brand e coinvolgere il pubblico. Spaziamo dalle campagne ADV, ai Social, ai chatbot AI.',
     },
     {
-      title: 'Alta formazione AI',
+      title: 'Formazione AI e innovazione',
       tag: 'Workshop · Prompt design · Automazioni · Strumenti AI · Casi pratici',
       img: altaFormazioneAiImg,
       desc: "Formiamo aziende e professionisti all'uso strategico dell'AI, con percorsi pratici pensati per innovare e crescere.",

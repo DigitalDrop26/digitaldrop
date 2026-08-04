@@ -20,7 +20,7 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
     "Marketing strategico",
     "Piani di comunicazione",
     "Creazione contenuti",
-    "Alta formazione AI",
+    "Formazione AI e innovazione",
   ] as const;
   return (
     <footer ref={rootRef} style={{
