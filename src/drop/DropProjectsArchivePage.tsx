@@ -143,7 +143,7 @@ export function DropProjectsArchivePage() {
         }
       `}</style>
 
-      <DropFooter anchorsResolveHome />
+      <DropFooter />
     </Fragment>
   );
 }

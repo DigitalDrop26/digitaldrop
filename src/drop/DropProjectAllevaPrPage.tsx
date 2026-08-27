@@ -506,7 +506,7 @@ export function DropProjectAllevaPrPage() {
         }
       `}</style>
 
-      <DropFooter anchorsResolveHome />
+      <DropFooter />
       <DropProjectBackFab />
     </Fragment>
   );

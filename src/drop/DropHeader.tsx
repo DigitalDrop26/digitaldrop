@@ -38,11 +38,10 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const isHome = location.pathname === "/";
   /** Pagine scheda progetto (/projects/…) — nav hero trasparente, testi bianchi fino allo scroll. */
   const isProjectDetailPage = location.pathname.startsWith("/projects/");
   const heroOverlayNav = isProjectDetailPage && !scrolled;
-  const contactLinks = getDropContactLinks(!isHome);
+  const contactLinks = getDropContactLinks();
 
   const navTextColor = heroOverlayNav ? "#ffffff" : "var(--drop-teal)";
   const navHoverBg = heroOverlayNav ? "rgba(255,255,255,0.12)" : "rgba(0,80,119,0.08)";
@@ -418,17 +417,28 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
               Contatti
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {contactLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="footer-link"
-                  onClick={() => setOpen(false)}
-                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {contactLinks.map((link) =>
+                link.to ? (
+                  <Link
+                    key={link.label}
+                    to={link.to}
+                    className="footer-link"
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="footer-link"
+                    onClick={() => setOpen(false)}
+                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  >
+                    {link.label}
+                  </a>
+                ),
+              )}
             </div>
           </div>
         </aside>

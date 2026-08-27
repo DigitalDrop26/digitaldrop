@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropManifesto } from "./DropManifesto";
@@ -11,16 +12,34 @@ import { CursorFollower, useReveal } from "./hooksAndUi";
 /** Pagina Chi siamo — manifesto e principi non negoziabili. */
 export function DropChiSiamoPage() {
   const mainRef = useRef<HTMLElement>(null);
+  const location = useLocation();
   useReveal(mainRef);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const prev = document.title;
     document.title = "Chi siamo · Drop";
     return () => {
       document.title = prev;
     };
   }, []);
+
+  useEffect(() => {
+    const id = location.hash.replace(/^#/, "");
+    if (!id) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    const el = document.getElementById(id);
+    if (!el) return;
+    const t = window.setTimeout(() => {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(el, { offset: -80, duration: 1.4 });
+      } else {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 120);
+    return () => window.clearTimeout(t);
+  }, [location.hash]);
 
   return (
     <Fragment>
@@ -63,7 +82,7 @@ export function DropChiSiamoPage() {
         <DropNewsletter />
       </main>
 
-      <DropFooter anchorsResolveHome />
+      <DropFooter />
     </Fragment>
   );
 }

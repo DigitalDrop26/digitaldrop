@@ -1,19 +1,28 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { bundleResources } from "./bundleResources";
 import { getDropContactLinks } from "./dropContactLinks";
-import { chiSiamoHash, chiSiamoPath, homeHash, projectsPath } from "./sitePaths";
+import { DropIubendaLegalLinks } from "./DropIubendaLegalLinks";
 import { useReveal, Reveal } from "./hooksAndUi";
 
-type DropFooterProps = { anchorsResolveHome?: boolean };
+const HOME_SECTIONS = {
+  settori: { pathname: "/", hash: "#settori" },
+  servizi: { pathname: "/", hash: "#servizi" },
+  contatti: { pathname: "/", hash: "#contatti" },
+} as const;
+
+const CHI_SIAMO_SECTIONS = {
+  team: { pathname: "/chi-siamo", hash: "#team" },
+  valori: { pathname: "/chi-siamo", hash: "#valori" },
+  manifesto: { pathname: "/chi-siamo", hash: "#manifesto" },
+} as const;
 
 // Footer — dark, big wordmark, links, legal
-export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
+export function DropFooter() {
   const rootRef = useRef(null);
   useReveal(rootRef);
 
-  const h = (fragmentId: string) => (anchorsResolveHome ? homeHash(fragmentId) : `#${fragmentId.replace(/^#/, "")}`);
-  const chiSiamoSection = (fragmentId: string) => chiSiamoHash(fragmentId);
-  const contactLinks = getDropContactLinks(anchorsResolveHome);
+  const contactLinks = getDropContactLinks();
 
   const serviceLinks = [
     "Brand Identity",
@@ -22,6 +31,7 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
     "Creazione contenuti",
     "Formazione AI e innovazione",
   ] as const;
+
   return (
     <footer ref={rootRef} style={{
       background: 'var(--drop-teal)',
@@ -44,13 +54,13 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
           <Reveal delay={1}>
             <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Navigazione</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <a href={h("settori")} className="footer-link">Settori</a>
-              <a href={h("servizi")} className="footer-link">Servizi</a>
-              <a href={anchorsResolveHome ? projectsPath() : "/projects"} className="footer-link">Progetti</a>
-              <a href={chiSiamoPath()} className="footer-link">Chi siamo</a>
-              <a href={chiSiamoSection("team")} className="footer-link">Team</a>
-              <a href={chiSiamoSection("valori")} className="footer-link">Valori</a>
-              <a href={chiSiamoSection("manifesto")} className="footer-link">Manifesto</a>
+              <Link to={HOME_SECTIONS.settori} className="footer-link">Settori</Link>
+              <Link to={HOME_SECTIONS.servizi} className="footer-link">Servizi</Link>
+              <Link to="/projects" className="footer-link">Progetti</Link>
+              <Link to="/chi-siamo" className="footer-link">Chi siamo</Link>
+              <Link to={CHI_SIAMO_SECTIONS.team} className="footer-link">Team</Link>
+              <Link to={CHI_SIAMO_SECTIONS.valori} className="footer-link">Valori</Link>
+              <Link to={CHI_SIAMO_SECTIONS.manifesto} className="footer-link">Manifesto</Link>
             </div>
           </Reveal>
 
@@ -58,7 +68,7 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
             <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Servizi</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {serviceLinks.map((label) => (
-                <a key={label} href={h("servizi")} className="footer-link">{label}</a>
+                <Link key={label} to={HOME_SECTIONS.servizi} className="footer-link">{label}</Link>
               ))}
             </div>
           </Reveal>
@@ -66,16 +76,22 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
           <Reveal delay={3}>
             <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Contatti</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {contactLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="footer-link"
-                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {contactLinks.map((link) =>
+                link.to ? (
+                  <Link key={link.label} to={link.to} className="footer-link">
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="footer-link"
+                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  >
+                    {link.label}
+                  </a>
+                ),
+              )}
             </div>
           </Reveal>
         </div>
@@ -89,11 +105,7 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
           fontSize: 12, color: 'rgba(255,255,255,0.5)', fontWeight: 500,
         }}>
           <div>© 2026 Drop s.r.l. • P. Iva 01253030959 • Strada 28, Ovest Arborea - 09092 (OR)</div>
-          <div style={{ display: 'flex', gap: 24 }}>
-            <a href={h("privacy")} style={{ color: 'rgba(255,255,255,0.5)' }}>Privacy</a>
-            <a href={h("cookies")} style={{ color: 'rgba(255,255,255,0.5)' }}>Cookie policy</a>
-            <a href={h("colofone")} style={{ color: 'rgba(255,255,255,0.5)' }}>Colofone</a>
-          </div>
+          <DropIubendaLegalLinks />
         </div>
       </div>
 

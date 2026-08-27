@@ -671,7 +671,7 @@ export function DropProjectAstaCremonaPage() {
         }
       `}</style>
 
-      <DropFooter anchorsResolveHome />
+      <DropFooter />
       <DropProjectBackFab />
     </Fragment>
   );

@@ -901,7 +901,7 @@ export function DropProjectAgrovitPage() {
         }
       `}</style>
 
-      <DropFooter anchorsResolveHome />
+      <DropFooter />
       <DropProjectBackFab />
     </Fragment>
   );
