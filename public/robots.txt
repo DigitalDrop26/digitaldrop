@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://digitaldrop26.github.io/digitaldrop/sitemap.xml
