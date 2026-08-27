@@ -96,6 +96,19 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
       return;
     }
 
+    if (id === "progetti") {
+      if (location.pathname === "/projects") {
+        if (window.__lenis) {
+          window.__lenis.scrollTo(0, { duration: 1.2 });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      } else {
+        navigate("/projects");
+      }
+      return;
+    }
+
     if (id === "contatti") {
       if (scrollToSection(id)) return;
       navigate({ pathname: "/", hash: id });
@@ -411,6 +424,7 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
                   href={link.href}
                   className="footer-link"
                   onClick={() => setOpen(false)}
+                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
                   {link.label}
                 </a>

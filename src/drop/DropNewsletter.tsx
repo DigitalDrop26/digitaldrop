@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { bundleResources } from "./bundleResources";
-import { useReveal, LineReveal, Btn, Reveal } from "./hooksAndUi";
+import { DropWhatsAppBtn } from "./DropWhatsAppBtn";
+import { useReveal, LineReveal, Reveal } from "./hooksAndUi";
 
 // Contatti — blocco dark, headline + dirette
 export function DropNewsletter() {
@@ -57,9 +58,7 @@ export function DropNewsletter() {
             }}>info@digitaldrop.eu</a>
 
             <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Btn variant="ghost" href="#wp">
-                Scrivici su WhatsApp
-              </Btn>
+              <DropWhatsAppBtn />
             </div>
           </Reveal>
         </div>

@@ -67,7 +67,14 @@ export function DropFooter({ anchorsResolveHome = false }: DropFooterProps) {
             <h4 style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', margin: '0 0 20px' }}>Contatti</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {contactLinks.map((link) => (
-                <a key={link.label} href={link.href} className="footer-link">{link.label}</a>
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="footer-link"
+                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {link.label}
+                </a>
               ))}
             </div>
           </Reveal>
