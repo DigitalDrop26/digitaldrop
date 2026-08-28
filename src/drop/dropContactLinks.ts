@@ -11,7 +11,6 @@ export type DropContactLink = {
 export function getDropContactLinks(): DropContactLink[] {
   return [
     { href: "mailto:info@digitaldrop.eu", label: "info@digitaldrop.eu" },
-    { href: "tel:+393475571187", label: "+39 347 557 1187" },
     { href: DROP_WHATSAPP_URL, label: "Scrivici su WhatsApp", external: true },
     { to: { pathname: "/", hash: "#contatti" }, label: "Iniziamo un progetto" },
   ];
