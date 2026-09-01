@@ -388,6 +388,22 @@ body.is-intro-loading .cursor-ring {
   line-height: 0.88;
   letter-spacing: -0.04em;
 }
+/** Contatti — headline leggibile su mobile (evita taglio da line-reveal + overflow) */
+@media (max-width: 900px) {
+  .drop-contatti-headline {
+    max-width: none !important;
+    font-size: clamp(28px, 7.8vw, 44px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+  .drop-contatti-headline .line-reveal {
+    padding-bottom: 0.16em;
+  }
+  .drop-contatti-headline .line-reveal > span {
+    display: block;
+    max-width: 100%;
+  }
+}
 .display-lg {
   font-size: clamp(40px, 7vw, 112px);
   line-height: 0.95;

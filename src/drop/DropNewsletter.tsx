@@ -8,7 +8,7 @@ export function DropNewsletter() {
   const rootRef = useRef(null);
   useReveal(rootRef);
   return (
-    <section id="contatti" ref={rootRef} className="section" style={{
+    <section id="contatti" ref={rootRef} className="section drop-contatti" style={{
       background: 'var(--ink-deep)',
       color: 'white',
       paddingTop: 'clamp(100px, 14vw, 180px)',
@@ -32,7 +32,7 @@ export function DropNewsletter() {
           <span className="eyebrow on-dark">Iniziamo un progetto</span>
         </Reveal>
 
-        <h2 className="display display-xl" style={{ color: 'white', maxWidth: '14ch', marginTop: 32, marginBottom: 0 }}>
+        <h2 className="display display-xl drop-contatti-headline" style={{ color: 'white', maxWidth: '14ch', marginTop: 32, marginBottom: 0 }}>
           <LineReveal delay={0}>Hai un progetto</LineReveal>
           <LineReveal delay={1}>
             <em className="italic-serif" style={{ color: 'var(--drop-orange)' }}>in campo?</em>
