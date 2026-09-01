@@ -98,7 +98,7 @@ export function DropHero() {
         gap: 'clamp(16px, 3vh, 32px)',
       }}>
         {/* Titolo centrato nell'area disponibile */}
-        <div style={{
+        <div className="hero-title-area" style={{
           position: 'relative',
           zIndex: 5,
           flex: '1 1 auto',
@@ -252,6 +252,15 @@ export function DropHero() {
         }
         @media (max-width: 960px) {
           .hero-claim-card { display: none; }
+        }
+        @media (max-width: 900px) {
+          .hero-fold {
+            padding-top: max(124px, calc(76px + 10vh)) !important;
+          }
+          .hero-title-area {
+            justify-content: flex-start;
+            padding-top: clamp(16px, 4vh, 32px);
+          }
         }
       `}</style>
     </section>
