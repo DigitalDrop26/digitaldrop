@@ -217,7 +217,6 @@ export function DropHero() {
             display: "flex",
             alignItems: "center",
             gap: 12,
-            color: "var(--teal-500)",
             fontSize: 11,
             fontWeight: 500,
             letterSpacing: "0.16em",
@@ -280,11 +279,12 @@ export function DropHero() {
         .hero-scroll-hint {
           margin-top: clamp(16px, 3vh, 44px);
           align-self: flex-end;
+          color: white;
         }
         .hero-scroll-line {
           width: 1px;
           height: 56px;
-          background: linear-gradient(180deg, var(--drop-orange) 0%, transparent 100%);
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, transparent 100%);
           animation: scrollLine 1.8s ease-in-out infinite;
         }
         .hero-head {
@@ -383,9 +383,11 @@ export function DropHero() {
           }
           .hero-scroll-hint {
             margin-top: clamp(8px, 1.6dvh, 14px);
+            color: var(--teal-500);
           }
           .hero-scroll-line {
             height: clamp(28px, 5dvh, 40px);
+            background: linear-gradient(180deg, var(--drop-orange) 0%, transparent 100%);
           }
         }
         @media (max-height: 740px) and (max-width: 900px) {
