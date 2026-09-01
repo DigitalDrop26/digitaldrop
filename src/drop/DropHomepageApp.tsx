@@ -63,6 +63,7 @@ export function DropHomepageApp() {
     } else {
       window.__lenis?.start();
       document.body.style.overflow = "";
+      document.body.classList.remove("is-intro-loading");
     }
     return () => {
       document.body.style.overflow = "";
@@ -71,7 +72,17 @@ export function DropHomepageApp() {
 
   useEffect(() => {
     const t = setTimeout(() => setIntro(false), 2200);
-    return () => clearTimeout(t);
+    /** Tab in background / timer throttled: evita body bloccato a overflow hidden. */
+    const failsafe = setTimeout(() => {
+      setIntro(false);
+      document.body.style.overflow = "";
+      document.body.classList.remove("is-intro-loading");
+      window.__lenis?.start();
+    }, 5000);
+    return () => {
+      clearTimeout(t);
+      clearTimeout(failsafe);
+    };
   }, []);
 
   /** Scroll alla sezione quando si arriva da sottopagine con hash (es. menu header archivio). */
@@ -105,6 +116,7 @@ export function DropHomepageApp() {
           alignItems: "center",
           justifyContent: "center",
           pointerEvents: intro ? "auto" : "none",
+          visibility: intro ? "visible" : "hidden",
           transform: intro ? "translateY(0)" : "translateY(-100%)",
           transition: "transform 1.1s cubic-bezier(.76,0,.24,1)",
         }}

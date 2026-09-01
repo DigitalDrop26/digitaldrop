@@ -7,16 +7,24 @@ declare global {
   }
 }
 
+/** Touch / coarse pointer: scroll nativo — Lenis può bloccare lo swipe su alcuni Android e iOS. */
+function shouldUseNativeTouchScroll(): boolean {
+  return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+}
+
 /** Call once from main.tsx before createRoot so children see window.__lenis. */
 export function initLenis(): void {
   if (typeof window === "undefined") return;
   window.__lenis?.destroy();
+  window.__lenis = null;
+
+  if (shouldUseNativeTouchScroll()) return;
+
   const lenis = new Lenis({
     duration: 1.15,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
     wheelMultiplier: 1,
-    touchMultiplier: 1.4,
   });
   window.__lenis = lenis;
   function raf(time: number) {
