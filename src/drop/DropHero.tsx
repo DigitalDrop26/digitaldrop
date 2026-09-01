@@ -315,9 +315,25 @@ export function DropHero() {
           .hero-wash {
             background: linear-gradient(
               180deg,
-              rgba(250, 247, 242, 0.94) 0%,
-              rgba(250, 247, 242, 0.9) 52%,
-              rgba(250, 247, 242, 0.98) 100%
+              rgba(250, 247, 242, 0.72) 0%,
+              rgba(250, 247, 242, 0.42) 45%,
+              rgba(250, 247, 242, 0.1) 100%
+            );
+          }
+          .hero-fold::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: min(52dvh, 460px);
+            z-index: 1;
+            pointer-events: none;
+            background: linear-gradient(
+              180deg,
+              rgba(250, 247, 242, 0) 0%,
+              rgba(250, 247, 242, 0.28) 36%,
+              rgba(250, 247, 242, 0.52) 100%
             );
           }
           .hero-fold {
@@ -352,22 +368,6 @@ export function DropHero() {
             padding-inline: var(--page-gutter);
             padding-top: clamp(14px, 3dvh, 22px);
           }
-          .hero-bottom-panel::before {
-            content: "";
-            position: absolute;
-            left: calc(-1 * var(--page-gutter));
-            right: calc(-1 * var(--page-gutter));
-            top: -28px;
-            bottom: -4px;
-            background: linear-gradient(
-              180deg,
-              rgba(250, 247, 242, 0) 0%,
-              rgba(250, 247, 242, 0.78) 32%,
-              rgba(250, 247, 242, 0.94) 100%
-            );
-            pointer-events: none;
-            z-index: -1;
-          }
           .hero-lead {
             font-size: clamp(14px, 3.6vw, 16px);
             line-height: 1.48;
@@ -375,7 +375,7 @@ export function DropHero() {
             font-weight: 600;
           }
           .hero-lead-accent {
-            text-shadow: 0 1px 10px rgba(250, 247, 242, 0.9);
+            text-shadow: 0 1px 8px rgba(250, 247, 242, 0.55);
           }
           .hero-cta-row {
             margin-top: clamp(12px, 2.5dvh, 18px);
