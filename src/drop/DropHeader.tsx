@@ -277,6 +277,7 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
           inset: 0,
           zIndex: 10150,
           pointerEvents: open ? "auto" : "none",
+          overflow: "hidden",
         }}
       >
         <div
