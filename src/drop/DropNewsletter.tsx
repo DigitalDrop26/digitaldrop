@@ -17,13 +17,14 @@ export function DropNewsletter() {
       overflow: 'hidden',
     }}>
       {/* Big goccia pattern bg */}
-      <div style={{
+      <div
+        className="drop-contatti-bg spin-slow"
+        style={{
         position: 'absolute',
         left: '-12%', bottom: '-20%',
-        width: 720, height: 720,
         opacity: 0.07,
         pointerEvents: 'none',
-      }} className="spin-slow">
+      }} aria-hidden>
         <img src={bundleResources.patternGoccia} alt="" style={{ width: '100%', height: '100%' }} />
       </div>
 

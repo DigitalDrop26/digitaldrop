@@ -127,22 +127,14 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
     <img
       src={logoSrc}
       alt="Drop"
-      style={{ height: 36, width: "auto", maxWidth: "min(220px, 42vw)", display: "block" }}
+      className="drop-header-logo"
     />
   );
-
-  const logoSubtitleStyle = {
-    fontSize: 11,
-    fontWeight: 600,
-    color: subtitleColor,
-    letterSpacing: "0.06em",
-    lineHeight: 1.2,
-    maxWidth: projectName ? 420 : logoSubtitle ? 220 : 200,
-  } as const;
 
   return (
     <Fragment>
       <header
+        className="drop-header"
         style={{
           position: "fixed",
           top: 0,
@@ -159,39 +151,41 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
           boxShadow: headerShadow,
         }}
       >
-        <div className="container-wide" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
-          {logoSubtitle ? (
-            <Link to="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", color: "inherit" }}>
-              {logoMark}
-              <span style={{ display: "inline-block", height: 22, width: 1, background: subtitleDivider }} />
-              <span style={logoSubtitleStyle}>
-                {logoSubtitle}
-                {projectName ? (
-                  <span style={{ color: "var(--drop-orange)" }}>
-                    {" / "}
-                    {projectName}
-                  </span>
-                ) : null}
-              </span>
-            </Link>
-          ) : (
-            <a
-              href="#top"
-              onClick={(e) => {
-                e.preventDefault();
-                if (window.__lenis) {
-                  window.__lenis.scrollTo(0, { duration: 1.2 });
-                } else {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-              }}
-              style={{ display: "flex", alignItems: "center", gap: 12 }}
-            >
-              {logoMark}
-            </a>
-          )}
+        <div className="drop-header-inner container-wide">
+          <div className="drop-header-brand">
+            {logoSubtitle ? (
+              <Link to="/" className="drop-header-brand-link">
+                {logoMark}
+                <span className="drop-header-divider" style={{ background: subtitleDivider }} />
+                <span className="drop-header-subtitle" style={{ color: subtitleColor }}>
+                  {logoSubtitle}
+                  {projectName ? (
+                    <span style={{ color: "var(--drop-orange)" }}>
+                      {" / "}
+                      {projectName}
+                    </span>
+                  ) : null}
+                </span>
+              </Link>
+            ) : (
+              <a
+                href="#top"
+                className="drop-header-brand-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.__lenis) {
+                    window.__lenis.scrollTo(0, { duration: 1.2 });
+                  } else {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+              >
+                {logoMark}
+              </a>
+            )}
+          </div>
 
-          <nav style={{ display: "flex", alignItems: "center", gap: 4, marginLeft: "auto" }} className="hide-mobile">
+          <nav className="drop-header-nav hide-mobile">
             {NAV_LINKS.map((l) => (
               <button
                 key={l.id}
@@ -235,39 +229,16 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
             </button>
           </nav>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <button
-              type="button"
-              className="show-mobile"
-              onClick={() => setOpen(true)}
-              aria-label="Menu"
-              style={{
-                background: "var(--drop-orange)",
-                color: "white",
-                border: "none",
-                cursor: "pointer",
-                width: 52,
-                height: 52,
-                borderRadius: 999,
-                alignItems: "center",
-                justifyContent: "center",
-                transition: "background .35s var(--ease), transform .35s var(--ease)",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "var(--orange-400)";
-                e.currentTarget.style.transform = "scale(1.04)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "var(--drop-orange)";
-                e.currentTarget.style.transform = "scale(1)";
-              }}
-            >
-              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden>
-                <path d="M0 1H18M0 7H18M0 13H12" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
-            </button>
-          </div>
+          <button
+            type="button"
+            className="drop-header-burger"
+            onClick={() => setOpen(true)}
+            aria-label="Menu"
+          >
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden>
+              <path d="M0 1H18M0 7H18M0 13H12" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+          </button>
         </div>
       </header>
 
@@ -292,15 +263,17 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
         />
         <aside
           className="nav-drawer"
+          aria-hidden={!open}
           style={{
             position: "absolute",
             top: 0,
             right: 0,
             bottom: 0,
-            width: "min(560px, 92vw)",
+            width: "min(560px, 100vw)",
             background: "var(--drop-teal)",
             color: "white",
             transform: open ? "translateX(0)" : "translateX(100%)",
+            visibility: open ? "visible" : "hidden",
             transition: "transform .7s var(--ease)",
             display: "flex",
             flexDirection: "column",
@@ -444,14 +417,6 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
           </div>
         </aside>
       </div>
-
-      <style>{`
-        .show-mobile { display: none; }
-        @media (max-width: 1100px) {
-          .hide-mobile { display: none !important; }
-          .show-mobile { display: flex !important; }
-        }
-      `}</style>
     </Fragment>
   );
 }

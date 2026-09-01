@@ -112,11 +112,10 @@ export function DropHomepageApp() {
           inset: 0,
           zIndex: 10300,
           background: "var(--drop-teal)",
-          display: "flex",
+          display: intro ? "flex" : "none",
           alignItems: "center",
           justifyContent: "center",
           pointerEvents: intro ? "auto" : "none",
-          visibility: intro ? "visible" : "hidden",
           transform: intro ? "translateY(0)" : "translateY(-100%)",
           transition: "transform 1.1s cubic-bezier(.76,0,.24,1)",
         }}
@@ -139,6 +138,7 @@ export function DropHomepageApp() {
               position: "relative",
               width: "100%",
               lineHeight: 0,
+              overflow: "hidden",
             }}
           >
             {/* Cerchi pulsanti sulla O — centro da viewBox SVG 385.57 × 111.49 */}

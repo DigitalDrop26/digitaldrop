@@ -287,15 +287,27 @@ a:hover { opacity: 0.7; }
 html { scroll-behavior: auto; }
 html, body { margin: 0; padding: 0; background: #FAF7F2; overscroll-behavior: none; }
 @media (max-width: 900px) {
+  :root {
+    --page-gutter: clamp(16px, 4.5vw, 28px);
+  }
   body {
+    overflow-x: hidden;
     overscroll-behavior-x: none;
     touch-action: pan-y;
+  }
+  main {
+    overflow-x: clip;
   }
   /** Breakout 100vw su carousel — evita scroll orizzontale pagina */
   .alive-carousel-fullscreen {
     width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+}
+@media (max-width: 380px) {
+  :root {
+    --page-gutter: 14px;
   }
 }
 body {
@@ -400,8 +412,18 @@ body.is-intro-loading .cursor-ring {
   line-height: 0.88;
   letter-spacing: -0.04em;
 }
-/** Contatti — headline leggibile su mobile (evita taglio da line-reveal + overflow) */
+/** Contatti — decorazione bg + headline mobile */
+.drop-contatti-bg {
+  width: 720px;
+  height: 720px;
+}
 @media (max-width: 900px) {
+  .drop-contatti-bg {
+    width: min(480px, 130vw) !important;
+    height: min(480px, 130vw) !important;
+    left: -18% !important;
+    bottom: -15% !important;
+  }
   .drop-contatti-headline {
     max-width: none !important;
     font-size: clamp(34px, 9.5vw, 54px);
@@ -591,6 +613,105 @@ body.is-intro-loading .cursor-ring {
   max-width: 1680px;
   margin: 0 auto;
   padding-inline: var(--page-gutter);
+  min-width: 0;
+}
+
+/* ---------- Site header — responsive, no horizontal overflow ---------- */
+.drop-header {
+  overflow-x: clip;
+}
+.drop-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(10px, 2.5vw, 24px);
+  min-width: 0;
+}
+.drop-header-brand {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+.drop-header-brand-link {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 2vw, 12px);
+  min-width: 0;
+  max-width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.drop-header-logo {
+  display: block;
+  height: clamp(30px, 8vw, 36px);
+  width: auto;
+  max-width: min(160px, 38vw);
+  flex-shrink: 0;
+}
+.drop-header-divider {
+  display: inline-block;
+  height: 22px;
+  width: 1px;
+  flex-shrink: 0;
+}
+.drop-header-subtitle {
+  font-size: clamp(9px, 2.6vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  max-width: min(420px, calc(100vw - var(--page-gutter) * 2 - 120px));
+}
+.drop-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.drop-header-burger {
+  display: none;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  background: var(--drop-orange);
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: clamp(44px, 12vw, 52px);
+  height: clamp(44px, 12vw, 52px);
+  border-radius: 999px;
+  transition: background .35s var(--ease), transform .35s var(--ease);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.drop-header-burger:hover {
+  background: var(--orange-400);
+  transform: scale(1.04);
+}
+@media (max-width: 1100px) {
+  .hide-mobile { display: none !important; }
+  .drop-header-burger { display: inline-flex !important; }
+  .drop-header-subtitle {
+    max-width: min(220px, calc(100vw - var(--page-gutter) * 2 - 108px));
+  }
+}
+@media (max-width: 420px) {
+  .drop-header-logo {
+    max-width: min(128px, 34vw);
+  }
+  .drop-header-subtitle {
+    max-width: calc(100vw - var(--page-gutter) * 2 - 96px);
+  }
+}
+@media (max-width: 340px) {
+  .drop-header-divider,
+  .drop-header-subtitle {
+    display: none;
+  }
 }
 
 /* Pannello menu mobile — stesso gutter laterale del resto del sito */
