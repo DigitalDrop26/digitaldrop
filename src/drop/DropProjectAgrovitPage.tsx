@@ -14,7 +14,7 @@ import agrovitPersonaggioTavola from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT P
 import agrovitLogoAnimation from "@Immagini/Agrovit/prova animazione.mov?url";
 import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?url";
 import agrovitContesto1 from "@Immagini/Agrovit/Agrovit_1.jpg?url";
-import agrovitContesto2 from "@Immagini/Agrovit/Agrovit 2.png?url";
+import agrovitContesto2 from "@Immagini/Agrovit/Agrovit 2.webp?url";
 import agrovitContesto3 from "@Immagini/Agrovit/Agrovit 3.jpg?url";
 import agrovitOfflineMockupGrid from "@Immagini/Agrovit/adv stampa/mockup agrovit (1).jpg?url";
 import agrovitOfflineRivistaTavolo from "@Immagini/Agrovit/adv stampa/ChatGPT Image 1 giu 2026, 16_01_53.png?url";

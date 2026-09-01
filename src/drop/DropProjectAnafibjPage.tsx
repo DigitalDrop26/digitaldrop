@@ -1,10 +1,10 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import anafibjHeroBg from "@Immagini/Anafibj/Anafibj_hero.png?url";
 import anafibjGalleryBarn from "@Immagini/Anafibj/anafibj09.png?url";
-import anafibjSolutionApp from "@Immagini/Anafibj/cell anafibj-04.png?url";
-import anafibjPlatformLaptop from "@Immagini/Anafibj/Anafibij_laptop.png?url";
+import anafibjSolutionApp from "@Immagini/Anafibj/cell anafibj-04.webp?url";
+import anafibjPlatformLaptop from "@Immagini/Anafibj/Anafibij_laptop.webp?url";
 import anafibjSocial01 from "@Immagini/Anafibj/anafibj01_mobile.png?url";
-import anafibjSocial02 from "@Immagini/Anafibj/CLAIM.png?url";
+import anafibjSocial02 from "@Immagini/Anafibj/CLAIM.webp?url";
 import { DropFooter } from "./DropFooter";
 import { DropHeroBackground } from "./DropHeroBackground";
 import { DropHeader } from "./DropHeader";
