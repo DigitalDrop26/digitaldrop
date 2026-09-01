@@ -403,21 +403,26 @@ body.is-intro-loading .cursor-ring {
 /** Mobile: titolo hero homepage dentro fold 100dvh (4 righe + copy sotto). */
 @media (max-width: 900px) {
   .hero-fold .display-xxl.hero-title-fold {
-    font-size: clamp(30px, min(10.5vw, 8.1dvh), 88px);
-    line-height: 0.88;
+    font-size: clamp(38px, min(13vw, 11.2dvh), 118px);
+    line-height: 0.86;
     letter-spacing: -0.04em;
+  }
+}
+@media (min-height: 780px) and (max-width: 900px) {
+  .hero-fold .display-xxl.hero-title-fold {
+    font-size: clamp(42px, min(13.8vw, 12.4dvh), 128px);
   }
 }
 @media (max-height: 820px) and (max-width: 900px) {
   .hero-fold .display-xxl.hero-title-fold {
-    font-size: clamp(26px, min(9.5vw, 7.1dvh), 72px);
-    line-height: 0.9;
+    font-size: clamp(32px, min(11.5vw, 9.5dvh), 92px);
+    line-height: 0.88;
   }
 }
 @media (max-height: 700px) and (max-width: 900px) {
   .hero-fold .display-xxl.hero-title-fold {
-    font-size: clamp(22px, min(9vw, 6.2dvh), 60px);
-    line-height: 0.92;
+    font-size: clamp(28px, min(10.5vw, 8dvh), 76px);
+    line-height: 0.9;
   }
 }
 .display-xl {

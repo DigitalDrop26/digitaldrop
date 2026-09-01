@@ -163,7 +163,7 @@ export function DropHero() {
         </div>
 
         {/* Lead block + meta — piede fisso della fold */}
-        <div className="hero-bottom" style={{
+        <div className="hero-bottom hero-bottom-panel" style={{
             marginTop: 0,
             flexShrink: 0,
             position: 'relative',
@@ -172,7 +172,7 @@ export function DropHero() {
           <div className="reveal" data-idx="6" style={{ maxWidth: 560 }}>
             <p className="hero-lead">
               DROP è l'agenzia di comunicazione e marketing strategico per imprese
-              agroalimentari, zootecniche e filiere. <span style={{ color: 'var(--drop-orange)', fontWeight: 700 }}>Concreto, gentile, su misura</span> —
+              agroalimentari, zootecniche e filiere. <span className="hero-lead-accent">Concreto, gentile, su misura</span> —
               da oltre 25 anni dentro al settore.
             </p>
             <div className="hero-cta-row">
@@ -233,6 +233,10 @@ export function DropHero() {
           font-weight: 500;
           margin: 0;
         }
+        .hero-lead-accent {
+          color: var(--drop-orange);
+          font-weight: 700;
+        }
         .hero-cta-row {
           margin-top: clamp(20px, 3vh, 36px);
           display: flex;
@@ -288,8 +292,8 @@ export function DropHero() {
           .hero-title-area {
             flex: 1 1 auto;
             min-height: 0;
-            justify-content: center;
-            padding-top: clamp(8px, 1.5dvh, 16px);
+            justify-content: flex-start;
+            padding-top: clamp(4px, 1dvh, 12px);
             overflow: hidden;
           }
           .hero-head {
@@ -298,19 +302,47 @@ export function DropHero() {
           .hero-head .hero-line-reveal--indent {
             margin-left: clamp(12px, 4vw, 28px);
           }
+          .hero-bottom-panel {
+            position: relative;
+            z-index: 6;
+            margin-inline: calc(-1 * var(--page-gutter));
+            padding-inline: var(--page-gutter);
+            padding-top: clamp(14px, 3dvh, 22px);
+          }
+          .hero-bottom-panel::before {
+            content: "";
+            position: absolute;
+            left: calc(-1 * var(--page-gutter));
+            right: calc(-1 * var(--page-gutter));
+            top: -28px;
+            bottom: -4px;
+            background: linear-gradient(
+              180deg,
+              rgba(250, 247, 242, 0) 0%,
+              rgba(250, 247, 242, 0.78) 32%,
+              rgba(250, 247, 242, 0.94) 100%
+            );
+            pointer-events: none;
+            z-index: -1;
+          }
           .hero-lead {
             font-size: clamp(14px, 3.6vw, 16px);
-            line-height: 1.45;
+            line-height: 1.48;
+            color: var(--ink);
+            font-weight: 600;
+          }
+          .hero-lead-accent {
+            text-shadow: 0 1px 10px rgba(250, 247, 242, 0.9);
           }
           .hero-cta-row {
             margin-top: clamp(12px, 2.5dvh, 18px);
             gap: 10px;
           }
           .hero-scroll-hint {
-            margin-top: clamp(10px, 2dvh, 16px);
+            margin-top: clamp(8px, 1.6dvh, 14px);
           }
           .hero-scroll-line {
-            height: clamp(32px, 6dvh, 44px);
+            height: clamp(28px, 5dvh, 40px);
           }
         }
         @media (max-height: 740px) and (max-width: 900px) {
