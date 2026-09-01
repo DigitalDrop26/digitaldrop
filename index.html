@@ -8,14 +8,22 @@
         function (ev) {
           var t = ev.target;
           if (!t || t.tagName !== "SCRIPT") return;
+          var root = document.getElementById("root");
+          if (!root) return;
           var fb = document.getElementById("static-fallback");
-          if (!fb) return;
+          if (!fb) {
+            fb = document.createElement("div");
+            fb.id = "static-fallback";
+            fb.style.cssText =
+              "font-family:system-ui,sans-serif;padding:2rem;max-width:40rem;margin:0 auto;line-height:1.5;color:#005279";
+            root.appendChild(fb);
+          }
           var isFile = location.protocol === "file:";
           var isLocal =
             location.hostname === "localhost" || location.hostname === "127.0.0.1";
           var hint =
             "<p>Apri la console del browser (F12 → scheda Console). Controlla di usare l’URL pubblicato " +
-            "(<code>https://digitaldrop26.github.io/digitaldrop/</code>), di non aprire questo file dal disco " +
+            "(<code>https://www.digitaldrop.eu/</code>), di non aprire questo file dal disco " +
             "e di non avere estensioni che bloccano JavaScript.</p>";
           if (isFile) {
             hint =
@@ -23,7 +31,7 @@
               "<p><strong>Fai così:</strong> nella cartella del progetto esegui <code>npm install</code> e poi " +
               "<code>npm run dev</code> (oppure <code>npm run dev:local</code> se il progetto è su Dropbox).</p>" +
               "<p>In alternativa usa la versione online: " +
-              "<code>https://digitaldrop26.github.io/digitaldrop/</code></p>";
+              "<code>https://www.digitaldrop.eu/</code></p>";
           } else if (isLocal) {
             hint =
               "<p>Stai usando <code>localhost</code> ma lo script non si carica. Se la cartella del progetto è su " +
@@ -31,11 +39,16 @@
               "<p><strong>Soluzione rapida:</strong> nel terminale esegui <code>npm run dev:local</code> " +
               "(copia il progetto fuori da Dropbox e avvia il server lì).</p>" +
               "<p>Oppure apri la versione online già funzionante: " +
-              "<code>https://digitaldrop26.github.io/digitaldrop/</code></p>";
+              "<code>https://www.digitaldrop.eu/</code></p>";
           }
           fb.innerHTML =
             "<p style=\"font-weight:700;margin-top:0\">Impossibile caricare la parte interattiva del sito.</p>" +
-            hint;
+            hint +
+            "<p>Se resta solo questa schermata o una pagina bianca, molto probabilmente stai aprendo il file " +
+            "<code>index.html</code> direttamente dal disco. Con React e Vite il browser non esegue il codice in quel modo.</p>" +
+            "<p><strong>Fai così:</strong> nella cartella del progetto esegui nel terminale:</p>" +
+            "<pre style=\"background:#f0f0f0;padding:1rem;overflow:auto;border-radius:8px\">npm install\nnpm run dev</pre>" +
+            "<p>Poi apri l’indirizzo che compare (di solito <code>http://localhost:5173</code>).</p>";
         },
         true,
       );
@@ -68,41 +81,8 @@
       async
     ></script>
   </head>
-  <body>
-    <div id="root">
-      <div
-        id="static-fallback"
-        style="
-          font-family: system-ui, sans-serif;
-          padding: 2rem;
-          max-width: 40rem;
-          margin: 0 auto;
-          line-height: 1.5;
-          color: #005279;
-        "
-      >
-        <p style="font-weight: 700; margin-top: 0">Caricamento…</p>
-        <p>
-          Se resta solo questa schermata o una pagina bianca, molto probabilmente stai aprendo il file
-          <code>index.html</code> direttamente dal disco. Con React e Vite il browser non esegue il
-          codice in quel modo.
-        </p>
-        <p><strong>Fai così:</strong> nella cartella del progetto esegui nel terminale:</p>
-        <pre style="background: #f0f0f0; padding: 1rem; overflow: auto; border-radius: 8px">
-npm install
-npm run dev</pre>
-        <p>
-          Poi apri l’indirizzo che compare (di solito <code>http://localhost:5173</code>). Per
-          vedere la versione di produzione: <code>npm run build</code> e
-          <code>npm run preview</code>.
-        </p>
-        <p>
-          Online l’indirizzo del sito è
-          <code>https://digitaldrop26.github.io/digitaldrop/</code> (serve il suffisso
-          <code>/digitaldrop/</code>).
-        </p>
-      </div>
-    </div>
+  <body style="margin: 0; background: #faf7f2">
+    <div id="root"></div>
     <!-- Iubenda — embed Privacy / Cookie Policy -->
     <script type="text/javascript">
       (function (w, d) {
