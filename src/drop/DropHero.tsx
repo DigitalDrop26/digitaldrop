@@ -315,9 +315,9 @@ export function DropHero() {
           .hero-wash {
             background: linear-gradient(
               180deg,
-              rgba(250, 247, 242, 0.72) 0%,
-              rgba(250, 247, 242, 0.42) 45%,
-              rgba(250, 247, 242, 0.1) 100%
+              rgba(250, 247, 242, 0.82) 0%,
+              rgba(250, 247, 242, 0.58) 45%,
+              rgba(250, 247, 242, 0.22) 100%
             );
           }
           .hero-fold::after {
@@ -332,8 +332,8 @@ export function DropHero() {
             background: linear-gradient(
               180deg,
               rgba(250, 247, 242, 0) 0%,
-              rgba(250, 247, 242, 0.28) 36%,
-              rgba(250, 247, 242, 0.52) 100%
+              rgba(250, 247, 242, 0.42) 36%,
+              rgba(250, 247, 242, 0.72) 100%
             );
           }
           .hero-fold {
@@ -375,7 +375,7 @@ export function DropHero() {
             font-weight: 600;
           }
           .hero-lead-accent {
-            text-shadow: 0 1px 8px rgba(250, 247, 242, 0.55);
+            text-shadow: 0 1px 8px rgba(250, 247, 242, 0.72);
           }
           .hero-cta-row {
             margin-top: clamp(12px, 2.5dvh, 18px);
