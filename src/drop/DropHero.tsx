@@ -67,8 +67,6 @@ export function DropHero() {
       display: 'flex',
       flexDirection: 'column',
       boxSizing: 'border-box',
-      paddingTop: 'clamp(100px, 12vh, 180px)',
-      paddingBottom: 'clamp(28px, 5vh, 64px)',
       overflowX: 'hidden',
       overflowY: 'visible',
       backgroundColor: 'var(--paper-warm)',
@@ -87,7 +85,7 @@ export function DropHero() {
       />
 
       {/* Contenuti: colonna che occupa tutta l'altezza utile viewport */}
-      <div className="container-wide" style={{
+      <div className="container-wide hero-inner" style={{
         position: 'relative',
         zIndex: 5,
         flex: 1,
@@ -95,7 +93,6 @@ export function DropHero() {
         flexDirection: 'column',
         minHeight: 0,
         justifyContent: 'space-between',
-        gap: 'clamp(16px, 3vh, 32px)',
       }}>
         {/* Titolo centrato nell'area disponibile */}
         <div className="hero-title-area" style={{
@@ -114,7 +111,7 @@ export function DropHero() {
               <div className="line-reveal hero-line-reveal" data-idx={1}>
                 <span>Parliamo</span>
               </div>
-              <div className="line-reveal hero-line-reveal" data-idx={2} style={{ marginLeft: 'clamp(24px, 6vw, 120px)' }}>
+              <div className="line-reveal hero-line-reveal hero-line-reveal--indent" data-idx={2}>
                 <span>la lingua</span>
               </div>
               <div className="line-reveal hero-line-reveal" data-idx={3}>
@@ -166,25 +163,19 @@ export function DropHero() {
         </div>
 
         {/* Lead block + meta — piede fisso della fold */}
-        <div style={{
+        <div className="hero-bottom" style={{
             marginTop: 0,
             flexShrink: 0,
             position: 'relative',
             zIndex: 5,
-          }} className="hero-bottom">
+          }}>
           <div className="reveal" data-idx="6" style={{ maxWidth: 560 }}>
-            <p style={{
-              fontSize: 'clamp(16px, 1.3vw, 20px)',
-              lineHeight: 1.55,
-              color: 'var(--ink)',
-              fontWeight: 500,
-              margin: 0,
-            }}>
+            <p className="hero-lead">
               DROP è l'agenzia di comunicazione e marketing strategico per imprese
               agroalimentari, zootecniche e filiere. <span style={{ color: 'var(--drop-orange)', fontWeight: 700 }}>Concreto, gentile, su misura</span> —
               da oltre 25 anni dentro al settore.
             </p>
-            <div style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            <div className="hero-cta-row">
               <Btn variant="primary" href="#contatti" onClick={(e) => { e.preventDefault(); document.getElementById('contatti')?.scrollIntoView({ behavior: 'smooth' }); }}>
                 Iniziamo un progetto
               </Btn>
@@ -198,13 +189,13 @@ export function DropHero() {
 
         {/* Invito allo scroll — sotto copy + CTAs */}
         <div
+          className="hero-scroll-hint"
           aria-hidden="true"
           style={{
             flexShrink: 0,
             display: "flex",
             alignItems: "center",
             gap: 12,
-            marginTop: "clamp(20px, 3.5vh, 44px)",
             color: "var(--teal-500)",
             fontSize: 11,
             fontWeight: 500,
@@ -214,14 +205,7 @@ export function DropHero() {
             transition: "opacity 0.3s linear",
           }}
         >
-          <div
-            style={{
-              width: 1,
-              height: 56,
-              background: "linear-gradient(180deg, var(--drop-orange) 0%, transparent 100%)",
-              animation: "scrollLine 1.8s ease-in-out infinite",
-            }}
-          />
+          <div className="hero-scroll-line" />
           <span>Scroll</span>
         </div>
 
@@ -229,8 +213,40 @@ export function DropHero() {
 
       <style>{`
         .hero-fold {
+          box-sizing: border-box;
           min-height: 100vh;
           min-height: 100dvh;
+          padding-top: clamp(100px, 12vh, 180px);
+          padding-bottom: clamp(28px, 5vh, 64px);
+        }
+        .hero-fold .container-wide {
+          flex: 1;
+          min-height: 0;
+        }
+        .hero-inner {
+          gap: clamp(16px, 3vh, 32px);
+        }
+        .hero-lead {
+          font-size: clamp(16px, 1.3vw, 20px);
+          line-height: 1.55;
+          color: var(--ink);
+          font-weight: 500;
+          margin: 0;
+        }
+        .hero-cta-row {
+          margin-top: clamp(20px, 3vh, 36px);
+          display: flex;
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+        .hero-scroll-hint {
+          margin-top: clamp(16px, 3vh, 44px);
+        }
+        .hero-scroll-line {
+          width: 1px;
+          height: 56px;
+          background: linear-gradient(180deg, var(--drop-orange) 0%, transparent 100%);
+          animation: scrollLine 1.8s ease-in-out infinite;
         }
         .hero-head {
           display: flex;
@@ -239,6 +255,9 @@ export function DropHero() {
           width: 100%;
         }
         .hero-head h1 { flex: 1 1 auto; min-width: 0; }
+        .hero-line-reveal--indent {
+          margin-left: clamp(24px, 6vw, 120px);
+        }
         .hero-claim-card {
           width: clamp(440px, 48vw, 820px);
           aspect-ratio: 3 / 2;
@@ -255,11 +274,52 @@ export function DropHero() {
         }
         @media (max-width: 900px) {
           .hero-fold {
-            padding-top: max(124px, calc(76px + 10vh)) !important;
+            height: 100dvh;
+            min-height: 100dvh;
+            max-height: 100dvh;
+            overflow: hidden;
+            padding-top: calc(72px + env(safe-area-inset-top, 0px));
+            padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+          }
+          .hero-inner {
+            gap: clamp(10px, 2dvh, 16px);
+            height: 100%;
           }
           .hero-title-area {
-            justify-content: flex-start;
-            padding-top: clamp(16px, 4vh, 32px);
+            flex: 1 1 auto;
+            min-height: 0;
+            justify-content: center;
+            padding-top: clamp(8px, 1.5dvh, 16px);
+            overflow: hidden;
+          }
+          .hero-head {
+            align-items: flex-start;
+          }
+          .hero-head .hero-line-reveal--indent {
+            margin-left: clamp(12px, 4vw, 28px);
+          }
+          .hero-lead {
+            font-size: clamp(14px, 3.6vw, 16px);
+            line-height: 1.45;
+          }
+          .hero-cta-row {
+            margin-top: clamp(12px, 2.5dvh, 18px);
+            gap: 10px;
+          }
+          .hero-scroll-hint {
+            margin-top: clamp(10px, 2dvh, 16px);
+          }
+          .hero-scroll-line {
+            height: clamp(32px, 6dvh, 44px);
+          }
+        }
+        @media (max-height: 740px) and (max-width: 900px) {
+          .hero-fold {
+            padding-top: calc(64px + env(safe-area-inset-top, 0px));
+          }
+          .hero-cta-row .btn {
+            padding-top: 14px;
+            padding-bottom: 14px;
           }
         }
       `}</style>

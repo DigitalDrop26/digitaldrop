@@ -400,11 +400,24 @@ body.is-intro-loading .cursor-ring {
     line-height: 0.92;
   }
 }
-/** Mobile strette (portrait): titolo hero un filo più generoso */
+/** Mobile: titolo hero homepage dentro fold 100dvh (4 righe + copy sotto). */
 @media (max-width: 900px) {
-  .display-xxl.hero-title-fold {
-    font-size: clamp(44px, min(13.2vw, 15vh), 132px);
-    line-height: 0.86;
+  .hero-fold .display-xxl.hero-title-fold {
+    font-size: clamp(30px, min(10.5vw, 8.1dvh), 88px);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+  }
+}
+@media (max-height: 820px) and (max-width: 900px) {
+  .hero-fold .display-xxl.hero-title-fold {
+    font-size: clamp(26px, min(9.5vw, 7.1dvh), 72px);
+    line-height: 0.9;
+  }
+}
+@media (max-height: 700px) and (max-width: 900px) {
+  .hero-fold .display-xxl.hero-title-fold {
+    font-size: clamp(22px, min(9vw, 6.2dvh), 60px);
+    line-height: 0.92;
   }
 }
 .display-xl {
