@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 /** GitHub Pages (repository `digitaldrop`): https://<org>.github.io/digitaldrop/ */
-const GITHUB_PAGES_BASE = "/digitaldrop/";
+const GITHUB_PAGES_BASE = "/";
 
 /** Keep esbuild/transform cache OFF Dropbox — cloud sync locking often wedges Vite (connects hang, no HTTP bytes). */
 const VITE_CACHE_DIR = path.join(os.tmpdir(), "digitaldrop-site-vite-cache");
