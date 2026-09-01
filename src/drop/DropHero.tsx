@@ -57,6 +57,36 @@ export function DropHero() {
     };
   }, []);
 
+  /** Mobile: 100dvh su iOS può essere più basso del frame visibile → gap sotto la fold. */
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const mq = window.matchMedia("(max-width: 900px)");
+    const syncViewportHeight = () => {
+      if (!mq.matches) {
+        root.style.removeProperty("--hero-vh");
+        return;
+      }
+      const h = window.visualViewport?.height ?? window.innerHeight;
+      root.style.setProperty("--hero-vh", `${Math.round(h)}px`);
+    };
+
+    syncViewportHeight();
+    window.visualViewport?.addEventListener("resize", syncViewportHeight);
+    window.addEventListener("resize", syncViewportHeight);
+    window.addEventListener("orientationchange", syncViewportHeight);
+    mq.addEventListener("change", syncViewportHeight);
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", syncViewportHeight);
+      window.removeEventListener("resize", syncViewportHeight);
+      window.removeEventListener("orientationchange", syncViewportHeight);
+      mq.removeEventListener("change", syncViewportHeight);
+      root.style.removeProperty("--hero-vh");
+    };
+  }, []);
+
   const titleTransform = `translate3d(0, ${Math.min(y * -0.08, 60)}px, 0)`;
   const fadeOnScroll = Math.max(0, 1 - y / 600);
   const cardParallax = Math.min(70, y * 0.12);
@@ -72,17 +102,7 @@ export function DropHero() {
       backgroundColor: 'var(--paper-warm)',
     }}>
       <DropHeroBackground src={dropHeroSrc} priority />
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-          background:
-            'linear-gradient(105deg, rgba(250,247,242,0.88) 0%, rgba(250,247,242,0.72) min(42vw, 52%), rgba(250,247,242,0.42) 68%, rgba(250,247,242,0.12) 100%)',
-        }}
-      />
+      <div aria-hidden className="hero-wash" />
 
       {/* Contenuti: colonna che occupa tutta l'altezza utile viewport */}
       <div className="container-wide hero-inner" style={{
@@ -193,6 +213,7 @@ export function DropHero() {
           aria-hidden="true"
           style={{
             flexShrink: 0,
+            alignSelf: "flex-end",
             display: "flex",
             alignItems: "center",
             gap: 12,
@@ -212,6 +233,19 @@ export function DropHero() {
       </div>
 
       <style>{`
+        .hero-wash {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          background: linear-gradient(
+            105deg,
+            rgba(250, 247, 242, 0.88) 0%,
+            rgba(250, 247, 242, 0.72) min(42vw, 52%),
+            rgba(250, 247, 242, 0.42) 68%,
+            rgba(250, 247, 242, 0.12) 100%
+          );
+        }
         .hero-fold {
           box-sizing: border-box;
           min-height: 100vh;
@@ -245,6 +279,7 @@ export function DropHero() {
         }
         .hero-scroll-hint {
           margin-top: clamp(16px, 3vh, 44px);
+          align-self: flex-end;
         }
         .hero-scroll-line {
           width: 1px;
@@ -277,13 +312,21 @@ export function DropHero() {
           .hero-claim-card { display: none; }
         }
         @media (max-width: 900px) {
+          .hero-wash {
+            background: linear-gradient(
+              180deg,
+              rgba(250, 247, 242, 0.94) 0%,
+              rgba(250, 247, 242, 0.9) 52%,
+              rgba(250, 247, 242, 0.98) 100%
+            );
+          }
           .hero-fold {
-            height: 100dvh;
-            min-height: 100dvh;
-            max-height: 100dvh;
+            height: var(--hero-vh, 100svh);
+            min-height: var(--hero-vh, 100svh);
+            max-height: var(--hero-vh, 100svh);
             overflow: hidden;
             padding-top: calc(72px + env(safe-area-inset-top, 0px));
-            padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+            padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
           }
           .hero-inner {
             gap: clamp(10px, 2dvh, 16px);
