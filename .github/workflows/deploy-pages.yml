@@ -27,6 +27,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          VITE_GTM_ID: ${{ secrets.VITE_GTM_ID }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -6,6 +6,7 @@ import { DropProjectAllevaPrPage } from "./drop/DropProjectAllevaPrPage";
 import { DropProjectAnafibjPage } from "./drop/DropProjectAnafibjPage";
 import { DropProjectAstaCremonaPage } from "./drop/DropProjectAstaCremonaPage";
 import { DropProjectsArchivePage } from "./drop/DropProjectsArchivePage";
+import { GtmPageView } from "./drop/GtmPageView";
 
 /** Normalizza `import.meta.env.BASE_URL` (es. `/digitaldrop/` → `/digitaldrop`). */
 function basenameFromEnv(): string | undefined {
@@ -34,6 +35,7 @@ export default function App() {
 
   return (
     <BrowserRouter basename={basename}>
+      <GtmPageView />
       <Routes>
         <Route path="/" element={<DropHomepageApp />} />
         <Route path="/chi-siamo" element={<DropChiSiamoPage />} />
