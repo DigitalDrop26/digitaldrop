@@ -334,7 +334,24 @@ html.lenis { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
-.lenis.lenis-smooth iframe { pointer-events: none; }
+/* Esclude iframe Iubenda (cookie / policy) — altrimenti non scrollano */
+.lenis.lenis-smooth iframe:not([id^="iubenda"]):not([src*="iubenda.com"]) {
+  pointer-events: none;
+}
+
+/* Scroll interno modale / preferenze Iubenda */
+#iubenda-iframe,
+#iubenda-iframe-popup,
+#iubenda-cs-banner,
+.iubenda-cs-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+#iubenda-iframe-popup {
+  overflow-y: auto !important;
+  max-height: min(900px, 99vh) !important;
+}
 
 /* ---------- Custom cursor follower (subtle) ---------- */
 .cursor-dot {

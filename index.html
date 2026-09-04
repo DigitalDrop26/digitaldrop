@@ -72,6 +72,14 @@
         cookiePolicyId: 35509802,
         lang: "it",
         storage: { useSiteId: true },
+        callback: {
+          onCookiePolicyShown: function () {
+            window.__patchIubendaScroll && window.__patchIubendaScroll();
+          },
+          onPreferenceFirstShown: function () {
+            window.__patchIubendaScroll && window.__patchIubendaScroll();
+          },
+        },
       };
     </script>
     <script

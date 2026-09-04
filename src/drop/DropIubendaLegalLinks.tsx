@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import {
   IUBENDA_COOKIE_POLICY_URL,
   IUBENDA_EMBED_LINK_CLASS,
+  IUBENDA_EMBED_OVERFLOW_ATTR,
   IUBENDA_PRIVACY_POLICY_URL,
 } from "./iubendaConfig";
 import { useIubendaEmbed } from "./useIubendaEmbed";
@@ -27,6 +28,7 @@ export function DropIubendaLegalLinks({ className = "", style }: DropIubendaLega
         className={IUBENDA_EMBED_LINK_CLASS}
         title="Privacy Policy"
         style={linkStyle}
+        {...IUBENDA_EMBED_OVERFLOW_ATTR}
       >
         Privacy Policy
       </a>
@@ -35,6 +37,7 @@ export function DropIubendaLegalLinks({ className = "", style }: DropIubendaLega
         className={IUBENDA_EMBED_LINK_CLASS}
         title="Cookie Policy"
         style={linkStyle}
+        {...IUBENDA_EMBED_OVERFLOW_ATTR}
       >
         Cookie Policy
       </a>

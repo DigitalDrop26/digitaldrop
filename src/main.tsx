@@ -2,8 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { initLenis } from "./drop/hooksAndUi";
+import { initIubendaLenisBridge } from "./drop/iubendaLenis";
 import "./styles/drop-homepage.css";
 
+initIubendaLenisBridge();
 initLenis();
 
 const container = document.getElementById("root");

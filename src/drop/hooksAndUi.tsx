@@ -1,5 +1,6 @@
 import Lenis from "lenis";
 import React, { useEffect, useLayoutEffect, useRef, useState, type ElementType, type ReactNode } from "react";
+import { isIubendaScrollNode } from "./iubendaLenis";
 
 declare global {
   interface Window {
@@ -25,6 +26,7 @@ export function initLenis(): void {
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
     wheelMultiplier: 1,
+    prevent: (node) => isIubendaScrollNode(node),
   });
   window.__lenis = lenis;
   function raf(time: number) {
