@@ -64,30 +64,35 @@
       rel="stylesheet"
     />
     <title>Drop · Marketing &amp; Comunicazione per il settore primario</title>
-    <!-- Iubenda Cookie Solution -->
-    <script type="text/javascript">
-      var _iub = _iub || [];
-      _iub.csConfiguration = {
-        siteId: 3711256,
-        cookiePolicyId: 35509802,
-        lang: "it",
-        storage: { useSiteId: true },
-        callback: {
-          onCookiePolicyShown: function () {
-            window.__patchIubendaScroll && window.__patchIubendaScroll();
-          },
-          onPreferenceFirstShown: function () {
-            window.__patchIubendaScroll && window.__patchIubendaScroll();
-          },
-        },
-      };
-    </script>
-    <script
-      type="text/javascript"
-      src="https://cdn.iubenda.com/cs/iubenda_cs.js"
-      charset="UTF-8"
-      async
-    ></script>
+  <!-- Iubenda Cookie Solution -->
+<script type="text/javascript">
+  var _iub = _iub || [];
+  _iub.csConfiguration = {
+    siteId: 3711256,
+    cookiePolicyId: 35509802,
+    lang: "it",
+    storage: { useSiteId: true },
+    googleConsentMode: "template",
+    callback: {
+      onCookiePolicyShown: function () {
+        window.__patchIubendaScroll && window.__patchIubendaScroll();
+      },
+      onPreferenceFirstShown: function () {
+        window.__patchIubendaScroll && window.__patchIubendaScroll();
+      },
+    },
+  };
+</script>
+<script
+  type="text/javascript"
+  src="https://cdn.iubenda.com/cs/gcm/stub-v2.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.iubenda.com/cs/iubenda_cs.js"
+  charset="UTF-8"
+  async
+></script>
   </head>
   <body style="margin: 0; background: #faf7f2">
     <div id="root"></div>
