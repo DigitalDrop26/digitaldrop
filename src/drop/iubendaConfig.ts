@@ -13,6 +13,8 @@ export const IUBENDA_EMBED_OVERFLOW_ATTR = {
 export const IUBENDA_CS_CONFIGURATION = {
   siteId: 3711256,
   cookiePolicyId: 35509802,
-  lang: "it",
-  storage: { useSiteId: true },
+} as const;
+
+export const IUBENDA_CS_LANG_CONFIGURATION = {
+  it: { cookiePolicyId: 35509802 },
 } as const;
