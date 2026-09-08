@@ -3,11 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <script>
+      function isAppEntryScript(scriptEl) {
+        var src = scriptEl.src || scriptEl.getAttribute("src") || "";
+        if (!src) return false;
+        if (src.indexOf("/src/main") !== -1) return true;
+        if (/\/assets\/index-[^/?]+\.js/.test(src)) return true;
+        return false;
+      }
+
       window.addEventListener(
         "error",
         function (ev) {
           var t = ev.target;
           if (!t || t.tagName !== "SCRIPT") return;
+          if (!isAppEntryScript(t)) return;
           var root = document.getElementById("root");
           if (!root) return;
           var fb = document.getElementById("static-fallback");
