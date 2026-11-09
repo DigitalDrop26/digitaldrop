@@ -1,4 +1,5 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import { pageTitle } from "../seo/routes";
 import anafibjHeroBg from "@Immagini/Anafibj/Anafibj_hero.png?url";
 import anafibjGalleryBarn from "@Immagini/Anafibj/anafibj09.png?url";
 import anafibjSolutionApp from "@Immagini/Anafibj/cell anafibj-04.webp?url";
@@ -133,7 +134,7 @@ export function DropProjectAnafibjPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const prev = document.title;
-    document.title = `${PROJECT_NAME} · Progetto · Drop`;
+    document.title = pageTitle("/projects/anafibj/");
     return () => {
       document.title = prev;
     };

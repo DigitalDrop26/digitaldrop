@@ -12,9 +12,9 @@ const HOME_SECTIONS = {
 } as const;
 
 const CHI_SIAMO_SECTIONS = {
-  team: { pathname: "/chi-siamo", hash: "#team" },
-  valori: { pathname: "/chi-siamo", hash: "#valori" },
-  manifesto: { pathname: "/chi-siamo", hash: "#manifesto" },
+  team: { pathname: "/chi-siamo/", hash: "#team" },
+  valori: { pathname: "/chi-siamo/", hash: "#valori" },
+  manifesto: { pathname: "/chi-siamo/", hash: "#manifesto" },
 } as const;
 
 // Footer — dark, big wordmark, links, legal
@@ -56,8 +56,8 @@ export function DropFooter() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <Link to={HOME_SECTIONS.settori} className="footer-link">Settori</Link>
               <Link to={HOME_SECTIONS.servizi} className="footer-link">Servizi</Link>
-              <Link to="/projects" className="footer-link">Progetti</Link>
-              <Link to="/chi-siamo" className="footer-link">Chi siamo</Link>
+              <Link to="/projects/" className="footer-link">Progetti</Link>
+              <Link to="/chi-siamo/" className="footer-link">Chi siamo</Link>
               <Link to={CHI_SIAMO_SECTIONS.team} className="footer-link">Team</Link>
               <Link to={CHI_SIAMO_SECTIONS.valori} className="footer-link">Valori</Link>
               <Link to={CHI_SIAMO_SECTIONS.manifesto} className="footer-link">Manifesto</Link>

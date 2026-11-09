@@ -1,3 +1,4 @@
+import { withoutTrailingSlash } from "./sitePaths";
 import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?url";
 import allevaHero from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?url";
 import anafibjHero from "@Immagini/Anafibj/Anafibj_hero.png?url";
@@ -65,7 +66,7 @@ export const DROP_PROJECTS: DropProject[] = [
     year: "2025",
     img: agrovitHeroBg,
     categories: ["visual", "content", "social"],
-    detailPath: "/projects/agrovit",
+    detailPath: "/projects/agrovit/",
   },
   {
     id: "fiera-cremona",
@@ -75,7 +76,7 @@ export const DROP_PROJECTS: DropProject[] = [
     year: "2023",
     img: astaHero,
     categories: ["strategy", "communication"],
-    detailPath: "/projects/fiera-cremona",
+    detailPath: "/projects/fiera-cremona/",
   },
   {
     id: "alleva-pr",
@@ -85,7 +86,7 @@ export const DROP_PROJECTS: DropProject[] = [
     year: "2023",
     img: allevaHero,
     categories: ["communication", "strategy"],
-    detailPath: "/projects/alleva-pr",
+    detailPath: "/projects/alleva-pr/",
   },
   {
     id: "anafibj",
@@ -95,7 +96,7 @@ export const DROP_PROJECTS: DropProject[] = [
     year: "2023",
     img: anafibjHero,
     categories: ["strategy", "communication", "branding"],
-    detailPath: "/projects/anafibj",
+    detailPath: "/projects/anafibj/",
   },
 ];
 
@@ -142,7 +143,7 @@ export function getProjectsWithDetailPages(): (DropProject & { detailPath: strin
 export function getNextProject(currentPath: string): (DropProject & { detailPath: string }) | null {
   const projects = getProjectsWithDetailPages();
   if (projects.length === 0) return null;
-  const idx = projects.findIndex((p) => p.detailPath === currentPath);
+  const idx = projects.findIndex((p) => withoutTrailingSlash(p.detailPath) === withoutTrailingSlash(currentPath));
   if (idx === -1) return projects[0];
   return projects[(idx + 1) % projects.length];
 }
@@ -151,7 +152,7 @@ export function getNextProject(currentPath: string): (DropProject & { detailPath
 export function getPreviousProject(currentPath: string): (DropProject & { detailPath: string }) | null {
   const projects = getProjectsWithDetailPages();
   if (projects.length === 0) return null;
-  const idx = projects.findIndex((p) => p.detailPath === currentPath);
+  const idx = projects.findIndex((p) => withoutTrailingSlash(p.detailPath) === withoutTrailingSlash(currentPath));
   if (idx === -1) return projects[projects.length - 1];
   return projects[(idx - 1 + projects.length) % projects.length];
 }

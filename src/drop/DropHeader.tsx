@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { bundleResources } from "./bundleResources";
 import { getDropContactLinks } from "./dropContactLinks";
 import { useScrollY } from "./hooksAndUi";
+import { isProjectDetailPath, withoutTrailingSlash } from "./sitePaths";
 
 const NAV_LINKS = [
   { id: "settori", label: "Settori", num: "01" },
@@ -39,7 +40,8 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
   }, [open]);
 
   /** Pagine scheda progetto (/projects/…) — nav hero trasparente, testi bianchi fino allo scroll. */
-  const isProjectDetailPage = location.pathname.startsWith("/projects/");
+  const path = withoutTrailingSlash(location.pathname);
+  const isProjectDetailPage = isProjectDetailPath(location.pathname);
   const heroOverlayNav = isProjectDetailPage && !scrolled;
   const contactLinks = getDropContactLinks();
 
@@ -83,27 +85,27 @@ export function DropHeader({ logoSubtitle, projectName }: DropHeaderProps = {}) 
     setOpen(false);
 
     if (id === "chi-siamo") {
-      if (location.pathname === "/chi-siamo") {
+      if (path === "/chi-siamo") {
         if (window.__lenis) {
           window.__lenis.scrollTo(0, { duration: 1.2 });
         } else {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
       } else {
-        navigate("/chi-siamo");
+        navigate("/chi-siamo/");
       }
       return;
     }
 
     if (id === "progetti") {
-      if (location.pathname === "/projects") {
+      if (path === "/projects") {
         if (window.__lenis) {
           window.__lenis.scrollTo(0, { duration: 1.2 });
         } else {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
       } else {
-        navigate("/projects");
+        navigate("/projects/");
       }
       return;
     }

@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { pageTitle } from "../seo/routes";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropManifesto } from "./DropManifesto";
@@ -17,7 +18,7 @@ export function DropChiSiamoPage() {
 
   useEffect(() => {
     const prev = document.title;
-    document.title = "Chi siamo · Drop";
+    document.title = pageTitle("/chi-siamo/");
     return () => {
       document.title = prev;
     };

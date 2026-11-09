@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-ssr
 extracted-bundle
 *.local
 .DS_Store

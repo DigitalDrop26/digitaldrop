@@ -1,5 +1,6 @@
 import { useEffect, Fragment, useState, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { pageTitle } from "../seo/routes";
 import { bundleResources } from "./bundleResources";
 import { CursorFollower } from "./hooksAndUi";
 import { DropCaseStudies } from "./DropCaseStudies";
@@ -16,6 +17,14 @@ export function DropHomepageApp() {
   const location = useLocation();
   const introStackRef = useRef<HTMLDivElement>(null);
   const introSubtitleRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const prev = document.title;
+    document.title = pageTitle("/");
+    return () => {
+      document.title = prev;
+    };
+  }, []);
 
   useLayoutEffect(() => {
     const stack = introStackRef.current;

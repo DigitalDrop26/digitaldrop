@@ -1,6 +1,7 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DropChiSiamoPage } from "./drop/DropChiSiamoPage";
 import { DropHomepageApp } from "./drop/DropHomepageApp";
+import { DropNotFoundPage } from "./drop/DropNotFoundPage";
 import { DropProjectAgrovitPage } from "./drop/DropProjectAgrovitPage";
 import { DropProjectAllevaPrPage } from "./drop/DropProjectAllevaPrPage";
 import { DropProjectAnafibjPage } from "./drop/DropProjectAnafibjPage";
@@ -30,11 +31,9 @@ function routerBasename(): string | undefined {
   return undefined;
 }
 
-export default function App() {
-  const basename = routerBasename();
-
+export function AppRoutes() {
   return (
-    <BrowserRouter basename={basename}>
+    <>
       <GtmPageView />
       <Routes>
         <Route path="/" element={<DropHomepageApp />} />
@@ -44,8 +43,18 @@ export default function App() {
         <Route path="/projects/fiera-cremona" element={<DropProjectAstaCremonaPage />} />
         <Route path="/projects/alleva-pr" element={<DropProjectAllevaPrPage />} />
         <Route path="/projects/anafibj" element={<DropProjectAnafibjPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<DropNotFoundPage />} />
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  const basename = routerBasename();
+
+  return (
+    <BrowserRouter basename={basename}>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

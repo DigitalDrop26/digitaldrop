@@ -42,7 +42,7 @@ export function DropCaseStudies() {
           </Reveal>
           <Reveal delay={1} style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Link
-              to="/projects"
+              to="/projects/"
               className="ulink"
               style={{ fontSize: "clamp(19px, 1.35vw, 22px)", fontWeight: 600, color: "var(--drop-orange)" }}
             >

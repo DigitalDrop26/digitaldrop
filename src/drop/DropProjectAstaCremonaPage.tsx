@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef } from "react";
+import { pageTitle } from "../seo/routes";
 import astaHeroBg from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?url";
 import astaGallery1 from "@Immagini/Fiera Cremona/FieraCremona_1.jpg?url";
 import astaGallery2 from "@Immagini/Fiera Cremona/FieraCremona_2.webp?url";
@@ -76,7 +77,7 @@ export function DropProjectAstaCremonaPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const prev = document.title;
-    document.title = `${PROJECT_NAME} · Progetto · Drop`;
+    document.title = pageTitle("/projects/fiera-cremona/");
     return () => {
       document.title = prev;
     };

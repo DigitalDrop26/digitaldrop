@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
+import { pageTitle } from "../seo/routes";
 import agrovitPersonaggio02 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-02.png?url";
 import agrovitPersonaggio03 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-03.png?url";
 import agrovitPersonaggio04 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-04.png?url";
@@ -279,7 +280,7 @@ export function DropProjectAgrovitPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const prev = document.title;
-    document.title = "Agrovit · Progetto · Drop";
+    document.title = pageTitle("/projects/agrovit/");
     return () => {
       document.title = prev;
     };

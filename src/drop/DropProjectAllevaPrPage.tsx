@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef } from "react";
+import { pageTitle } from "../seo/routes";
 import allevaGallery01 from "@Immagini/Alleva PR/amber-kipp-Q9n1qsws8ZY-unsplash.jpg?url";
 import allevaGallery02 from "@Immagini/Alleva PR/caroline-roose-HgbKnsaAu_0-unsplash (1).jpg?url";
 import allevaGallery03 from "@Immagini/Alleva PR/elio-santos-0AIb6bBdgXc-unsplash.jpg?url";
@@ -59,7 +60,7 @@ export function DropProjectAllevaPrPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const prev = document.title;
-    document.title = `${PROJECT_NAME} · Progetto · Drop`;
+    document.title = pageTitle("/projects/alleva-pr/");
     return () => {
       document.title = prev;
     };

@@ -4,6 +4,7 @@ import {
   filterProjectsByCategory,
   type ProjectCategoryId,
 } from "./dropProjects";
+import { pageTitle } from "../seo/routes";
 import { DropFooter } from "./DropFooter";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
@@ -25,7 +26,7 @@ export function DropProjectsArchivePage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const prev = document.title;
-    document.title = "Tutti i progetti · Drop";
+    document.title = pageTitle("/projects/");
     return () => {
       document.title = prev;
     };
