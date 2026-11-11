@@ -520,40 +520,132 @@ body.is-intro-loading .cursor-ring {
 .eyebrow.on-dark { color: rgba(255,255,255,0.7); }
 .eyebrow.on-dark::before { background: var(--drop-orange); }
 
-/* ---------- Reveal primitives (controlled by JS) ---------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(36px);
-  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
-  will-change: opacity, transform;
-}
-.reveal.is-in { opacity: 1; transform: translateY(0); }
-.reveal-fade { opacity: 0; transform: none; transition: opacity 1.2s var(--ease-out); }
-.reveal-fade.is-in { opacity: 1; }
-
-/* Line-mask reveal — clip up from below */
+/* ---------- Reveal primitives ---------- */
+/* Senza html.anim (niente JavaScript) il testo resta visibile. */
 .line-reveal {
   display: block;
   overflow: hidden;
   padding-bottom: 0.08em;
 }
-.line-reveal > span {
+.line-reveal > span,
+.char {
   display: inline-block;
+}
+
+html.anim .reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  will-change: opacity, transform;
+}
+html.anim .reveal.is-in { opacity: 1; transform: translateY(0); }
+html.anim .reveal-fade { opacity: 0; transform: none; transition: opacity 1.2s var(--ease-out); }
+html.anim .reveal-fade.is-in { opacity: 1; }
+
+html.anim .line-reveal > span {
   transform: translateY(110%);
   transition: transform 1.05s var(--ease-out);
   will-change: transform;
 }
-.line-reveal.is-in > span { transform: translateY(0); }
+html.anim .line-reveal.is-in > span { transform: translateY(0); }
 
-/* Char split */
-.char {
-  display: inline-block;
+html.anim .char {
   transform: translateY(110%);
   opacity: 0;
   transition: transform .9s var(--ease-out), opacity .6s var(--ease-out);
   will-change: transform, opacity;
 }
-.char.is-in { transform: translateY(0); opacity: 1; }
+html.anim .char.is-in { transform: translateY(0); opacity: 1; }
+
+/* Prima schermata: keyframes al primo paint. Stessi tempi del vecchio stagger JS. */
+@keyframes line-rise {
+  from { transform: translateY(110%); }
+  to { transform: translateY(0); }
+}
+@keyframes reveal-rise {
+  from { opacity: 0; transform: translateY(36px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+html.anim .hero-fold .hero-line-reveal > span {
+  animation: line-rise 1.05s var(--ease-out) both;
+  transition: none;
+}
+/* Home: parte dopo l'intro (2380ms) e scala di 92ms, come il setTimeout precedente. */
+html.anim .hero-fold .hero-line-reveal[data-idx="1"] > span { animation-delay: 2.472s; }
+html.anim .hero-fold .hero-line-reveal[data-idx="2"] > span { animation-delay: 2.564s; }
+html.anim .hero-fold .hero-line-reveal[data-idx="3"] > span { animation-delay: 2.656s; }
+html.anim .hero-fold .hero-line-reveal[data-idx="4"] > span { animation-delay: 2.748s; }
+
+html.anim .hero-fold .line-reveal:not(.hero-line-reveal) > span {
+  animation: line-rise 1.05s var(--ease-out) both;
+  transition: none;
+}
+html.anim .hero-fold .line-reveal:not(.hero-line-reveal)[data-idx="0"] > span { animation-delay: 0ms; }
+html.anim .hero-fold .line-reveal:not(.hero-line-reveal)[data-idx="1"] > span { animation-delay: 70ms; }
+
+html.anim .hero-fold .reveal,
+html.anim .archive-hero-fold .reveal,
+html.anim .alive-project-hero-fold .reveal {
+  animation: reveal-rise .9s var(--ease-out) both;
+  transition: none;
+}
+html.anim .hero-fold .reveal[data-idx="0"],
+html.anim .archive-hero-fold .reveal[data-idx="0"],
+html.anim .alive-project-hero-fold .reveal[data-idx="0"] { animation-delay: 0ms; }
+html.anim .hero-fold .reveal[data-idx="1"],
+html.anim .archive-hero-fold .reveal[data-idx="1"],
+html.anim .alive-project-hero-fold .reveal[data-idx="1"] { animation-delay: 70ms; }
+html.anim .hero-fold .reveal[data-idx="2"],
+html.anim .archive-hero-fold .reveal[data-idx="2"],
+html.anim .alive-project-hero-fold .reveal[data-idx="2"] { animation-delay: 140ms; }
+html.anim .hero-fold .reveal[data-idx="3"],
+html.anim .archive-hero-fold .reveal[data-idx="3"],
+html.anim .alive-project-hero-fold .reveal[data-idx="3"] { animation-delay: 210ms; }
+html.anim .hero-fold .reveal[data-idx="4"],
+html.anim .archive-hero-fold .reveal[data-idx="4"],
+html.anim .alive-project-hero-fold .reveal[data-idx="4"] { animation-delay: 280ms; }
+html.anim .hero-fold .reveal[data-idx="5"],
+html.anim .archive-hero-fold .reveal[data-idx="5"],
+html.anim .alive-project-hero-fold .reveal[data-idx="5"] { animation-delay: 350ms; }
+html.anim .hero-fold .reveal[data-idx="6"],
+html.anim .archive-hero-fold .reveal[data-idx="6"],
+html.anim .alive-project-hero-fold .reveal[data-idx="6"] { animation-delay: 420ms; }
+
+/* Intro: senza JS non copre la pagina; se non finisce, si toglie da sola dopo 2,2s. */
+html:not(.anim) .intro-splash {
+  display: none !important;
+}
+html.anim .intro-splash {
+  animation: intro-dismiss 0.01s linear 2.2s forwards;
+}
+@keyframes intro-dismiss {
+  to {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.anim .reveal,
+  html.anim .reveal-fade,
+  html.anim .line-reveal > span,
+  html.anim .char,
+  html.anim .hero-fold .reveal,
+  html.anim .archive-hero-fold .reveal,
+  html.anim .alive-project-hero-fold .reveal,
+  html.anim .hero-fold .line-reveal > span,
+  html.anim .hero-fold .hero-line-reveal > span {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .intro-splash {
+    display: none !important;
+  }
+}
 
 /* ---------- Buttons ---------- */
 .btn {

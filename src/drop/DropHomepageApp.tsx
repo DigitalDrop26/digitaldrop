@@ -116,6 +116,7 @@ export function DropHomepageApp() {
       <CursorFollower />
 
       <div
+        className="intro-splash"
         style={{
           position: "fixed",
           inset: 0,

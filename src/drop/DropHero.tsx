@@ -4,58 +4,10 @@ import trattoreSrc from "@Immagini/trattore.jpeg?url";
 import { DropHeroBackground } from "./DropHeroBackground";
 import { useReveal, useScrollY, Btn } from "./hooksAndUi";
 
-/** Dopo overlay intro (~2200ms) mentre l’hero diventa leggibile (DropHomepageApp). */
-const HERO_TITLE_REVEAL_START_MS = 2380;
-const HERO_TITLE_STAGGER_MS = 92;
-
 export function DropHero() {
   const rootRef = useRef<HTMLElement | null>(null);
   useReveal(rootRef);
   const y = useScrollY();
-
-  /** Titolo: .hero-line-reveal è escluso da IntersectionObserver; servono is-in dopo intro. */
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const heroRoot = root;
-    let cancelled = false;
-    const ids: ReturnType<typeof setTimeout>[] = [];
-
-    function revealLines() {
-      if (cancelled) return;
-      const lines = [...heroRoot.querySelectorAll<HTMLElement>(".hero-line-reveal")];
-      lines.sort(
-        (a, b) =>
-          Number(a.getAttribute("data-idx") ?? 99) -
-          Number(b.getAttribute("data-idx") ?? 99),
-      );
-      lines.forEach((el) => {
-        const idx = Number(el.getAttribute("data-idx") ?? 0);
-        ids.push(
-          window.setTimeout(() => {
-            if (!cancelled) el.classList.add("is-in");
-          }, Math.max(0, idx * HERO_TITLE_STAGGER_MS)),
-        );
-      });
-    }
-
-    ids.push(window.setTimeout(revealLines, HERO_TITLE_REVEAL_START_MS));
-
-    const failSafeMs = HERO_TITLE_REVEAL_START_MS + 12 * HERO_TITLE_STAGGER_MS;
-    ids.push(
-      window.setTimeout(() => {
-        if (!cancelled) {
-          heroRoot.querySelectorAll<HTMLElement>(".hero-line-reveal").forEach((el) => el.classList.add("is-in"));
-        }
-      }, failSafeMs),
-    );
-
-    return () => {
-      cancelled = true;
-      ids.forEach(clearTimeout);
-    };
-  }, []);
 
   /** Mobile: 100dvh su iOS può essere più basso del frame visibile → gap sotto la fold. */
   useEffect(() => {

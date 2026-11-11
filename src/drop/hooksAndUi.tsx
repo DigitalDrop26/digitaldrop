@@ -36,13 +36,42 @@ export function initLenis(): void {
   requestAnimationFrame(raf);
 }
 
+const FIRST_SCREEN = ".hero-fold, .archive-hero-fold, .alive-project-hero-fold";
+
+function isFirstScreenAnimated(el: Element): boolean {
+  return Boolean(el.closest(FIRST_SCREEN));
+}
+
+/** Dopo 2s marca is-in gli animati già in viewport, se l'observer non l'ha fatto. */
+function startRevealFailsafe(): void {
+  const run = () => {
+    window.setTimeout(() => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      document.querySelectorAll(".reveal, .reveal-fade, .line-reveal, .char").forEach((el) => {
+        if (el.classList.contains("is-in")) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < vh) el.classList.add("is-in");
+      });
+    }, 2000);
+  };
+  if (document.readyState === "complete") run();
+  else window.addEventListener("load", run, { once: true });
+}
+
+let revealFailsafeStarted = false;
+
 export function useReveal(rootRef: React.RefObject<HTMLElement | null>, opts: Record<string, unknown> = {}) {
   useEffect(() => {
+    if (!revealFailsafeStarted) {
+      revealFailsafeStarted = true;
+      startRevealFailsafe();
+    }
     const root = rootRef.current;
     if (!root) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const selector =
       (opts.selector as string) || ".reveal, .reveal-fade, .line-reveal:not(.hero-line-reveal), .char-line";
-    const els = root.querySelectorAll(selector);
+    const els = [...root.querySelectorAll(selector)].filter((el) => !isFirstScreenAnimated(el));
     const stagger = (opts.stagger as number) ?? 70;
     const io = new IntersectionObserver(
       (entries) => {
