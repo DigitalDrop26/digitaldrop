@@ -3,6 +3,7 @@ import { StaticRouter } from "react-router";
 import { AppRoutes } from "./App";
 
 export { notFoundSeo, publicRoutes, SITE_ORIGIN } from "./seo/routes";
+export { organizationJsonLd } from "./seo/organizationJsonLd";
 export { redirects } from "./seo/redirects";
 
 /** HTML della pagina per il prerender. Niente fetch a runtime: solo stringa statica. */

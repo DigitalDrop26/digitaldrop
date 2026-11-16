@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 process.env.NODE_ENV = "production";
 
@@ -25,7 +26,9 @@ if (!template.includes("<!--app-html-->") || !template.includes("<!--app-head-->
   process.exit(1);
 }
 
-const { render, publicRoutes, redirects, SITE_ORIGIN, notFoundSeo } = await import(pathToFileURL(ssrEntry).href);
+const { render, publicRoutes, redirects, SITE_ORIGIN, notFoundSeo, organizationJsonLd } = await import(
+  pathToFileURL(ssrEntry).href
+);
 
 function escapeAttr(value) {
   return String(value)
@@ -99,7 +102,12 @@ function socialTags({ title, description, canonical, image }) {
   ];
 }
 
-function renderPage(url, { title, description, canonical, image, robots }) {
+function jsonLdTag(data) {
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return `<script type="application/ld+json">${json}</script>`;
+}
+
+function renderPage(url, { title, description, canonical, image, robots, jsonLd }) {
   const appHtml = render(url);
   if (!appHtml.includes("<h1")) throw new Error(`Rendered HTML has no H1 for ${url}`);
   let html = template.replace("<!--app-html-->", appHtml);
@@ -108,6 +116,7 @@ function renderPage(url, { title, description, canonical, image, robots }) {
   html = replaceDescription(html, description);
   const tags = [];
   if (canonical && image) tags.push(...socialTags({ title, description, canonical, image }));
+  if (jsonLd) tags.push(jsonLdTag(jsonLd));
   if (robots) tags.push(`<meta name="robots" content="${escapeAttr(robots)}" />`);
   html = injectHead(html, tags);
   const iubendaInTemplate = template.match(/cdn\.iubenda\.com/g)?.length ?? 0;
@@ -125,7 +134,12 @@ function assetPathFromUrl(url) {
 
 function ensureReferencedAssets(html) {
   const urls = new Set();
-  for (const match of html.matchAll(/(?:src|href)=["']([^"']+)["']/g)) urls.add(match[1]);
+  for (const match of html.matchAll(/(?:src|href|srcset)=["']([^"']+)["']/gi)) {
+    for (const part of match[1].split(",")) {
+      const url = part.trim().split(/\s+/)[0];
+      if (url) urls.add(url);
+    }
+  }
   for (const match of html.matchAll(/content=["']([^"']*\/assets\/[^"']+)["']/g)) urls.add(match[1]);
   for (const url of urls) {
     if (!url.includes("/assets/")) continue;
@@ -149,7 +163,15 @@ for (const route of publicRoutes) {
     description: route.description,
     canonical,
     image: absoluteAsset(route.ogImage),
+    jsonLd: route.path === "/" ? organizationJsonLd : undefined,
   });
+  const jsonLdCount = html.match(/application\/ld\+json/g)?.length ?? 0;
+  if (route.path === "/" && jsonLdCount !== 1) {
+    throw new Error(`Home JSON-LD count is ${jsonLdCount}`);
+  }
+  if (route.path !== "/" && jsonLdCount !== 0) {
+    throw new Error(`JSON-LD leaked onto ${route.path}`);
+  }
   ensureReferencedAssets(html);
   writeInsideDist(pageFile(route.path), html);
   console.log(`prerender: ${route.path} → ${path.relative(root, pageFile(route.path))}`);
@@ -207,3 +229,39 @@ if (!fs.existsSync(cname)) {
   process.exit(1);
 }
 console.log(`prerender: CNAME → ${fs.readFileSync(cname, "utf8").trim()}`);
+
+/** JPG/PNG rimasti in dist (cartella public) diventano WebP qualità 80. */
+async function convertDistRasters() {
+  async function walk(dir) {
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, ent.name);
+      if (ent.isDirectory()) {
+        await walk(full);
+        continue;
+      }
+      if (!/\.(png|jpe?g)$/i.test(ent.name)) continue;
+      const dest = full.replace(/\.(png|jpe?g)$/i, ".webp");
+      await sharp(full).webp({ quality: 80 }).toFile(dest);
+      fs.unlinkSync(full);
+      console.log(`webp: ${path.relative(dist, full)} → ${path.basename(dest)}`);
+    }
+  }
+  await walk(dist);
+}
+
+await convertDistRasters();
+
+function referencedRaster(file) {
+  const text = fs.readFileSync(file, "utf8");
+  const hits = text.match(/(?:src|href|srcset|content)=["'][^"']+\.(?:png|jpe?g)\b/gi);
+  if (hits) throw new Error(`Raster URL left in ${path.relative(root, file)}: ${hits[0]}`);
+}
+
+function walkOutput(dir) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) walkOutput(full);
+    else if (/\.(html|js|css)$/i.test(ent.name)) referencedRaster(full);
+  }
+}
+walkOutput(dist);

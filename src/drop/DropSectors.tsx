@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import agrovitIndustriaImg from "@Immagini/Agrovit/adv stampa/agrovit_testata.png?url";
+import agrovitIndustriaImg from "@Immagini/Agrovit/adv stampa/agrovit_testata.png?img";
+import type { BuiltImage } from "./builtImage";
 import foodSectorImg from "@Immagini/food-sector-wine.jpg?url";
 import { bundleResources } from "./bundleResources";
 import { Reveal, useReveal } from "./hooksAndUi";
@@ -9,7 +10,7 @@ type Sector = {
   num: string;
   title: string;
   tag: string;
-  img: string;
+  img: string | BuiltImage;
   imgObjectPosition?: string;
   video?: string;
   darkOverlay?: boolean;
@@ -53,7 +54,7 @@ export function DropSectors() {
     <section id="settori" ref={rootRef} className="section" style={{ background: 'var(--drop-teal)', color: 'white' }}>
       {/* Pattern bg */}
       <div style={{ position: 'absolute', top: '8%', right: '-6%', width: 480, height: 480, opacity: 0.06, pointerEvents: 'none' }} className="spin-slow">
-        <img src={bundleResources.patternGoccia} alt="" style={{ width: '100%', height: '100%' }} />
+        <img src={bundleResources.patternGoccia} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%' }} />
       </div>
 
       <div className="container-wide" style={{ position: 'relative', zIndex: 2 }}>
@@ -123,8 +124,13 @@ function SectorTile({ s, delay }: { s: Sector; delay: number }) {
         />
       ) : (
         <img
-          src={s.img}
+          src={typeof s.img === "string" ? s.img : s.img.src}
+          {...(typeof s.img === "string" || !s.img.srcSet
+            ? {}
+            : { srcSet: s.img.srcSet, sizes: "(min-width: 1000px) 33vw, 100vw" })}
           alt={s.title}
+          loading="lazy"
+          decoding="async"
           style={s.imgObjectPosition ? { objectPosition: s.imgObjectPosition } : undefined}
         />
       )}

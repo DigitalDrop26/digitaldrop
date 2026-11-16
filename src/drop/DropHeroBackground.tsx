@@ -1,16 +1,19 @@
 type DropHeroBackgroundProps = {
   src: string;
+  alt: string;
+  srcSet?: string;
+  sizes?: string;
   /** Solo per LCP homepage — una immagine per pagina al massimo. */
   priority?: boolean;
 };
 
-/** Sfondo hero come `<img>` per lazy load, fetchpriority e migliore LCP rispetto a CSS background. */
-export function DropHeroBackground({ src, priority = false }: DropHeroBackgroundProps) {
+/** Sfondo hero come `<img>`: niente lazy, è la prima schermata. */
+export function DropHeroBackground({ src, alt, srcSet, sizes, priority = false }: DropHeroBackgroundProps) {
   return (
     <img
       src={src}
-      alt=""
-      aria-hidden
+      alt={alt}
+      {...(srcSet ? { srcSet, sizes } : {})}
       fetchPriority={priority ? "high" : "auto"}
       decoding={priority ? "sync" : "async"}
       style={{

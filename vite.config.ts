@@ -3,6 +3,7 @@ import os from "node:os";
 
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { webpImages } from "./scripts/webp-plugin.mjs";
 
 /** GitHub Pages (repository `digitaldrop`): https://<org>.github.io/digitaldrop/ */
 const GITHUB_PAGES_BASE = "/";
@@ -20,7 +21,7 @@ export default defineConfig(({ command, isPreview }) => ({
       "@Immagini": path.resolve(__dirname, "Immagini"),
     },
   },
-  plugins: [react()],
+  plugins: [react(), webpImages(command)],
   server: {
     /** `true`: risponde sia su localhost (IPv6 (::1)) che su 127.0.0.1 — evita “non carica” solo con uno dei due hostname. */
     host: true,

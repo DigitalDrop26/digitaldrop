@@ -13,12 +13,12 @@ import agrovitPersonaggio11 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSO
 import agrovitPersonaggio12 from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO-12.png?url";
 import agrovitPersonaggioTavola from "@Immagini/Agrovit/PERSONAGGI PNG/AGROVIT PERSONAGGI PER SITO_Tavola disegno 6-01.png?url";
 import agrovitLogoAnimation from "@Immagini/Agrovit/prova animazione.mov?url";
-import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?url";
+import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?img";
 import agrovitContesto1 from "@Immagini/Agrovit/Agrovit_1.jpg?url";
 import agrovitContesto2 from "@Immagini/Agrovit/Agrovit 2.webp?url";
-import agrovitContesto3 from "@Immagini/Agrovit/Agrovit 3.jpg?url";
-import agrovitOfflineMockupGrid from "@Immagini/Agrovit/adv stampa/mockup agrovit (1).jpg?url";
-import agrovitOfflineRivistaTavolo from "@Immagini/Agrovit/adv stampa/ChatGPT Image 1 giu 2026, 16_01_53.png?url";
+import agrovitContesto3 from "@Immagini/Agrovit/Agrovit 3.jpg?img";
+import agrovitOfflineMockupGrid from "@Immagini/Agrovit/adv stampa/mockup agrovit (1).jpg?img";
+import agrovitOfflineRivistaTavolo from "@Immagini/Agrovit/adv stampa/ChatGPT Image 1 giu 2026, 16_01_53.png?img";
 import agrovitSocial06 from "@Immagini/Agrovit/social/06.02.png?url";
 import agrovitSocial09 from "@Immagini/Agrovit/social/09.12_Tavola disegno 2 copia 14-21.png?url";
 import agrovitSocial10 from "@Immagini/Agrovit/social/10.06-01.jpg?url";
@@ -46,38 +46,29 @@ import { DropProjectPrefooter } from "./DropProjectPrefooter";
 import { DropProjectBackFab } from "./DropProjectBackFab";
 import { DropProjectMediaMasonry, type MediaMasonryRow } from "./DropProjectMediaMasonry";
 import { DropProjectSocialMasonry, type SocialMasonryItem } from "./DropProjectSocialMasonry";
+import { imageShot } from "./builtImage";
 import { CursorFollower, DropProjectHeroYearLine, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
 const agrovitCarouselSlides = [
-  agrovitPersonaggio02,
-  agrovitPersonaggio03,
-  agrovitPersonaggio04,
-  agrovitPersonaggio05,
-  agrovitPersonaggio06,
-  agrovitPersonaggio07,
-  agrovitPersonaggio08,
-  agrovitPersonaggio09,
-  agrovitPersonaggio10,
-  agrovitPersonaggio11,
-  agrovitPersonaggio12,
-  agrovitPersonaggioTavola,
+  { src: agrovitPersonaggio02, alt: "Mascotte Agrovit turchese sorpresa accanto a un granchio" },
+  { src: agrovitPersonaggio03, alt: "Mascotte Agrovit turchese stanca, con la batteria quasi scarica" },
+  { src: agrovitPersonaggio04, alt: "Mascotte Agrovit arancione con gli occhiali e la batteria carica" },
+  { src: agrovitPersonaggio05, alt: "Mascotte Agrovit arancione con gli occhiali e un pesce in mano" },
+  { src: agrovitPersonaggio06, alt: "Mascotte Agrovit arancione versa del mangime a un fungo" },
+  { src: agrovitPersonaggio07, alt: "Mascotte Agrovit gialla con corona e coccarda" },
+  { src: agrovitPersonaggio08, alt: "Mascotte Agrovit gialla con corona mostra una goccia" },
+  { src: agrovitPersonaggio09, alt: "Mascotte Agrovit gialla con corona, a occhi chiusi" },
+  { src: agrovitPersonaggio10, alt: "Mascotte Agrovit rossa con cappello legge un foglio" },
+  { src: agrovitPersonaggio11, alt: "Mascotte Agrovit rossa con cappello alza una coppa" },
+  { src: agrovitPersonaggio12, alt: "Mascotte Agrovit rossa si toglie il cappello" },
+  { src: agrovitPersonaggioTavola, alt: "Mascotte Agrovit turchese apre una bottiglia d'acqua" },
 ] as const;
 
 const agrovitContestoGallery = [
-  {
-    src: agrovitContesto1,
-    alt: "Agrovit, palletizzazione sacchi in stabilimento industriale",
-  },
-  {
-    src: agrovitContesto2,
-    alt: "Agrovit, sede a vista aerea",
-  },
-  {
-    src: agrovitContesto3,
-    alt: "Agrovit, sacco prodotti in ambiente industriale",
-    objectPosition: "center bottom",
-  },
-] as const;
+  imageShot(agrovitContesto1, "Agrovit, palletizzazione sacchi in stabilimento industriale"),
+  imageShot(agrovitContesto2, "Agrovit, sede a vista aerea"),
+  imageShot(agrovitContesto3, "Agrovit, sacco prodotti in ambiente industriale", "center bottom"),
+];
 
 const agrovitLogoCards = [
   {
@@ -128,14 +119,16 @@ const agrovitOfflineRows: MediaMasonryRow[] = [
   {
     type: "full",
     item: {
-      src: agrovitOfflineMockupGrid,
+      src: agrovitOfflineMockupGrid.src,
+      srcSet: agrovitOfflineMockupGrid.srcSet,
       alt: "Agrovit, mockup griglia flyer coordinati",
     },
   },
   {
     type: "full",
     item: {
-      src: agrovitOfflineRivistaTavolo,
+      src: agrovitOfflineRivistaTavolo.src,
+      srcSet: agrovitOfflineRivistaTavolo.srcSet,
       alt: "Agrovit, rivista aperta su tavolo in stalla",
     },
   },
@@ -215,13 +208,13 @@ function AgrovitMascotShowcase() {
               "radial-gradient(circle at 50% 45%, rgba(0, 122, 153, 0.1) 0%, rgba(0, 122, 153, 0) 62%)",
           }}
         />
-        {slides.map((src, i) => (
+        {slides.map((slide, i) => (
           <img
-            key={src}
-            src={src}
-            alt={i === active ? `Mascotte Agrovit ${i + 1} di ${slides.length}` : ""}
+            key={slide.src}
+            src={slide.src}
+            alt={slide.alt}
             aria-hidden={i === active ? undefined : true}
-            loading={i === 0 ? "eager" : "lazy"}
+            loading="lazy"
             decoding="async"
             draggable={false}
             style={{
@@ -247,9 +240,9 @@ function AgrovitMascotShowcase() {
           gap: 12,
         }}
       >
-        {slides.map((src, i) => (
+        {slides.map((slide, i) => (
           <button
-            key={`dot-${src}`}
+            key={`dot-${slide.src}`}
             type="button"
             aria-label={`Vai alla mascotte ${i + 1}`}
             onClick={() => setActive(i)}
@@ -318,7 +311,12 @@ export function DropProjectAgrovitPage() {
             backgroundColor: "var(--paper-warm)",
           }}
         >
-          <DropHeroBackground src={agrovitHeroBg} />
+          <DropHeroBackground
+            src={agrovitHeroBg.src}
+            srcSet={agrovitHeroBg.srcSet}
+            sizes="100vw"
+            alt="Mucca in stalla annusa un sacco di mangime Agrovit"
+          />
           <div
             aria-hidden
             style={{
@@ -463,7 +461,7 @@ export function DropProjectAgrovitPage() {
               <aside className="agrovit-contesto-aside">
                 <Reveal delay={1}>
                   <div className="agrovit-meta-block">
-                    <h3 className="agrovit-meta-label">Focus</h3>
+                    <p className="agrovit-meta-label">Focus</p>
                     <ul className="agrovit-meta-list">
                       <li>Brand Identity</li>
                       <li>Comunicazione offline</li>
@@ -472,7 +470,7 @@ export function DropProjectAgrovitPage() {
                     </ul>
                   </div>
                   <div className="agrovit-meta-block" style={{ marginTop: 32 }}>
-                    <h3 className="agrovit-meta-label">Outcome</h3>
+                    <p className="agrovit-meta-label">Outcome</p>
                     <ul className="agrovit-meta-list">
                       <li>Sistema di icone e fregi</li>
                       <li>Creatività materiale offline</li>
@@ -489,11 +487,12 @@ export function DropProjectAgrovitPage() {
                 <Reveal key={item.src} delay={i} role="listitem" className="agrovit-contesto-gallery-item">
                   <img
                     src={item.src}
+                    {...(item.srcSet ? { srcSet: item.srcSet, sizes: "(min-width: 1000px) 33vw, 100vw" } : {})}
                     alt={item.alt}
                     loading="lazy"
                     decoding="async"
                     draggable={false}
-                    style={"objectPosition" in item ? { objectPosition: item.objectPosition } : undefined}
+                    style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
                   />
                 </Reveal>
               ))}
@@ -684,8 +683,10 @@ export function DropProjectAgrovitPage() {
         }
         .agrovit-meta-label {
           margin: 0 0 16px;
+          font-family: var(--font-display);
           font-size: 11px;
           font-weight: 600;
+          line-height: var(--lh-snug);
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: var(--drop-orange);

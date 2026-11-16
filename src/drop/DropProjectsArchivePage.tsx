@@ -115,6 +115,7 @@ export function DropProjectsArchivePage() {
                   hovered={hovered === project.id}
                   onHover={setHovered}
                   height={440}
+                  titleAs="h2"
                   style={{ gridColumn: "span 6" }}
                 />
               ))}

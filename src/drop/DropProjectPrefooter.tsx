@@ -21,7 +21,14 @@ function PrefooterNavLink({
 
   const thumb = (
     <span className="drop-project-prefooter-link-thumb" aria-hidden>
-      <img src={project.img} alt="" loading="lazy" decoding="async" draggable={false} />
+      <img
+        src={project.img}
+        {...(project.imgSrcSet ? { srcSet: project.imgSrcSet, sizes: "112px" } : {})}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+      />
     </span>
   );
 

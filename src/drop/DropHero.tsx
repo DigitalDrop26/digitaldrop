@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import dropHeroSrc from "@Immagini/Drop_hero.png?url";
+import dropHeroSrc from "@Immagini/Drop_hero.png?img";
 import trattoreSrc from "@Immagini/trattore.jpeg?url";
 import { DropHeroBackground } from "./DropHeroBackground";
 import { useReveal, useScrollY, Btn } from "./hooksAndUi";
@@ -53,7 +53,13 @@ export function DropHero() {
       overflowY: 'visible',
       backgroundColor: 'var(--paper-warm)',
     }}>
-      <DropHeroBackground src={dropHeroSrc} priority />
+      <DropHeroBackground
+        src={dropHeroSrc.src}
+        srcSet={dropHeroSrc.srcSet}
+        sizes="100vw"
+        alt="Vigneti sulla costa al tramonto con la goccia Drop"
+        priority
+      />
       <div aria-hidden className="hero-wash" />
 
       {/* Contenuti: colonna che occupa tutta l'altezza utile viewport */}

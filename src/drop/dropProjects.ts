@@ -1,8 +1,8 @@
 import { withoutTrailingSlash } from "./sitePaths";
-import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?url";
-import allevaHero from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?url";
-import anafibjHero from "@Immagini/Anafibj/Anafibj_hero.png?url";
-import astaHero from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?url";
+import agrovitHeroBg from "@Immagini/Agrovit/Agrovit_hero.jpg?img";
+import allevaHero from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?img";
+import anafibjHero from "@Immagini/Anafibj/Anafibj_hero.png?img";
+import astaHero from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?img";
 
 export type ProjectCategoryId =
   | "tutti"
@@ -47,6 +47,7 @@ export type DropProject = {
   sector: string;
   year: string;
   img: string;
+  imgSrcSet?: string;
   categories: ProjectCategory[];
   detailPath?: string;
 };
@@ -64,7 +65,8 @@ export const DROP_PROJECTS: DropProject[] = [
     title: "Agrovit",
     sector: "Agro · Brand World",
     year: "2025",
-    img: agrovitHeroBg,
+    img: agrovitHeroBg.src,
+    imgSrcSet: agrovitHeroBg.srcSet,
     categories: ["visual", "content", "social"],
     detailPath: "/projects/agrovit/",
   },
@@ -74,7 +76,8 @@ export const DROP_PROJECTS: DropProject[] = [
     title: "Fiera Zootecnica Internazionale di Cremona",
     sector: "Livestock · Events",
     year: "2023",
-    img: astaHero,
+    img: astaHero.src,
+    imgSrcSet: astaHero.srcSet,
     categories: ["strategy", "communication"],
     detailPath: "/projects/fiera-cremona/",
   },
@@ -84,7 +87,8 @@ export const DROP_PROJECTS: DropProject[] = [
     title: "Alleva PR",
     sector: "Food · Community",
     year: "2023",
-    img: allevaHero,
+    img: allevaHero.src,
+    imgSrcSet: allevaHero.srcSet,
     categories: ["communication", "strategy"],
     detailPath: "/projects/alleva-pr/",
   },
@@ -94,7 +98,8 @@ export const DROP_PROJECTS: DropProject[] = [
     title: "Anafibj",
     sector: "Livestock · Digital",
     year: "2023",
-    img: anafibjHero,
+    img: anafibjHero.src,
+    imgSrcSet: anafibjHero.srcSet,
     categories: ["strategy", "communication", "branding"],
     detailPath: "/projects/anafibj/",
   },

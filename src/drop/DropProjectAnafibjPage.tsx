@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { pageTitle } from "../seo/routes";
-import anafibjHeroBg from "@Immagini/Anafibj/Anafibj_hero.png?url";
+import anafibjHeroBg from "@Immagini/Anafibj/Anafibj_hero.png?img";
 import anafibjGalleryBarn from "@Immagini/Anafibj/anafibj09.png?url";
 import anafibjSolutionApp from "@Immagini/Anafibj/cell anafibj-04.webp?url";
 import anafibjPlatformLaptop from "@Immagini/Anafibj/Anafibij_laptop.webp?url";
@@ -172,7 +172,12 @@ export function DropProjectAnafibjPage() {
             backgroundColor: "var(--ink-deep)",
           }}
         >
-          <DropHeroBackground src={anafibjHeroBg} />
+          <DropHeroBackground
+            src={anafibjHeroBg.src}
+            srcSet={anafibjHeroBg.srcSet}
+            sizes="100vw"
+            alt="Mandria al pascolo in un prato verde, progetto Anafibj"
+          />
           <div
             aria-hidden
             style={{
@@ -313,7 +318,7 @@ export function DropProjectAnafibjPage() {
               <aside className="anafibj-progetto-aside">
                 <Reveal delay={1}>
                   <div className="anafibj-meta-block">
-                    <h3 className="anafibj-meta-label">Attività</h3>
+                    <p className="anafibj-meta-label">Attività</p>
                     <ul className="anafibj-meta-list">
                       <li>Analisi dei bisogni dei soci</li>
                       <li>Sviluppo web application</li>
@@ -322,7 +327,7 @@ export function DropProjectAnafibjPage() {
                     </ul>
                   </div>
                   <div className="anafibj-meta-block" style={{ marginTop: 32 }}>
-                    <h3 className="anafibj-meta-label">Deliverables</h3>
+                    <p className="anafibj-meta-label">Deliverables</p>
                     <ul className="anafibj-meta-list">
                       <li>Prima community della filiera PR</li>
                       <li>Punto d&apos;incontro digitale</li>
@@ -518,8 +523,10 @@ export function DropProjectAnafibjPage() {
         }
         .anafibj-meta-label {
           margin: 0 0 16px;
+          font-family: var(--font-display);
           font-size: 11px;
           font-weight: 600;
+          line-height: var(--lh-snug);
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: var(--drop-orange);

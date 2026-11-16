@@ -44,7 +44,7 @@ export function DropFooter() {
         {/* Top: 4-col link grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: 'clamp(32px, 4vw, 64px)', marginBottom: 'clamp(60px, 8vw, 100px)' }} className="ft-grid">
           <Reveal delay={0}>
-            <img src={bundleResources.logoFullWhite} alt="Drop" style={{ height: 56, display: 'block', marginBottom: 28 }} />
+            <img src={bundleResources.logoFullWhite} alt="Drop" loading="lazy" decoding="async" style={{ height: 56, display: 'block', marginBottom: 28 }} />
             <p style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)', maxWidth: 340, margin: 0, fontWeight: 500 }}>
               Agenzia di comunicazione e marketing strategico per il settore primario italiano.
               Dal 1998, dentro alle filiere.

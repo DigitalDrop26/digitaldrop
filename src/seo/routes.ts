@@ -1,8 +1,8 @@
-import agrovitHero from "@Immagini/Agrovit/Agrovit_hero.jpg?url";
-import allevaHero from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?url";
-import anafibjHero from "@Immagini/Anafibj/Anafibj_hero.png?url";
-import fieraHero from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?url";
-import dropHero from "@Immagini/Drop_hero.png?url";
+import agrovitHero from "@Immagini/Agrovit/Agrovit_hero.jpg?img";
+import allevaHero from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?img";
+import anafibjHero from "@Immagini/Anafibj/Anafibj_hero.png?img";
+import fieraHero from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?img";
+import dropHero from "@Immagini/Drop_hero.png?img";
 import homeHero from "@Immagini/trattore.jpeg?url";
 
 export const SITE_ORIGIN = "https://www.digitaldrop.eu";
@@ -28,42 +28,42 @@ export const publicRoutes: PublicRoute[] = [
     title: "Chi siamo · Drop, comunicazione agroalimentare dal 1998",
     description:
       "Drop è un'agenzia di marketing e comunicazione agroalimentare con sede in Sardegna e Lombardia. Dal 1998 parliamo la lingua dell'agrifood e delle filiere.",
-    ogImage: dropHero,
+    ogImage: dropHero.src,
   },
   {
     path: "/projects/",
     title: "Caso studio di comunicazione agroalimentare · Drop",
     description:
       "Case history di comunicazione agroalimentare e zootecnica: Agrovit, Fiere di Cremona, Alleva PR e Anafibj. Identità, video content, campagne e digitale.",
-    ogImage: dropHero,
+    ogImage: dropHero.src,
   },
   {
     path: "/projects/agrovit/",
     title: "Agrovit: identità e comunicazione per la zootecnia · Drop",
     description:
       "Agrovit, partner tecnico degli allevatori: identità, contenuti e social per un brand zootecnico che parla alle persone.",
-    ogImage: agrovitHero,
+    ogImage: agrovitHero.src,
   },
   {
     path: "/projects/fiera-cremona/",
     title: "Fiere di Cremona: l'asta delle bovine da latte · Drop",
     description:
       "Fiere di Cremona: come abbiamo portato un nuovo format di comunicazione e innovazione per l'asta di vacche da latte, innovando un settore tradizionale della zootecnia.",
-    ogImage: fieraHero,
+    ogImage: fieraHero.src,
   },
   {
     path: "/projects/alleva-pr/",
     title: "Alleva PR: la filiera del Parmigiano Reggiano · Drop",
     description:
       "Alleva PR riunisce allevatori e tecnici del Parmigiano Reggiano: connessioni e dialogo per ascoltare la filiera produttiva della DOP.",
-    ogImage: allevaHero,
+    ogImage: allevaHero.src,
   },
   {
     path: "/projects/anafibj/",
     title: "Anafibj: in rete gli allevatori di tutta Italia · Drop",
     description:
       "Anafibj e la selezione genetica delle bovine da latte: come abbiamo messo in connessione gli allevatori di tutta Italia.",
-    ogImage: anafibjHero,
+    ogImage: anafibjHero.src,
   },
 ];
 

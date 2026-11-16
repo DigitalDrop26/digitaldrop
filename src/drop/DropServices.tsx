@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import brandIdentityImg from "@Immagini/brand identity.png?url";
-import marketingStrategicoImg from "@Immagini/Marketing strategico.png?url";
-import pianiComunicazioneImg from "@Immagini/Piani di comunicazione.png?url";
-import creazioneContenutiImg from "@Immagini/creazione contenuti.png?url";
-import altaFormazioneAiImg from "@Immagini/AI_Drop.png?url";
+import brandIdentityImg from "@Immagini/brand identity.png?img";
+import marketingStrategicoImg from "@Immagini/Marketing strategico.png?img";
+import pianiComunicazioneImg from "@Immagini/Piani di comunicazione.png?img";
+import creazioneContenutiImg from "@Immagini/creazione contenuti.png?img";
+import altaFormazioneAiImg from "@Immagini/AI_Drop.png?img";
 import { Btn, Reveal, useReveal } from "./hooksAndUi";
 
 // Services — line-by-line list with hover image preview (motto-style)
@@ -80,7 +80,13 @@ export function DropServices() {
                 ))}
               </div>
               <div className="preview">
-                <img src={s.img} alt={s.title.replace(/\s*\n\s*/g, " ")} />
+                <img
+                  src={s.img.src}
+                  {...(s.img.srcSet ? { srcSet: s.img.srcSet, sizes: "260px" } : {})}
+                  alt={s.title.replace(/\s*\n\s*/g, " ")}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </Reveal>
           ))}

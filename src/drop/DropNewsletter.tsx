@@ -25,7 +25,7 @@ export function DropNewsletter() {
         opacity: 0.07,
         pointerEvents: 'none',
       }} aria-hidden>
-        <img src={bundleResources.patternGoccia} alt="" style={{ width: '100%', height: '100%' }} />
+        <img src={bundleResources.patternGoccia} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%' }} />
       </div>
 
       <div className="container-wide" style={{ position: 'relative', zIndex: 2 }}>

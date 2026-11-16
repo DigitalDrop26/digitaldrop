@@ -13,6 +13,8 @@ type DropProjectCardProps = {
   height?: number;
   className?: string;
   style?: CSSProperties;
+  /** Archivio progetti: H2 sotto l'H1. In home restano H3 sotto l'H2 di sezione. */
+  titleAs?: "h2" | "h3";
 };
 
 /** Card progetto — stile case study home, riutilizzabile in archivio e homepage. */
@@ -24,7 +26,9 @@ export function DropProjectCard({
   height = 420,
   className = "case-card",
   style,
+  titleAs = "h3",
 }: DropProjectCardProps) {
+  const TitleTag = titleAs;
   const revealProps = {
     delay,
     className,
@@ -50,7 +54,10 @@ export function DropProjectCard({
     <Reveal {...revealProps}>
       <img
         src={project.img}
+        {...(project.imgSrcSet ? { srcSet: project.imgSrcSet, sizes: "(min-width: 900px) 50vw, 100vw" } : {})}
         alt={project.title}
+        loading="lazy"
+        decoding="async"
         style={{
           width: "100%",
           height: "100%",
@@ -107,7 +114,7 @@ export function DropProjectCard({
       </div>
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 1, padding: 28, color: "white" }}>
         <div>
-          <h3
+          <TitleTag
             className="display"
             style={{
               margin: 0,
@@ -119,7 +126,7 @@ export function DropProjectCard({
             }}
           >
             {project.title}
-          </h3>
+          </TitleTag>
         </div>
         {project.detailPath ? (
           <div

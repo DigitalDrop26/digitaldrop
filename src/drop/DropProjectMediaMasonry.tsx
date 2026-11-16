@@ -2,6 +2,7 @@ import { Reveal } from "./hooksAndUi";
 
 export type MediaMasonryItem = {
   src: string;
+  srcSet?: string;
   alt: string;
 };
 
@@ -25,10 +26,17 @@ type DropProjectMediaMasonryProps = {
   ariaLabel: string;
 };
 
-function MediaCard({ item, className = "" }: { item: MediaMasonryItem; className?: string }) {
+function MediaCard({ item, sizes, className = "" }: { item: MediaMasonryItem; sizes?: string; className?: string }) {
   return (
     <div className={`project-media-card ${className}`.trim()}>
-      <img src={item.src} alt={item.alt} loading="lazy" decoding="async" draggable={false} />
+      <img
+        src={item.src}
+        {...(item.srcSet ? { srcSet: item.srcSet, sizes } : {})}
+        alt={item.alt}
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+      />
     </div>
   );
 }
@@ -52,7 +60,7 @@ export function DropProjectMediaMasonry({ rows, ariaLabel }: DropProjectMediaMas
                 role="listitem"
                 className="project-media-row project-media-row--full"
               >
-                <MediaCard item={row.item} />
+                <MediaCard item={row.item} sizes="(min-width: 900px) min(1680px, 92vw), 100vw" />
               </Reveal>
             );
           }
@@ -66,7 +74,10 @@ export function DropProjectMediaMasonry({ rows, ariaLabel }: DropProjectMediaMas
             >
               {row.items.map((item, itemIdx) => (
                 <Reveal key={`${rowIdx}-${itemIdx}-${item.src}`} delay={rowIdx} role="listitem" className="project-media-cell">
-                  <MediaCard item={item} />
+                  <MediaCard
+                    item={item}
+                    sizes={row.columns === 2 ? "(min-width: 800px) 50vw, 100vw" : "(min-width: 1000px) 33vw, 100vw"}
+                  />
                 </Reveal>
               ))}
             </div>

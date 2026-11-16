@@ -75,6 +75,8 @@ export function DropManifesto() {
                 <img
                   src={bundleResources.logoColor}
                   alt="Drop"
+                  loading="lazy"
+                  decoding="async"
                   style={{ height: 24, filter: "brightness(0) invert(1)" }}
                 />
               </div>

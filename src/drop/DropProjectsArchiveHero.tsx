@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import dropHeroSrc from "@Immagini/Drop_hero.png?url";
+import dropHeroSrc from "@Immagini/Drop_hero.png?img";
 import { DropHeroBackground } from "./DropHeroBackground";
 import { useReveal, useScrollY } from "./hooksAndUi";
 
@@ -134,7 +134,12 @@ export function DropProjectsArchiveHero() {
         backgroundColor: "var(--paper-warm)",
       }}
     >
-      <DropHeroBackground src={dropHeroSrc} />
+      <DropHeroBackground
+        src={dropHeroSrc.src}
+        srcSet={dropHeroSrc.srcSet}
+        sizes="100vw"
+        alt="Vigneti sulla costa al tramonto con la goccia Drop"
+      />
       <div
         aria-hidden
         style={{

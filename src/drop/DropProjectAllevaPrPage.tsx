@@ -1,15 +1,16 @@
 import { Fragment, useEffect, useRef } from "react";
 import { pageTitle } from "../seo/routes";
-import allevaGallery01 from "@Immagini/Alleva PR/amber-kipp-Q9n1qsws8ZY-unsplash.jpg?url";
-import allevaGallery02 from "@Immagini/Alleva PR/caroline-roose-HgbKnsaAu_0-unsplash (1).jpg?url";
-import allevaGallery03 from "@Immagini/Alleva PR/elio-santos-0AIb6bBdgXc-unsplash.jpg?url";
-import allevaWarehouse from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?url";
+import allevaGallery01 from "@Immagini/Alleva PR/amber-kipp-Q9n1qsws8ZY-unsplash.jpg?img";
+import allevaGallery02 from "@Immagini/Alleva PR/caroline-roose-HgbKnsaAu_0-unsplash (1).jpg?img";
+import allevaGallery03 from "@Immagini/Alleva PR/elio-santos-0AIb6bBdgXc-unsplash.jpg?img";
+import allevaWarehouse from "@Immagini/Alleva PR/Magazzino_Parmigiano.jpg?img";
 import { DropFooter } from "./DropFooter";
 import { DropHeroBackground } from "./DropHeroBackground";
 import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectBackFab } from "./DropProjectBackFab";
 import { DropProjectPrefooter } from "./DropProjectPrefooter";
+import { imageShot } from "./builtImage";
 import { CursorFollower, DropProjectHeroYearLine, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
 const PROJECT_NAME = "Alleva PR";
@@ -24,10 +25,10 @@ const bodyStyle = {
 } as const;
 
 const allevaProgettoGallery = [
-  { src: allevaGallery01, alt: "Alleva PR, allevamento bovino nella filiera del Parmigiano Reggiano" },
-  { src: allevaGallery02, alt: "Alleva PR, lavorazione del formaggio in caseificio" },
-  { src: allevaGallery03, alt: "Alleva PR, forme e spicchi di Parmigiano Reggiano" },
-] as const;
+  imageShot(allevaGallery01, "Alleva PR, allevamento bovino nella filiera del Parmigiano Reggiano"),
+  imageShot(allevaGallery02, "Alleva PR, lavorazione del formaggio in caseificio"),
+  imageShot(allevaGallery03, "Alleva PR, forme e spicchi di Parmigiano Reggiano"),
+];
 
 const allevaSolutionCards = [
   {
@@ -98,7 +99,12 @@ export function DropProjectAllevaPrPage() {
             backgroundColor: "#000000",
           }}
         >
-          <DropHeroBackground src={allevaWarehouse} />
+          <DropHeroBackground
+            src={allevaWarehouse.src}
+            srcSet={allevaWarehouse.srcSet}
+            sizes="100vw"
+            alt="Forme di Parmigiano Reggiano in stagionatura, Alleva PR"
+          />
           <div
             aria-hidden
             style={{
@@ -237,7 +243,7 @@ export function DropProjectAllevaPrPage() {
               <aside className="alleva-progetto-aside">
                 <Reveal delay={1}>
                   <div className="alleva-meta-block">
-                    <h3 className="alleva-meta-label">Attività</h3>
+                    <p className="alleva-meta-label">Attività</p>
                     <ul className="alleva-meta-list">
                       <li>Analisi dei bisogni della filiera</li>
                       <li>Progettazione della community</li>
@@ -246,7 +252,7 @@ export function DropProjectAllevaPrPage() {
                     </ul>
                   </div>
                   <div className="alleva-meta-block" style={{ marginTop: 32 }}>
-                    <h3 className="alleva-meta-label">Obiettivi</h3>
+                    <p className="alleva-meta-label">Obiettivi</p>
                     <ul className="alleva-meta-list">
                       <li>Prima community della filiera PR</li>
                       <li>Punto d&apos;incontro digitale</li>
@@ -261,7 +267,14 @@ export function DropProjectAllevaPrPage() {
             <div className="alleva-trio-gallery" role="list" aria-label={`Immagini ${PROJECT_NAME}`}>
               {allevaProgettoGallery.map((item, i) => (
                 <Reveal key={item.src} delay={i} role="listitem" className="alleva-media-card">
-                  <img src={item.src} alt={item.alt} loading="lazy" decoding="async" draggable={false} />
+                  <img
+                    src={item.src}
+                    {...(item.srcSet ? { srcSet: item.srcSet, sizes: "(min-width: 1000px) 33vw, 100vw" } : {})}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                  />
                 </Reveal>
               ))}
             </div>
@@ -328,7 +341,10 @@ export function DropProjectAllevaPrPage() {
             <Reveal delay={0}>
               <div className="alleva-media-card alleva-feature-card">
                 <img
-                  src={allevaWarehouse}
+                  src={allevaWarehouse.src}
+                  {...(allevaWarehouse.srcSet
+                    ? { srcSet: allevaWarehouse.srcSet, sizes: "(min-width: 900px) min(1680px, 92vw), 100vw" }
+                    : {})}
                   alt="Alleva PR, magazzino di forme di Parmigiano Reggiano in stagionatura"
                   loading="lazy"
                   decoding="async"
@@ -382,8 +398,10 @@ export function DropProjectAllevaPrPage() {
         }
         .alleva-meta-label {
           margin: 0 0 16px;
+          font-family: var(--font-display);
           font-size: 11px;
           font-weight: 600;
+          line-height: var(--lh-snug);
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: var(--drop-orange);

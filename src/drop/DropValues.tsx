@@ -55,7 +55,7 @@ export function DropValues() {
               }}>{v.n} / 03</div>
 
               <div style={{ borderRadius: 16, overflow: 'hidden', aspectRatio: '4/3' }}>
-                <img src={v.img} alt={v.t} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={v.img} alt={v.t} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
 
               <h3 className="display" style={{

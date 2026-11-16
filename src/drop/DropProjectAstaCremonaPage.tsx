@@ -1,15 +1,15 @@
 import { Fragment, useEffect, useRef } from "react";
 import { pageTitle } from "../seo/routes";
-import astaHeroBg from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?url";
-import astaGallery1 from "@Immagini/Fiera Cremona/FieraCremona_1.jpg?url";
+import astaHeroBg from "@Immagini/Fiera Cremona/Fiera Cremona.jpg?img";
+import astaGallery1 from "@Immagini/Fiera Cremona/FieraCremona_1.jpg?img";
 import astaGallery2 from "@Immagini/Fiera Cremona/FieraCremona_2.webp?url";
 import astaSolutionImage from "@Immagini/Fiera Cremona/Fiera Cremona ibrida globale.webp?url";
-import astaEvent01 from "@Immagini/Fiera Cremona/Fiera globale ibrida/asta2022_10.jpg?url";
-import astaEvent02 from "@Immagini/Fiera Cremona/Fiera globale ibrida/asta2022_17.jpg?url";
-import astaEvent03 from "@Immagini/Fiera Cremona/Fiera globale ibrida/Copia di asta2022_19.jpg?url";
+import astaEvent01 from "@Immagini/Fiera Cremona/Fiera globale ibrida/asta2022_10.jpg?img";
+import astaEvent02 from "@Immagini/Fiera Cremona/Fiera globale ibrida/asta2022_17.jpg?img";
+import astaEvent03 from "@Immagini/Fiera Cremona/Fiera globale ibrida/Copia di asta2022_19.jpg?img";
 import astaEvent04 from "@Immagini/Fiera Cremona/Fiera globale ibrida/Copia di asta2022_23.jpeg?url";
-import astaEvent05 from "@Immagini/Fiera Cremona/Fiera globale ibrida/Copia di asta2022_29.jpg?url";
-import astaEvent06 from "@Immagini/Fiera Cremona/Fiera globale ibrida/Copia di asta2022_46.jpg?url";
+import astaEvent05 from "@Immagini/Fiera Cremona/Fiera globale ibrida/Copia di asta2022_29.jpg?img";
+import astaEvent06 from "@Immagini/Fiera Cremona/Fiera globale ibrida/Copia di asta2022_46.jpg?img";
 import astaMetamorfosi from "@Immagini/Fiera Cremona/Metamorfosi.webp?url";
 import astaAppPhone from "@Immagini/Fiera Cremona/asta in diretta.webp?url";
 import astaCharity from "@Immagini/Fiera Cremona/for charity.webp?url";
@@ -19,6 +19,7 @@ import { DropHeader } from "./DropHeader";
 import { DropNewsletter } from "./DropNewsletter";
 import { DropProjectBackFab } from "./DropProjectBackFab";
 import { DropProjectPrefooter } from "./DropProjectPrefooter";
+import { imageShot } from "./builtImage";
 import { CursorFollower, DropProjectHeroYearLine, Reveal, useReveal, useScrollY } from "./hooksAndUi";
 
 const PROJECT_NAME = "Fiera Zootecnica Internazionale di Cremona";
@@ -33,18 +34,18 @@ const bodyStyle = {
 } as const;
 
 const astaProgettoGallery = [
-  { src: astaGallery1, alt: "Fiera Zootecnica di Cremona, European Sale at Cremona — box bestiame in fiera" },
-  { src: astaGallery2, alt: "Fiera Zootecnica di Cremona, preparazione del bestiame in anello" },
-] as const;
+  imageShot(astaGallery1, "Fiera Zootecnica di Cremona, European Sale at Cremona — box bestiame in fiera"),
+  imageShot(astaGallery2, "Fiera Zootecnica di Cremona, preparazione del bestiame in anello"),
+];
 
 const astaEventGrid = [
-  { src: astaEvent01, alt: "Fiera Zootecnica di Cremona, catalogo e materiali dell'asta live" },
-  { src: astaEvent02, alt: "Fiera Zootecnica di Cremona, anello d'asta con pubblico in arena" },
-  { src: astaEvent03, alt: "Fiera Zootecnica di Cremona, bestiame in presentazione" },
-  { src: astaEvent04, alt: "Fiera Zootecnica di Cremona, palco con schermo dell'asta live" },
-  { src: astaEvent05, alt: "Fiera Zootecnica di Cremona, team sul palco dell'evento" },
-  { src: astaEvent06, alt: "Fiera Zootecnica di Cremona, regia e streaming dell'asta" },
-] as const;
+  imageShot(astaEvent01, "Fiera Zootecnica di Cremona, catalogo e materiali dell'asta live"),
+  imageShot(astaEvent02, "Fiera Zootecnica di Cremona, anello d'asta con pubblico in arena"),
+  imageShot(astaEvent03, "Fiera Zootecnica di Cremona, bestiame in presentazione"),
+  imageShot(astaEvent04, "Fiera Zootecnica di Cremona, palco con schermo dell'asta live"),
+  imageShot(astaEvent05, "Fiera Zootecnica di Cremona, team sul palco dell'evento"),
+  imageShot(astaEvent06, "Fiera Zootecnica di Cremona, regia e streaming dell'asta"),
+];
 
 const astaAppCards = [
   {
@@ -115,7 +116,12 @@ export function DropProjectAstaCremonaPage() {
             backgroundColor: "var(--ink-deep)",
           }}
         >
-          <DropHeroBackground src={astaHeroBg} />
+          <DropHeroBackground
+            src={astaHeroBg.src}
+            srcSet={astaHeroBg.srcSet}
+            sizes="100vw"
+            alt="Arena dell'asta bovina alla Fiera Zootecnica di Cremona"
+          />
           <div
             aria-hidden
             style={{
@@ -253,7 +259,7 @@ export function DropProjectAstaCremonaPage() {
               <aside className="asta-progetto-aside">
                 <Reveal delay={1}>
                   <div className="asta-meta-block">
-                    <h3 className="asta-meta-label">Attività</h3>
+                    <p className="asta-meta-label">Attività</p>
                     <ul className="asta-meta-list">
                       <li>Strategia digitale</li>
                       <li>Sviluppo app dedicata</li>
@@ -262,7 +268,7 @@ export function DropProjectAstaCremonaPage() {
                     </ul>
                   </div>
                   <div className="asta-meta-block" style={{ marginTop: 32 }}>
-                    <h3 className="asta-meta-label">Deliverables</h3>
+                    <p className="asta-meta-label">Deliverables</p>
                     <ul className="asta-meta-list">
                       <li>App per l&apos;asta live</li>
                       <li>Concept &ldquo;Metamorfosi&rdquo;</li>
@@ -277,7 +283,14 @@ export function DropProjectAstaCremonaPage() {
             <div className="asta-duo-gallery" role="list" aria-label={`Immagini ${PROJECT_NAME}`}>
               {astaProgettoGallery.map((item, i) => (
                 <Reveal key={item.src} delay={i} role="listitem" className="asta-media-card">
-                  <img src={item.src} alt={item.alt} loading="lazy" decoding="async" draggable={false} />
+                  <img
+                    src={item.src}
+                    {...(item.srcSet ? { srcSet: item.srcSet, sizes: "(min-width: 800px) 50vw, 100vw" } : {})}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                  />
                 </Reveal>
               ))}
             </div>
@@ -348,7 +361,14 @@ export function DropProjectAstaCremonaPage() {
             <div className="asta-event-grid" role="list" aria-label={`Galleria evento ${PROJECT_NAME}`}>
               {astaEventGrid.map((item, i) => (
                 <Reveal key={item.src} delay={1 + (i % 3)} role="listitem" className="asta-media-card">
-                  <img src={item.src} alt={item.alt} loading="lazy" decoding="async" draggable={false} />
+                  <img
+                    src={item.src}
+                    {...(item.srcSet ? { srcSet: item.srcSet, sizes: "(min-width: 1000px) 33vw, 100vw" } : {})}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                  />
                 </Reveal>
               ))}
             </div>
@@ -521,8 +541,10 @@ export function DropProjectAstaCremonaPage() {
         }
         .asta-meta-label {
           margin: 0 0 16px;
+          font-family: var(--font-display);
           font-size: 11px;
           font-weight: 600;
+          line-height: var(--lh-snug);
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: var(--drop-orange);
